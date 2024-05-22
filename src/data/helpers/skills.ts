@@ -74,13 +74,6 @@ export const mongoDb = createSkillFactory({
   url: 'https://www.mongodb.com/',
 });
 
-export const nestJs = createSkillFactory({
-  name: 'NestJS',
-  icon: 'simple-icons:nestjs',
-  iconColor: '#E0234E',
-  url: 'https://nestjs.com/',
-});
-
 export const nextJs = createSkillFactory({
   name: 'Next.js',
   icon: 'simple-icons:nextdotjs',
@@ -88,53 +81,11 @@ export const nextJs = createSkillFactory({
   url: 'https://nextjs.org/',
 });
 
-export const nx = createSkillFactory({
-  name: 'Nx',
-  icon: 'simple-icons:nx',
-  iconColor: '#143055',
-  url: 'https://nx.dev/',
-});
-
-export const pnpm = createSkillFactory({
-  name: 'pnpm',
-  icon: 'simple-icons:pnpm',
-  iconColor: '#F69220',
-  url: 'https://pnpm.io/',
-});
-
-export const postgreSql = createSkillFactory({
-  name: 'PostgreSQL',
-  icon: 'simple-icons:postgresql',
-  iconColor: '#4169E1',
-  url: 'https://www.postgresql.org/',
-});
-
-export const prettier = createSkillFactory({
-  name: 'Prettier',
-  icon: 'simple-icons:prettier',
-  iconColor: '#F7B93E',
-  url: 'https://prettier.io/',
-});
-
 export const react = createSkillFactory({
   name: 'React.js',
   icon: 'simple-icons:react',
   iconColor: '#61DAFB',
   url: 'https://reactjs.org/',
-});
-
-export const reactQuery = createSkillFactory({
-  name: 'React Query',
-  icon: 'simple-icons:reactquery',
-  iconColor: '#FF4154',
-  url: 'https://tanstack.com/query',
-});
-
-export const sass = createSkillFactory({
-  name: 'SASS',
-  icon: 'simple-icons:sass',
-  iconColor: '#CC6699',
-  url: 'https://sass-lang.com/',
 });
 
 export const supabase = createSkillFactory({
@@ -164,3 +115,80 @@ export const vue = createSkillFactory({
   iconColor: '#4FC08D',
   url: 'https://vuejs.org/',
 });
+
+export const csharp = createSkillFactory({
+  name: 'C#',
+  icon: 'simple-icons:csharp',
+  iconColor: '#953CAD',
+  url: 'https://docs.microsoft.com/en-us/dotnet/csharp/',
+})
+
+export const dotnet = createSkillFactory({
+  name: 'Asp .NET',
+  icon: 'simple-icons:dotnet',
+  iconColor: '#512BD4',
+  url: 'https://docs.microsoft.com/en-us/dotnet/',
+})
+
+export const angular = createSkillFactory({
+  name: 'Angular',
+  icon: 'simple-icons:angular',
+  iconColor: '#DD0031',
+  url: 'https://angular.io/',
+})
+
+export const sqlserver = createSkillFactory({
+  name: 'SQL Server',
+  icon: 'simple-icons:microsoftsqlserver',
+  iconColor: '#E34E4F',
+  url: 'https://docs.microsoft.com/en-us/sql/?view=sql-server-ver16',
+})
+
+export const sqlite = createSkillFactory({
+  name: 'SQLite',
+  icon: 'simple-icons:sqlite',
+  iconColor: '#56ABDD',
+  url: 'https://www.sqlite.org/',
+})
+
+export const mongodb = createSkillFactory({
+  name: 'MongoDB',
+  icon: 'simple-icons:mongodb',
+  iconColor: '#47A248',
+  url: 'https://www.mongodb.com/',
+})
+
+export const docker = createSkillFactory({
+  name: 'Docker',
+  icon: 'simple-icons:docker',
+  iconColor: '#119FED',
+  url: 'https://www.docker.com/',
+})
+
+export const jira = createSkillFactory({
+  name: 'Jira',
+  icon: 'simple-icons:jira',
+  iconColor: '#1268DF',
+  url: 'https://www.jira.com/',
+})
+
+export const go = createSkillFactory({
+  name: 'Go',
+  icon: 'simple-icons:go',
+  iconColor: '#00ADD8',
+  url: 'https://golang.org/',
+})
+
+export const postman = createSkillFactory({
+  name: 'Postman',
+  icon: 'simple-icons:postman',
+  iconColor: '#FF6C37',
+  url: 'https://www.postman.com/',
+})
+
+export const css = createSkillFactory({
+  name: 'CSS',
+  icon: 'simple-icons:css3',
+  iconColor: '#1572B6',
+  url: 'https://developer.mozilla.org/en-US/docs/Web/CSS',
+})

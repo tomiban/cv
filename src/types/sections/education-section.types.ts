@@ -1,5 +1,6 @@
 import type { DateRange, LinkButton, Photo, Section } from '../shared';
 
+
 export interface Diploma {
   /**
    * Name of the certificate or the degree you got.
@@ -34,6 +35,7 @@ export interface Diploma {
    * [WEB] Links related to your studies (e.g. course/university website, link to realized project).
    */
   links: LinkButton[];
+
 }
 
 export interface EducationSection extends Section {

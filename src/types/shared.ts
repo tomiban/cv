@@ -153,4 +153,5 @@ export interface LinkButton {
    * [WEB] URL that will be opened in a new tab, when the button is clicked.
    */
   url: string;
+
 }

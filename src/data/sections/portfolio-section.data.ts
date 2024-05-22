@@ -1,27 +1,22 @@
 import type { PortfolioSection } from '@/types/sections/portfolio-section.types';
 import type { ReadonlyDeep } from 'type-fest';
-import { demo, github, mockups, website } from '../helpers/links';
+import { demo, github, website } from '../helpers/links';
 import {
-  chakraUi,
-  eslint,
+  angular,
+  csharp,
+  css,
+  dotnet,
   firebase,
-  jest,
-  nestJs,
-  nextJs,
-  nx,
-  pnpm,
-  postgreSql,
-  prettier,
   react,
-  sass,
+  sqlserver,
   tailwindCss,
   typescript,
 } from '../helpers/skills';
 
 const portfolioSectionData = {
   config: {
-    title: 'Projects',
-    slug: 'projects',
+    title: 'Proyectos',
+    slug: 'proyectos',
     icon: 'fa6-solid:rocket',
     visible: true,
     screenshots: {
@@ -31,18 +26,36 @@ const portfolioSectionData = {
   },
   projects: [
     {
-      name: 'Golden Bulls',
-      image: import('@/assets/portfolio/project-1.jpeg'),
-      dates: [new Date('2020-03'), null],
+      name: 'VeterinariApp UI',
+      image: import('@/assets/portfolio/pet-vaccination.jpg'),
+      dates: [new Date('2024-02'), new Date('2024-02')],
       details: [
-        { label: 'Team size', value: '1 person' },
-        { label: 'My role', value: ['Front-end Developer', 'Designer'] },
-        { label: 'Company', value: 'None' },
-        { label: 'Category', value: ['Web app', 'Open source'] },
+        { label: 'Rol', value: ['Front-end Developer', 'Designer'] },
+        { label: 'Categoria', value: ['Web app', 'Open source', 'Proyecto personal'] },
+      ],
+      pdfDetails: [
+        { label: 'Demo', value: 'https://tru-quest-ck7ea3.netlify.app', url: '#' },
+        { label: 'Repository', value: 'https://github.com/tomiban/veterinariapp-FE', url: '#' },
+      ],
+      description:
+      "Aplicación cliente desarrollada con Angular 17 y Angular Material, diseñada para consumir la API interna.",
+      tagsList: {
+        title: 'Tecnologías',
+        tags: [typescript(), angular(), css()],
+      },
+      links: [github({ url: 'https://github.com/tomiban/veterinariapp-FE' }), demo({ url: '#' })],
+    },
+    {
+      name: 'VeterinariApp API',
+      image: import('@/assets/portfolio/pet-vaccination.jpg'),
+      dates: [new Date('2023-09'), new Date('2024-01')],
+      details: [
+        { label: 'Rol', value: ['Back-end Developer', 'System designer'] },
+        { label: 'Categoria', value: ['Web API', 'Open source', 'Proyecto personal'] },
       ],
       pdfDetails: [
         { label: 'Demo', value: 'https://golden-bulls-d73jd7.netlify.app', url: '#' },
-        { label: 'Repository', value: 'https://github.com/mark-freeman/golden-bulls', url: '#' },
+        { label: 'Repository', value: 'https://github.com/tomiban/veterinariapp-API', url: '#' },
       ],
       screenshots: [
         { src: import('@/assets/portfolio/project-1-screenshot-1.jpg'), alt: 'First screenshot' },
@@ -50,79 +63,35 @@ const portfolioSectionData = {
         { src: import('@/assets/portfolio/project-1-screenshot-3.jpg'), alt: 'Third screenshot' },
       ],
       description:
-        'In tristique vulputate augue vel egestas. Quisque ac imperdiet tortor, at lacinia ex. Duis vel ex hendrerit, commodo odio sed, aliquam enim. Ut arcu nulla, tincidunt eget arcu eget, molestie vulputate nisi. Nunc malesuada leo et est iaculis facilisis.',
+        'Web Api ASP NET 8 para la gestión de pacientes en VeterinariAPP, incluyendo registro de mascotas, dueños, vacunas y dosis aplicadas.',
       tagsList: {
-        title: 'Technologies',
-        tags: [nextJs(), sass(), pnpm(), eslint(), prettier()],
+        title: 'Tecnologías',
+        tags: [csharp(), dotnet(), sqlserver()],
       },
-      links: [mockups({ url: '#' }), demo({ url: '#' })],
+      links: [github({ url: '#' })],
     },
     {
-      name: 'TruQuest',
-      image: import('@/assets/portfolio/project-2.jpeg'),
-      dates: [new Date('2019-06'), new Date('2020-02')],
+      name: 'Sitio Web Muebleria Modikra',
+      image: import('@/assets/portfolio/modikra.jpg'),
+      dates: [new Date('2022-08'), new Date('2022-11')],
       details: [
-        { label: 'Team size', value: '7 people' },
-        { label: 'My role', value: ['Front-end Developer', 'Mobile Developer', 'Designer'] },
-        { label: 'Company', value: 'Facebook' },
-        { label: 'Category', value: ['Web app', 'Mobile app'] },
+        { label: 'Role', value: ['Front-end Developer', 'Designer'] },
+        { label: 'Compañia', value: 'Freelance' },
+        { label: 'Categoria', value: ['Web app', 'Open source'] },
       ],
       pdfDetails: [
-        { label: 'Demo', value: 'https://tru-quest-ck7ea3.netlify.app', url: '#' },
-        { label: 'Repository', value: 'https://github.com/mark-freeman/tru-quest', url: '#' },
+        { label: 'Demo', value: 'https://modikra-website.web.app/', url: '#' },
+        { label: 'Repository', value: 'https://github.com/tomiban/modikra-website', url: '#' },
       ],
       description:
-        'Ut ultricies tortor at sodales aliquam. Vivamus metus ante, fringilla nec ligula in, suscipit rhoncus mauris. Praesent hendrerit velit odio, at accumsan urna faucibus convallis. Nunc at massa eget ligula volutpat dictum a sit amet libero. Vestibulum iaculis molestie maximus. In hac habitasse platea dictumst.',
+        'Aplicación web SPA desarrollada para Mueblería Modikra. Cuenta con una página de inicio del sitio y un catálogo de productos para que el cliente pueda consultar vía WhatsApp. Realizada con React, Tailwind CSS y Firebase para la persistencia de los datos y el despliegue.',
       tagsList: {
-        title: 'Technologies',
-        tags: [react(), tailwindCss(), nestJs(), postgreSql()],
+        title: 'Tecnologías',
+        tags: [react(), tailwindCss(), firebase()],
       },
-      links: [mockups({ url: '#' }), demo({ url: '#' })],
+      links: [github({ url: 'https://github.com/tomiban/modikra-website' }),website({ url: 'https://modikra-website.web.app/' })],
     },
-    {
-      name: 'Software Chasers',
-      image: import('@/assets/portfolio/project-3.jpeg'),
-      dates: [new Date('2018-01'), new Date('2020-12')],
-      details: [
-        { label: 'Team size', value: '3 people' },
-        { label: 'My role', value: ['Front-end Developer', 'Designer'] },
-        { label: 'Company', value: 'None' },
-        { label: 'Category', value: ['Web app', 'Open source'] },
-      ],
-      pdfDetails: [
-        { label: 'Demo', value: 'https://software-chasers-e82l8e.netlify.app', url: '#' },
-        { label: 'Repository', value: 'https://github.com/mark-freeman/software-chasers', url: '#' },
-      ],
-      description:
-        'Quisque id consectetur eros. In hac habitasse platea dictumst. Sed eu pulvinar orci. Mauris consequat, est in dignissim varius, neque nisl commodo mauris, id blandit risus justo eu nulla.',
-      tagsList: {
-        title: 'Technologies',
-        tags: [react(), chakraUi(), typescript(), nx(), pnpm()],
-      },
-      links: [website({ url: '#' }), github({ url: '#' })],
-    },
-    {
-      name: 'Disco Ninjas',
-      image: import('@/assets/portfolio/project-4.jpeg'),
-      dates: [new Date('2016-05'), new Date('2018-07')],
-      details: [
-        { label: 'Team size', value: '11 people' },
-        { label: 'My role', value: 'Front-end Developer' },
-        { label: 'Company', value: 'Google' },
-        { label: 'Category', value: ['Mobile app', 'Open source'] },
-      ],
-      pdfDetails: [
-        { label: 'Demo', value: 'https://disco-ninjas-g321ol.netlify.app', url: '#' },
-        { label: 'Repository', value: 'https://github.com/mark-freeman/disco-ninjas', url: '#' },
-      ],
-      description:
-        'Praesent eu neque tortor. Vestibulum ac magna nisl. Vivamus massa sem, feugiat in pharetra non, convallis egestas purus. Ut consequat ullamcorper sem, in euismod nibh posuere ut. ',
-      tagsList: {
-        title: 'Technologies',
-        tags: [typescript(), jest(), firebase()],
-      },
-      links: [mockups({ url: '#' }), github({ url: '#' })],
-    },
+   
   ],
 } as const satisfies ReadonlyDeep<PortfolioSection>;
 

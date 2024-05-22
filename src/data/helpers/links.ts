@@ -162,3 +162,8 @@ export const repository = createLinkFactory({
   name: 'Repository',
   icon: 'fa6-solid:code-branch',
 });
+
+export const diploma = createLinkFactory({
+  name: 'Diploma',
+  icon: 'fa6-solid:file-lines',
+})

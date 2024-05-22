@@ -6,10 +6,7 @@ import {
   eslint,
   firebase,
   nextJs,
-  nx,
-  pnpm,
   react,
-  reactQuery,
   tailwindCss,
   typescript,
   vue,
@@ -20,7 +17,7 @@ const experienceSectionData = {
     title: 'Work experience',
     slug: 'experience',
     icon: 'fa6-solid:suitcase',
-    visible: true,
+    visible: false,
   },
   jobs: [
     {
@@ -38,7 +35,7 @@ const experienceSectionData = {
       `,
       tagsList: {
         title: 'Technologies',
-        tags: [react(), nextJs(), typescript(), nx(), firebase()],
+        tags: [react(), nextJs(), typescript(),  firebase()],
       },
       links: [facebook({ url: '#' }), linkedin({ url: '#' })],
     },
@@ -55,7 +52,7 @@ const experienceSectionData = {
       `,
       tagsList: {
         title: 'Technologies',
-        tags: [react(), reactQuery(), chakraUi(), eslint()],
+        tags: [react(), chakraUi(), eslint()],
       },
       links: [website({ url: '#' }), instagram({ url: '#' })],
     },
@@ -74,7 +71,7 @@ const experienceSectionData = {
       `,
       tagsList: {
         title: 'Technologies',
-        tags: [vue(), tailwindCss(), pnpm()],
+        tags: [vue(), tailwindCss()],
       },
       links: [twitter({ url: '#' }), github({ url: '#' })],
     },

@@ -1,19 +1,18 @@
 import type { SkillsSection } from '@/types/sections/skills-section.types';
 import type { ReadonlyDeep } from 'type-fest';
 import {
-  apolloGraphql,
-  astro,
-  chakraUi,
-  cypress,
-  eslint,
+  angular,
+  csharp,
+  docker,
+  dotnet,
   firebase,
+  go,
+  jira,
   mongoDb,
-  nestJs,
-  pnpm,
-  postgreSql,
-  prettier,
+  postman,
   react,
-  sass,
+  sqlite,
+  sqlserver,
   supabase,
   tailwindCss,
   typescript,
@@ -21,57 +20,45 @@ import {
 
 const skillsSectionData = {
   config: {
-    title: 'Skills',
-    slug: 'skills',
+    title: 'Habilidades',
+    slug: 'Xskills',
     icon: 'fa6-solid:bars-progress',
     visible: true,
   },
   skillSets: [
     {
-      title: 'I already know',
+      title: 'Tecnologías que manejo',
       skills: [
+        csharp({ level: 3, description: "Colecciones y genericos, POO, métodos virtuales y override, LINQ, métodos lambda, programación asincrónica, diseño de interfaces y clases abstractas." }),
+        dotnet({ level: 2, description: "APIs RESTful con Entity Framework, servicios y filtros, patrón repositorio y DTO, AutoMapper, Identity y JWT." }),
+       
         react({
-          level: 5,
+          level: 2,
           description:
-            'Proin ut erat sed massa tempus suscipit. Mauris efficitur nunc sem, nec scelerisque ligula bibendum ut.',
+            "Diseño de layouts y componentes, React hooks, configuración de rutas públicas y privadas, autorizacion y autenticacion con JWT, consumo de APIs y servicios externos.",
         }),
         typescript({
-          level: 4,
-          description: 'Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.',
+          level: 2,
         }),
-        sass({
-          level: 4,
-          description: 'Nulla interdum pellentesque ultricies. Ut id eros commodo, ultrices ligula eu, elementum ante.',
-        }),
-        chakraUi({ level: 5 }),
         tailwindCss({ level: 3 }),
-        prettier({ level: 5 }),
-        eslint({
-          level: 4,
-          description:
-            'Nulla tempor turpis at vehicula pharetra. Vestibulum tellus tortor, commodo et suscipit id, lobortis id nunc.',
-        }),
-        nestJs({
-          level: 3,
-          description:
-            'Praesent feugiat ultricies iaculis. In posuere vehicula odio, sed consequat velit porta viverra.',
-        }),
-        postgreSql({ level: 2 }),
-        mongoDb({ level: 1 }),
-        firebase({ level: 1 }),
-        pnpm({ level: 3 }),
+        sqlserver({ level: 3 , description: "Procedimientos almacenados, funciones y triggers"} ),
+        mongoDb({ level: 2 }),
+        sqlite({ level: 2 }),
+        firebase({ level: 2 }),
+        postman({ level: 2 }),
+        docker({level: 1}),
+        jira({level: 2}),
       ],
     },
     {
-      title: 'I want to learn',
-      skills: [apolloGraphql(), astro(), supabase(), cypress()],
+      title: 'Quiero aprender',
+      skills: [go(), angular(), supabase()],
     },
     {
-      title: 'I speak',
+      title: 'Idiomas',
       skills: [
-        { icon: 'circle-flags:pl', name: 'Polish - native' },
-        { icon: 'circle-flags:us', name: 'English - C1' },
-        { icon: 'circle-flags:es-variant', name: 'Spanish - B1' },
+        { icon: 'circle-flags:es-variant', name: 'Español (Nativo)' },
+        { icon: 'circle-flags:us', name: 'Ingles - B1' },
       ],
     },
   ],

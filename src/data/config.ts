@@ -1,24 +1,24 @@
 import type { Config } from '@/types/data';
-import { enUS } from 'date-fns/locale';
+import {  es } from 'date-fns/locale';
 import type { ReadonlyDeep } from 'type-fest';
 
 const config = {
   i18n: {
-    locale: enUS,
+    locale: es,
     dateFormat: 'MMMM yyyy',
     translations: {
       now: 'now',
     },
   },
   meta: {
-    title: 'Mark Freeman - Senior React Developer',
+    title: 'Tomás Banchio - .NET Developer Jr',
     description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sodales ac dui at vestibulum. In condimentum metus id dui tincidunt, in blandit mi vehicula.',
+      'Sitio personal de Tomás Banchio, desarrollador de aplicaciones .NET.',
     faviconPath: '/src/assets/my-image.jpeg',
   },
   pdf: {
     footer:
-      'I hereby give consent for my personal data included in my application to be processed for the purposes of the recruitment process.',
+      'Otorgo mi consentimiento para que mis datos personales incluidos en mi solicitud sean procesados con fines de proceso de selección.',
   },
 } as const satisfies ReadonlyDeep<Config>;
 
