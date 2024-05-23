@@ -18,8 +18,8 @@ const mainSectionData = {
     { label: 'Ciudad', value: 'Esperanza, Argentina' },
   ],
   pdfDetails: [
-    { label: 'Phone', value: '3496547076' },
-    { label: 'Email', value: 'tbanchio15@gmail.com' },
+    { label: 'Phone', value: '3496547076', url: 'tel:3496547076' },
+    { label: 'Email', value: 'tbanchio15@gmail.com', url: 'mailto:tbanchio15@gmail.com' },
     { label: 'LinkedIn', value: 'tbanchio', url: 'https://linkedin.com/in/tbanchio' },
     { label: 'GitHub', value: 'tomiban', url: 'https://github.com/tomiban' },
   ],

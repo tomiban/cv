@@ -35,7 +35,7 @@ const portfolioSectionData = {
       ],
       pdfDetails: [
         { label: 'Demo', value: 'https://tru-quest-ck7ea3.netlify.app', url: '#' },
-        { label: 'Repository', value: 'https://github.com/tomiban/veterinariapp-FE', url: '#' },
+        { label: 'Repositorio', value: 'https://github.com/tomiban/veterinariapp-FE', url: 'https://github.com/tomiban/veterinariapp-FE'},
       ],
       description:
       "Aplicación cliente desarrollada con Angular 17 y Angular Material, diseñada para consumir la API interna.",
@@ -55,7 +55,7 @@ const portfolioSectionData = {
       ],
       pdfDetails: [
         { label: 'Demo', value: 'https://golden-bulls-d73jd7.netlify.app', url: '#' },
-        { label: 'Repository', value: 'https://github.com/tomiban/veterinariapp-API', url: '#' },
+        { label: 'Repositorio', value: 'https://github.com/tomiban/veterinariapp-API', url: 'https://github.com/tomiban/veterinariapp-API' },
       ],
       screenshots: [
         { src: import('@/assets/portfolio/project-1-screenshot-1.jpg'), alt: 'First screenshot' },
@@ -80,8 +80,8 @@ const portfolioSectionData = {
         { label: 'Categoria', value: ['Web app', 'Open source'] },
       ],
       pdfDetails: [
-        { label: 'Demo', value: 'https://modikra-website.web.app/', url: '#' },
-        { label: 'Repository', value: 'https://github.com/tomiban/modikra-website', url: '#' },
+        { label: 'Sitio web', value: 'https://modikra-website.web.app/', url: 'https://modikra-website.web.app/' },
+        { label: 'Repositorio', value: 'https://github.com/tomiban/modikra-website', url: 'https://github.com/tomiban/modikra-website' },
       ],
       description:
         'Aplicación web SPA desarrollada para Mueblería Modikra. Cuenta con una página de inicio del sitio y un catálogo de productos para que el cliente pueda consultar vía WhatsApp. Realizada con React, Tailwind CSS y Firebase para la persistencia de los datos y el despliegue.',

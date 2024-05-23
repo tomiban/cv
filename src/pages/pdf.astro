@@ -1,6 +1,5 @@
 ---
 import Fonts from '@/components/fonts.astro';
-import Footer from '@/pdf/components/footer.astro';
 import EducationSection from '@/pdf/sections/education-section.pdf.astro';
 import ExperienceSection from '@/pdf/sections/experience-section.pdf.astro';
 import MainSection from '@/pdf/sections/main-section.pdf.astro';
@@ -28,6 +27,5 @@ const shouldRenderSection = (section: keyof typeof sections) => sections[section
     {shouldRenderSection('experience') && <ExperienceSection {...sections.experience} />}
     {shouldRenderSection('portfolio') && <PortfolioSection {...sections.portfolio} />}
     {shouldRenderSection('education') && <EducationSection {...sections.education} />}
-    {config.pdf?.footer && <Footer>{config.pdf.footer}</Footer>}
   </body>
 </html>

@@ -192,3 +192,17 @@ export const css = createSkillFactory({
   iconColor: '#1572B6',
   url: 'https://developer.mozilla.org/en-US/docs/Web/CSS',
 })
+
+export const git = createSkillFactory({
+  name: 'Git',
+  icon: 'simple-icons:git',
+  iconColor: '#F05032',
+  url: 'https://git-scm.com/',
+})
+
+export const maui = createSkillFactory({
+  name: '.NET MAUI',
+  icon: 'simple-icons:dotnet',
+  iconColor: '#512BD4',
+  url: 'https://dotnet.microsoft.com/es-es/apps/maui',
+})
