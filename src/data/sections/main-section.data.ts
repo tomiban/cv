@@ -9,7 +9,7 @@ const mainSectionData = {
     slug: 'profile',
     visible: true,
   },
-  image: import('@/assets/my-image.jpeg'),
+  image: import('@/assets/cv.jpg'),
   fullName: 'Tomás Banchio',
   role: 'Desarrollador de Software',
   details: [
@@ -20,10 +20,10 @@ const mainSectionData = {
   pdfDetails: [
     { label: 'Phone', value: '3496547076' },
     { label: 'Email', value: 'tbanchio15@gmail.com' },
-    { label: 'LinkedIn', value: '/in/tbanchio', url: 'https://linkedin.com' },
-    { label: 'GitHub', value: '/tomiban', url: 'https://github.com' },
+    { label: 'LinkedIn', value: 'tbanchio', url: 'https://linkedin.com/in/tbanchio' },
+    { label: 'GitHub', value: 'tomiban', url: 'https://github.com/tomiban' },
   ],
-  description: 'Estudiante de desarrollo de software apasionado por la tecnología, internet y el mundo del open source. Actualmente, me estoy formando como desarrollador .NET, especializándome en Back-end con tecnologías como Entity Framework, SQL Server y Docker. Mi objetivo es aplicar y ampliar mis habilidades participando en proyectos desafiantes, donde pueda contribuir y aprender junto a los mejores profesionales.',  tags: [{ name: 'Open to Work' }],
+  description: 'Estoy estudiando Desarrollo de Software en el Instituto Tecnológico El Molino y soy un desarrollador web autodidacta con un perfil de Backend. Manejo C# .NET, SQL y Firebase. También conozco tecnologías para el frontend como TypeScript, React y Tailwind. Me esfuerzo por seguir buenas prácticas de programación, implementando principios SOLID, arquitecturas de diseño como MVC o Clean Architecture, y manteniéndome al día con los cambios tecnológicos. Me encanta programar y estoy dispuesto a aprender y trabajar duro para crecer profesionalmente en este rubro.',  tags: [{ name: 'Open to Work' }],
   action: {
     label: 'Download CV',
     url: '/cv.pdf',
