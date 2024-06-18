@@ -1,17 +1,7 @@
 import type { PortfolioSection } from '@/types/sections/portfolio-section.types';
 import type { ReadonlyDeep } from 'type-fest';
 import { demo, github, website } from '../helpers/links';
-import {
-  angular,
-  csharp,
-  css,
-  dotnet,
-  firebase,
-  react,
-  sqlserver,
-  tailwindCss,
-  typescript,
-} from '../helpers/skills';
+import { angular, csharp, css, dotnet, firebase, react, sqlserver, tailwindCss, typescript } from '../helpers/skills';
 
 const portfolioSectionData = {
   config: {
@@ -34,16 +24,23 @@ const portfolioSectionData = {
         { label: 'Categoria', value: ['Web app', 'Open source', 'Proyecto personal'] },
       ],
       pdfDetails: [
-        { label: 'Demo', value: 'https://tru-quest-ck7ea3.netlify.app', url: '#' },
-        { label: 'Repositorio', value: 'https://github.com/tomiban/veterinariapp-FE', url: 'https://github.com/tomiban/veterinariapp-FE'},
+        { label: 'Demo', value: 'https://clinicaveterina.netlify.app', url: 'https://clinicaveterina.netlify.app' },
+        {
+          label: 'Repositorio',
+          value: 'https://github.com/tomiban/veterinariapp-FE',
+          url: 'https://github.com/tomiban/veterinariapp-FE',
+        },
       ],
       description:
-      "Aplicación cliente desarrollada con Angular 17 y Angular Material, diseñada para consumir la API interna.",
+        'Aplicación cliente desarrollada con Angular 17 y Angular Material, diseñada para consumir la API interna.',
       tagsList: {
         title: 'Tecnologías',
         tags: [typescript(), angular(), css()],
       },
-      links: [github({ url: 'https://github.com/tomiban/veterinariapp-FE' }), demo({ url: '#' })],
+      links: [
+        github({ url: 'https://github.com/tomiban/veterinariapp-FE' }),
+        demo({ url: 'https://clinicaveterina.netlify.app' }),
+      ],
     },
     {
       name: 'VeterinariApp API',
@@ -54,13 +51,23 @@ const portfolioSectionData = {
         { label: 'Categoria', value: ['Web API', 'Open source', 'Proyecto personal'] },
       ],
       pdfDetails: [
-        { label: 'Demo', value: 'https://golden-bulls-d73jd7.netlify.app', url: '#' },
-        { label: 'Repositorio', value: 'https://github.com/tomiban/veterinariapp-API', url: 'https://github.com/tomiban/veterinariapp-API' },
+        {
+          label: 'Demo',
+          value: 'http://veterinariapp.runasp.net/api/mascotas/',
+          url: 'http://veterinariapp.runasp.net/api/mascotas/',
+        },
+        {
+          label: 'Repositorio',
+          value: 'https://github.com/tomiban/veterinariapp-API',
+          url: 'https://github.com/tomiban/veterinariapp-API',
+        },
       ],
       screenshots: [
-        { src: import('@/assets/portfolio/project-1-screenshot-1.jpg'), alt: 'First screenshot' },
-        { src: import('@/assets/portfolio/project-1-screenshot-2.jpg'), alt: 'Second screenshot' },
-        { src: import('@/assets/portfolio/project-1-screenshot-3.jpg'), alt: 'Third screenshot' },
+        { src: import('@/assets/portfolio/swagger2.png'), alt: ' First screenshot' },
+        { src: import('@/assets/portfolio/swagger3.png'), alt: 'Second screenshot' },
+        { src: import('@/assets/portfolio/swagger4.png'), alt: 'Third screenshot' },
+        { src: import('@/assets/portfolio/home.png'), alt: 'Fourth screenshot' },
+        { src: import('@/assets/portfolio/detail.png'), alt: 'Five screenshot' },
       ],
       description:
         'Web Api ASP NET 8 para la gestión de pacientes en VeterinariAPP, incluyendo registro de mascotas, dueños, vacunas y dosis aplicadas.',
@@ -68,7 +75,7 @@ const portfolioSectionData = {
         title: 'Tecnologías',
         tags: [csharp(), dotnet(), sqlserver()],
       },
-      links: [github({ url: '#' })],
+      links: [github({ url: 'https://github.com/tomiban/veterinariapp-API' })],
     },
     {
       name: 'Sitio Web Muebleria Modikra',
@@ -81,7 +88,11 @@ const portfolioSectionData = {
       ],
       pdfDetails: [
         { label: 'Sitio web', value: 'https://modikra-website.web.app/', url: 'https://modikra-website.web.app/' },
-        { label: 'Repositorio', value: 'https://github.com/tomiban/modikra-website', url: 'https://github.com/tomiban/modikra-website' },
+        {
+          label: 'Repositorio',
+          value: 'https://github.com/tomiban/modikra-website',
+          url: 'https://github.com/tomiban/modikra-website',
+        },
       ],
       description:
         'Aplicación web SPA desarrollada para Mueblería Modikra. Cuenta con una página de inicio del sitio y un catálogo de productos para que el cliente pueda consultar vía WhatsApp. Realizada con React, Tailwind CSS y Firebase para la persistencia de los datos y el despliegue.',
@@ -89,9 +100,11 @@ const portfolioSectionData = {
         title: 'Tecnologías',
         tags: [react(), tailwindCss(), firebase()],
       },
-      links: [github({ url: 'https://github.com/tomiban/modikra-website' }),website({ url: 'https://modikra-website.web.app/' })],
+      links: [
+        github({ url: 'https://github.com/tomiban/modikra-website' }),
+        website({ url: 'https://modikra-website.web.app/' }),
+      ],
     },
-   
   ],
 } as const satisfies ReadonlyDeep<PortfolioSection>;
 

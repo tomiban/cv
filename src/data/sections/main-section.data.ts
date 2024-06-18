@@ -5,8 +5,8 @@ import { github, linkedin } from '../helpers/links';
 const mainSectionData = {
   config: {
     icon: 'fa6-solid:user',
-    title: 'Profile',
-    slug: 'profile',
+    title: 'Perfil',
+    slug: 'perfil',
     visible: true,
   },
   image: import('@/assets/cv.jpg'),
@@ -23,9 +23,11 @@ const mainSectionData = {
     { label: 'LinkedIn', value: 'tbanchio', url: 'https://linkedin.com/in/tbanchio' },
     { label: 'GitHub', value: 'tomiban', url: 'https://github.com/tomiban' },
   ],
-  description: 'Estoy estudiando Desarrollo de Software en el Instituto Tecnológico El Molino y soy un desarrollador web autodidacta con un perfil de Backend. Manejo C# .NET, SQL y Firebase. También conozco tecnologías para el frontend como TypeScript, React y Tailwind. Me esfuerzo por seguir buenas prácticas de programación, implementando principios SOLID, arquitecturas de diseño como MVC o Clean Architecture, y manteniéndome al día con los cambios tecnológicos. Me encanta programar y estoy dispuesto a aprender y trabajar duro para crecer profesionalmente en este rubro.',  tags: [{ name: 'Open to Work' }],
+  description:
+    'Estoy estudiando Desarrollo de Software en el Instituto Tecnológico El Molino y desarrollo web con un perfil de Backend. Manejo C# .NET, SQL y Firebase. También conozco tecnologías para el frontend como TypeScript, React y Tailwind. Me esfuerzo por seguir buenas prácticas de programación, implementando principios SOLID, arquitecturas de diseño como MVC o Clean Architecture, y manteniéndome al día con los cambios tecnológicos. Me encanta programar y estoy dispuesto a aprender y trabajar duro para crecer profesionalmente en este rubro.',
+  tags: [{ name: 'Open to Work' }],
   action: {
-    label: 'Download CV',
+    label: 'Descargar CV',
     url: '/cv.pdf',
     downloadedFileName: 'CV-Tomas_Banchio.pdf',
   },
