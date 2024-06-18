@@ -9,7 +9,7 @@ const mainSectionData = {
     slug: 'perfil',
     visible: true,
   },
-  image: import('@/assets/cv.jpg'),
+  image: import('@/assets/my-image.jpeg'),
   fullName: 'Tomás Banchio',
   role: 'Desarrollador de Software',
   details: [
