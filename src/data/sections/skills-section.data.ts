@@ -54,7 +54,7 @@ const skillsSectionData = {
     },
     {
       title: 'Quiero aprender',
-      skills: [go(), angular(), maui()],
+      skills: [go(), angular()],
     },
     {
       title: 'Idiomas',

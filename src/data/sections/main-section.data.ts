@@ -24,7 +24,7 @@ const mainSectionData = {
     { label: 'GitHub', value: 'tomiban', url: 'https://github.com/tomiban' },
   ],
   description:
-    'Estoy estudiando Desarrollo de Software en el Instituto Tecnológico El Molino y desarrollo web con un perfil de Backend. Manejo C# .NET, SQL y Firebase. También conozco tecnologías para el frontend como TypeScript, React y Tailwind. Me esfuerzo por seguir buenas prácticas de programación, implementando principios SOLID, arquitecturas de diseño como MVC o Clean Architecture, y manteniéndome al día con los cambios tecnológicos. Me encanta programar y estoy dispuesto a aprender y trabajar duro para crecer profesionalmente en este rubro.',
+    'Estoy estudiando Desarrollo de Software en el Instituto Tecnológico El Molino, con un perfil de desarrollo web orientado al Backend. Manejo C# .NET y SQL DBs, y tengo experiencia con tecnologías web como JavaScript, React, Firebase y WordPress. Me esfuerzo por seguir buenas prácticas de programación, aplicando principios SOLID y arquitecturas de diseño como MVC y Clean Architecture. Me apasiona la programación y estoy dispuesto a aprender y trabajar arduamente para crecer profesionalmente en este campo.',
   tags: [{ name: 'Open to Work' }],
   action: {
     label: 'Descargar CV',
