@@ -206,3 +206,17 @@ export const maui = createSkillFactory({
   iconColor: '#512BD4',
   url: 'https://dotnet.microsoft.com/es-es/apps/maui',
 })
+
+export const javascript = createSkillFactory({
+  name: 'JavaScript',
+  icon: 'simple-icons:javascript',
+  iconColor: '#F0DB4F',
+  url: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript',
+})
+
+export const bootstrap = createSkillFactory({
+  name: 'Bootstrap',
+  icon: 'simple-icons:bootstrap',
+  iconColor: '#7952B3',
+  url: 'https://getbootstrap.com/',
+})
