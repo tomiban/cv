@@ -1,7 +1,7 @@
 import type { PortfolioSection } from '@/types/sections/portfolio-section.types';
 import type { ReadonlyDeep } from 'type-fest';
 import { demo, github, website } from '../helpers/links';
-import { angular, csharp, css, dotnet, firebase, react, sqlserver, tailwindCss, typescript } from '../helpers/skills';
+import { angular, bootstrap, csharp, css, dotnet, firebase, javascript, react, sqlite, sqlserver, tailwindCss, typescript } from '../helpers/skills';
 
 const portfolioSectionData = {
   config: {
@@ -15,6 +15,30 @@ const portfolioSectionData = {
     },
   },
   projects: [
+    {
+      name: 'Gestor de Turnos y Facturación',
+      image: import('@/assets/portfolio/logo-mvc.png'),
+      dates: [new Date('2024-04'), null],
+      details: [
+        { label: 'Compañia', value: 'Freelance' },
+        { label: 'Rol', value: ['System designer'] },
+        { label: 'Categoria', value: ['MVC', 'Local System'] },
+      ],
+      screenshots: [
+        { src: import('@/assets/portfolio/turnos-mvc_1.png'), alt: ' First screenshot' },
+        { src: import('@/assets/portfolio/turnos-mvc_2.png'), alt: 'Second screenshot' },
+        { src: import('@/assets/portfolio/turnos-mvc-3.png'), alt: 'Third screenshot' },
+        { src: import('@/assets/portfolio/turnos-mvc_4.png'), alt: 'Fourth screenshot' },
+        
+      ],
+      description:
+        'Sistema local que permite optimizar y simplificar la gestión de alumnos, la programación de turnos para clases particulares y la administración de la facturación, todo desde una única plataforma intuitiva y accesible.',
+      tagsList: {
+        title: 'Tecnologías',
+        tags: [csharp(), dotnet(), sqlite(), javascript(), bootstrap()],
+      },
+      links: [],
+    },
     {
       name: 'VeterinariApp UI',
       image: import('@/assets/portfolio/pet-vaccination.jpg'),
