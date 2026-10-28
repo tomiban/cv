@@ -12,15 +12,7 @@
   --led: 1.55;
 }
 
-@media (max-width: 47.99rem) {
-  body {
-    padding-bottom: 7.2rem;
-  }
 
-  .ident__meta span + span::before {
-    content: none;
-  }
-}
 
 /* fósforo alternativo: la tecla G cambia el atributo del documento */
 :root[data-phosphor="green"] {
@@ -640,6 +632,113 @@ a.row:focus-visible dd {
   main {
     max-width: 1280px;
     margin: 0 auto;
+  }
+}
+
+@media (max-width: 47.99rem) {
+  :root {
+    --fs: 16px;
+    --gut: 1rem;
+  }
+
+  body {
+    padding-bottom: 1.5rem;
+  }
+
+  /* barra de menú: una sola fila que se desplaza, con blancos de 44px */
+  .menu {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 0.35rem;
+    padding: 0 0.9rem;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    scrollbar-width: none;
+  }
+
+  .menu::-webkit-scrollbar {
+    display: none;
+  }
+
+  .menu a {
+    min-height: 44px;
+    white-space: nowrap;
+    padding: 0 0.55em;
+    flex: 0 0 auto;
+  }
+
+  .menu__meta {
+    display: none;
+  }
+
+  /* la barra de estado es de teclado: en táctil no aporta y come 75px */
+  .status {
+    display: none;
+  }
+
+  .win__t {
+    font-size: 12.5px;
+    letter-spacing: 0.16em;
+  }
+
+  .row dt,
+  .row__k {
+    font-size: 13px;
+  }
+
+  .ident__meta {
+    font-size: 0.82em;
+    letter-spacing: 0.08em;
+  }
+
+  .ident__meta span + span::before {
+    content: none;
+  }
+
+  .lead-row {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 0.7em 0;
+  }
+
+  .lead-row__meta {
+    text-align: left;
+  }
+
+  .lead-row__acts {
+    justify-content: flex-start;
+  }
+
+  .plain li > span:last-child {
+    font-size: 13px;
+  }
+
+  .plain li > .certs__end {
+    justify-content: flex-start;
+    margin-top: 0.25rem;
+  }
+
+  .btn,
+  .btn--sm {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    padding: 0.4em 1em;
+    font-size: 13px;
+  }
+
+  .entry__when {
+    justify-content: flex-start;
+  }
+
+  .entry__head a.btn {
+    margin-top: 0.35rem;
+  }
+}
+
+/* el monitor mide 42 caracteres siempre: se escala con el ancho para no desbordar */
+@media (max-width: 47.99rem) {
+  .crt {
+    font-size: min(0.9em, 3vw);
   }
 }
 
