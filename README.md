@@ -19,7 +19,7 @@ Queda en `http://localhost:4321`.
 
 | Tecla | Qué hace |
 | --- | --- |
-| `1` … `7` | Salta a perfil, experiencia, stack, proyectos, repos, estudios o contacto |
+| `1` … `6` | Salta a perfil, experiencia, profesionales, personales, estudios o contacto |
 | `G` | Alterna el fósforo entre ámbar y verde (se recuerda en el navegador) |
 | `↑` `↓` | Desplazan la página |
 
@@ -32,7 +32,7 @@ YAML en `content/`:
 
 | Dónde | Qué |
 | --- | --- |
-| `content/perfil`, `content/stack`, `content/contacto` | Singletons: perfil, stack y contacto |
+| `content/perfil`, `content/contacto` | Singletons: perfil (con la ficha y el stack) y contacto |
 | `content/experiencia` | Trabajos, con viñetas y orden |
 | `content/proyectos-trabajo` | Proyectos profesionales: productos de empleadores (privados, sin enlaces) |
 | `content/repos` | Proyectos personales: nombre, lenguaje, año de creación, descripción, repo y `demo` opcional. El orden lo da el campo `orden` |

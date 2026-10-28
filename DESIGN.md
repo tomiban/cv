@@ -144,7 +144,7 @@ marcos son bordes CSS, así que nunca dependen de que la fuente tenga `┌ ─ �
 
 ## Layout
 
-Una columna de ventanas apiladas. Barra de menú pegajosa arriba (siete destinos con su tecla),
+Una columna de ventanas apiladas. Barra de menú pegajosa arriba (seis destinos con su tecla),
 barra de estado fija abajo, y entre las dos el documento.
 
 - Ventana de identidad: marco `3px double` — el único doble de la página — con el nombre grande.
@@ -167,7 +167,7 @@ solid` para las demás. No hay cursor parpadeante: el único elemento vivo de la
 
 ### Barra de menú
 
-Siete enlaces con la tecla en vídeo inverso (`[1] PERFIL`). La sección activa se marca con
+Seis enlaces con la tecla en vídeo inverso (`[1] PERFIL`). La sección activa se marca con
 `aria-current="true"` y se pinta invertida; en hover y foco también. La tecla real funciona: `1`–`7`
 saltan a la sección.
 

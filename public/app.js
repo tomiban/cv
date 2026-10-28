@@ -45,7 +45,7 @@
     if (event.metaKey || event.ctrlKey || event.altKey) return;
     const target = event.target;
     if (target instanceof HTMLElement && /^(INPUT|TEXTAREA)$/.test(target.tagName)) return;
-    if (/^[1-7]$/.test(event.key)) {
+    if (/^[1-6]$/.test(event.key)) {
       const section = document.getElementById(`p${event.key}`);
       if (section) {
         section.scrollIntoView({ block: "start" });

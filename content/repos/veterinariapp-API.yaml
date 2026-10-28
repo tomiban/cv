@@ -3,4 +3,5 @@ lenguaje: "C#"
 anio: 2024
 descripcion: "API .NET 8 para gestión de pacientes, dueños, vacunas y dosis aplicadas. Cliente web en Angular 17."
 url: "https://github.com/tomiban/veterinariapp-API"
+demo: "https://veterinariapp-api.vercel.app/swagger/index.html"
 orden: 4

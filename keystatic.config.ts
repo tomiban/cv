@@ -7,7 +7,7 @@ export default config({
   ui: {
     brand: { name: 'Televideo — tomiban.github.io' },
     navigation: {
-      Contenido: ['perfil', 'experiencia', 'stack', 'proyectosTrabajo', 'repos', 'estudios', 'certificados', 'contacto'],
+      Contenido: ['perfil', 'experiencia', 'proyectosTrabajo', 'repos', 'estudios', 'certificados', 'contacto'],
     },
   },
   singletons: {
@@ -24,19 +24,6 @@ export default config({
             valor: fields.text({ label: 'Valor', multiline: true }),
           }),
           { label: 'Ficha', itemLabel: (props) => props.fields.etiqueta.value },
-        ),
-      },
-    }),
-    stack: singleton({
-      label: 'Stack (P400)',
-      path: 'content/stack/',
-      schema: {
-        grupos: fields.array(
-          fields.object({
-            titulo: fields.text({ label: 'Título' }),
-            valor: fields.text({ label: 'Tecnologías', multiline: true }),
-          }),
-          { label: 'Grupos', itemLabel: (props) => props.fields.titulo.value },
         ),
       },
     }),
