@@ -196,8 +196,9 @@ para que el bloque mida lo que debe. Con `prefers-reduced-motion` queda un cuadr
 
 ### Acción
 
-Una sola por ventana: `< Escribir >`, en vídeo inverso, después del contenido. La navegación no se
-repite en botones: vive en la barra de menú.
+Una sola en toda la página y vive en la barra de menú: `CONTACTAR`, en vídeo inverso y empujado al
+borde derecho, visible en cualquier punto del scroll. Las ventanas no repiten navegación ni
+acciones.
 
 ### Botones
 

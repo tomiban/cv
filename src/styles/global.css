@@ -329,15 +329,6 @@ a.row:focus-visible dd {
 
 /* ---------- casillas y botones ---------- */
 
-.btns {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.7rem;
-  margin-top: 1.4rem;
-  font-size: 0.86em;
-  letter-spacing: 0.08em;
-}
-
 .btn {
   border: 1px solid var(--ink);
   padding: 0.35em 0.85em;
@@ -486,6 +477,12 @@ a.row:focus-visible dd {
   justify-content: flex-end;
   gap: 0.4rem;
   margin-top: 0.35em;
+}
+
+.card-go {
+  margin: 1.2rem 0 0;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .btn--sm {
