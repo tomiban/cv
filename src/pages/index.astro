@@ -16,6 +16,7 @@ const trabajos = (await reader.collections.proyectosTrabajo.all()).sort(byOrden)
 const estudios = (await reader.collections.estudios.all()).sort(byOrden);
 const certificados = (await reader.collections.certificados.all()).sort(byOrden);
 const repos = (await reader.collections.repos.all()).sort(byOrden);
+const conDemo = repos.filter(({ entry }) => Boolean(entry.demo));
 
 const secciones = [
   { id: 'p1', n: '1', label: 'Perfil' },
@@ -170,21 +171,29 @@ const secciones = [
       </section>
 
       <section class="win" id="p5" data-page="5" aria-labelledby="t5">
-        <h2 class="win__t" id="t5">[5] Repos públicos</h2>
+        <h2 class="win__t" id="t5">[5] Repos con demo</h2>
         {
-          repos.map(({ entry }) => (
-            <a class="lead-row" href={entry.url} rel="noopener">
+          conDemo.map(({ entry }) => (
+            <div class="lead-row">
               <span class="lead-row__name">{entry.nombre}</span>
               <span class="lead-row__meta">
                 {entry.lenguaje} · {entry.anio}
+                <span class="lead-row__acts">
+                  <a class="btn btn--sm" href={entry.url} rel="noopener">
+                    repo
+                  </a>
+                  <a class="btn btn--sm btn--on" href={entry.demo}>
+                    ver demo
+                  </a>
+                </span>
               </span>
               <span class="lead-row__desc">{entry.descripcion}</span>
-            </a>
+            </div>
           ))
         }
         <p class="note">
-          Nueve repositorios en <a href={contacto?.githubUrl}>{contacto?.github}</a>. Demo viva de la
-          tienda: <a href="https://tomiban.github.io/mi-tienda-react/">tomiban.github.io/mi-tienda-react</a>.
+          {conDemo.length} con demo viva, de {repos.length} repositorios públicos en <a
+            href={contacto?.githubUrl}>{contacto?.github}</a>.
         </p>
       </section>
 

@@ -97,6 +97,7 @@ export default config({
         anio: fields.integer({ label: 'Año' }),
         descripcion: fields.text({ label: 'Descripción', multiline: true }),
         url: fields.url({ label: 'URL' }),
+        demo: fields.url({ label: 'Demo', validation: { isRequired: false } }),
         subpagina: fields.integer({ label: 'Subpágina', defaultValue: 1, validation: { min: 1, max: 2 } }),
         orden,
       },

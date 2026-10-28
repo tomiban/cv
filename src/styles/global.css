@@ -474,6 +474,19 @@ a.row:focus-visible dd {
   white-space: nowrap;
 }
 
+.lead-row__acts {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.4rem;
+  margin-top: 0.35em;
+}
+
+.btn--sm {
+  padding: 0.08em 0.5em;
+  font-size: 0.9em;
+  letter-spacing: 0.1em;
+}
+
 .lead-row__desc {
   grid-column: 1 / -1;
   font-size: 0.88em;
@@ -481,16 +494,9 @@ a.row:focus-visible dd {
   max-width: 74ch;
 }
 
-a.lead-row:hover,
-a.lead-row:focus-visible {
+.lead-row:hover .lead-row__name,
+.lead-row:focus-within .lead-row__name {
   background: var(--ink);
-  color: var(--screen);
-}
-
-a.lead-row:hover .lead-row__meta,
-a.lead-row:focus-visible .lead-row__meta,
-a.lead-row:hover .lead-row__desc,
-a.lead-row:focus-visible .lead-row__desc {
   color: var(--screen);
 }
 

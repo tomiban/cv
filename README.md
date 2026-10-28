@@ -35,7 +35,7 @@ YAML en `content/`:
 | `content/perfil`, `content/stack`, `content/contacto` | Singletons: perfil, stack y contacto |
 | `content/experiencia` | Trabajos, con viñetas y orden |
 | `content/proyectos-trabajo` | Proyectos de empleadores (privados, sin enlaces) |
-| `content/repos` | Repos públicos; `subpagina` decide en qué hoja de P600 cae |
+| `content/repos` | Repos públicos. Sólo se publican los que tienen `demo`: el sitio muestra las demos vivas y cuenta el resto |
 | `content/estudios`, `content/certificados` | P700 |
 
 En producción **no hay CMS**, y es a propósito: GitHub Pages solo sirve archivos estáticos y las
