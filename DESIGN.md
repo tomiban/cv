@@ -131,7 +131,7 @@ marcos son bordes CSS, así que nunca dependen de que la fuente tenga `┌ ─ �
 
 | Rol | Tamaño | Detalle |
 | --- | --- | --- |
-| Nombre | `clamp(1.8rem, 5.6vw, 3.2rem)` | Mayúsculas, `letter-spacing: .02em`, cursor de bloque detrás |
+| Nombre | `clamp(1.8rem, 5.6vw, 3.2rem)` | Mayúsculas, `letter-spacing: .02em` |
 | Título de ventana | `.76em` | Mayúsculas, `letter-spacing: .2em`, se apoya sobre el borde |
 | Etiqueta de campo | `.78em` | Mayúsculas, ámbar atenuado, alineada a la derecha en desktop |
 | Cuerpo | `var(--fs)` | Máximo 74ch |
@@ -161,8 +161,7 @@ inverso: un bloque ámbar sobre pantalla negra. Los marcos dobles hacen de jerar
 ## Shapes
 
 Rectángulos puros, radio 0. Los marcos son bordes: `3px double` para la ventana principal y `1px
-solid` para las demás. El cursor es un rectángulo sólido `.55em × .78em` que parpadea con
-`steps(1)`; con `prefers-reduced-motion` queda fijo.
+solid` para las demás. No hay cursor parpadeante: el único elemento vivo de la página es la pantalla del monitor.
 
 ## Components
 

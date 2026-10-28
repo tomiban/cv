@@ -222,22 +222,6 @@ main {
   text-wrap: balance;
 }
 
-.ident h1 .cursor {
-  display: inline-block;
-  width: 0.55em;
-  height: 0.78em;
-  margin-left: 0.12em;
-  background: var(--ink);
-  vertical-align: -0.03em;
-  animation: blink 1.05s steps(1, end) infinite;
-}
-
-@keyframes blink {
-  50% {
-    opacity: 0;
-  }
-}
-
 @media (prefers-reduced-motion: no-preference) {
   .crt__f {
     animation: snake 4.4s steps(1, end) infinite;
@@ -679,10 +663,6 @@ a.row:focus-visible dd {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .ident h1 .cursor {
-    animation: none;
-  }
-
   *,
   *::before,
   *::after {
