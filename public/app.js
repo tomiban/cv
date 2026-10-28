@@ -26,10 +26,10 @@
     clockEl.dateTime = now.toISOString();
   };
 
-  const PHOSPHORS = ["yellow", "green", "red", "cyan"];
+  const PHOSPHORS = ["amber", "green", "red", "cyan"];
 
   const setPhosphor = (name) => {
-    if (name === "yellow") delete root.dataset.phosphor;
+    if (name === "amber") delete root.dataset.phosphor;
     else if (PHOSPHORS.includes(name)) root.dataset.phosphor = name;
     store.set("tui-phosphor", name);
   };
@@ -62,7 +62,7 @@
       return;
     }
     if (event.key === "c" || event.key === "C") {
-      const current = PHOSPHORS.indexOf(root.dataset.phosphor || "yellow");
+      const current = PHOSPHORS.indexOf(root.dataset.phosphor || "amber");
       setPhosphor(PHOSPHORS[(current + 1) % PHOSPHORS.length]);
     }
   });
