@@ -26,8 +26,16 @@
     clockEl.dateTime = now.toISOString();
   };
 
-  const phosphor = store.get("tui-phosphor");
-  if (phosphor === "green") root.dataset.phosphor = "green";
+  const PHOSPHORS = ["yellow", "green", "red", "cyan"];
+
+  const setPhosphor = (name) => {
+    if (name === "yellow") delete root.dataset.phosphor;
+    else if (PHOSPHORS.includes(name)) root.dataset.phosphor = name;
+    store.set("tui-phosphor", name);
+  };
+
+  const saved = store.get("tui-phosphor");
+  if (saved) setPhosphor(saved);
 
   const markCurrent = () => {
     const line = 120;
@@ -53,11 +61,9 @@
       }
       return;
     }
-    if (event.key === "g" || event.key === "G") {
-      const next = root.dataset.phosphor === "green" ? "amber" : "green";
-      if (next === "green") root.dataset.phosphor = "green";
-      else delete root.dataset.phosphor;
-      store.set("tui-phosphor", next);
+    if (event.key === "c" || event.key === "C") {
+      const current = PHOSPHORS.indexOf(root.dataset.phosphor || "yellow");
+      setPhosphor(PHOSPHORS[(current + 1) % PHOSPHORS.length]);
     }
   });
 

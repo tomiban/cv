@@ -1,9 +1,9 @@
 :root {
   color-scheme: dark;
   --screen: #0b0a08;
-  --ink: #ffb000;
-  --ink-2: #d59a20;
-  --rule: #5b3f09;
+  --ink: #ffe600;
+  --ink-2: #c9b400;
+  --rule: #4a4200;
   --mono: ui-monospace, "SFMono-Regular", "DejaVu Sans Mono", "Liberation Mono", Menlo, Consolas,
     monospace;
   --fs: clamp(14px, 0.28vw + 12.2px, 16px);
@@ -12,14 +12,26 @@
   --led: 1.55;
 }
 
-
-
-/* fósforo alternativo: la tecla G cambia el atributo del documento */
+/* fósforos: los cuatro colores del icono, en ciclo con la tecla C */
 :root[data-phosphor="green"] {
   --screen: #070a07;
-  --ink: #4dff8f;
-  --ink-2: #3fc473;
-  --rule: #1d5c33;
+  --ink: #4fe34f;
+  --ink-2: #35a035;
+  --rule: #1c5a1c;
+}
+
+:root[data-phosphor="red"] {
+  --screen: #0d0806;
+  --ink: #ff5240;
+  --ink-2: #e04a38;
+  --rule: #5a1d16;
+}
+
+:root[data-phosphor="cyan"] {
+  --screen: #060a0a;
+  --ink: #35d6d6;
+  --ink-2: #2aa9a9;
+  --rule: #144a4a;
 }
 
 *,

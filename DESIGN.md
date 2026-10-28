@@ -99,25 +99,28 @@ Voz: monoespaciada, sin excepción. Español con jerga técnica en inglés.
 
 ## Colors
 
-Dos tintas y una regla. Nada más.
+Cuatro fósforos, un token por rol. Se recorren con la tecla **C** y el navegador recuerda el último.
 
-- `screen` `#0b0a08` — el fondo. Negro cálido, no puro: deja margen para el vídeo inverso.
-- `ink` `#ffb000` — texto, marcos de ventana, botones. Fósforo ámbar.
-- `ink-2` `#d59a20` — etiquetas, metadatos, marcas de ítem. Ámbar atenuado, nunca por debajo de
-  4.5:1 sobre `screen`.
-- `rule` `#5b3f09` — líneas de 1px: separadores, marcos secundarios, líneas de puntos. Es
-  decoración estructural, no texto.
+| Fósforo | `ink` | `ink-2` | `rule` | `screen` |
+| --- | --- | --- | --- | --- |
+| Amarillo (por defecto) | `#ffe600` | `#c9b400` | `#4a4200` | `#0b0a08` |
+| Verde | `#4fe34f` | `#35a035` | `#1c5a1c` | `#070a07` |
+| Rojo | `#ff5240` | `#e04a38` | `#5a1d16` | `#0d0806` |
+| Cian | `#35d6d6` | `#2aa9a9` | `#144a4a` | `#060a0a` |
 
-Fósforo alternativo, activado con la tecla **G** y guardado en `localStorage`: `screen-green`
-`#070a07`, `ink-green` `#4dff8f`, `ink-2-green` `#3fc473`, `rule-green` `#1d5c33`. El par se cambia
-en un solo lugar: `:root[data-phosphor="green"]`.
+Son los cuatro colores del icono del sitio, con el `screen` apenas tintado en la dirección de cada
+uno. El estado se cambia con `:root[data-phosphor="…"]`; sin atributo, amarillo.
 
-La hoja impresa invierte a papel y tinta: `print-paper` `#ffffff` y `print-ink` `#000000`, con
-las ventanas en 1px negro y el menú fuera del flujo.
+- `ink` — texto, marcos, botones. Entre 6.2:1 y 15.6:1 sobre `screen`.
+- `ink-2` — etiquetas, metadatos, marcas. Nunca por debajo de 4.5:1 (el rojo es el más ajustado,
+  con 4.9:1).
+- `rule` — líneas de 1px. Decoración estructural, no texto.
+
+Los cuatro estados pasan AA completo, medidos en el DOM.
 
 ### Named Rules
 
-- **Dos tintas.** Ningún tercer color, ni siquiera para estados: el énfasis es vídeo inverso.
+- **Dos tintas por fósforo.** Ningún color fuera de la paleta activa: el énfasis es vídeo inverso.
 - **El color no es señal.** La selección se ve por bloque invertido, no por tono.
 
 ## Typography
