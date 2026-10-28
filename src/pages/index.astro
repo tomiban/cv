@@ -13,7 +13,10 @@ const byOrden = (a: { entry: { orden?: number | null } }, b: { entry: { orden?: 
 const experiencia = (await reader.collections.experiencia.all()).sort(byOrden);
 const trabajos = (await reader.collections.proyectosTrabajo.all()).sort(byOrden);
 const estudios = (await reader.collections.estudios.all()).sort(byOrden);
-const certificados = (await reader.collections.certificados.all()).sort(byOrden);
+const certificados = (await reader.collections.certificados.all()).sort((a, b) => {
+  const year = Number(b.entry.anio || 0) - Number(a.entry.anio || 0);
+  return year !== 0 ? year : (a.entry.orden ?? 0) - (b.entry.orden ?? 0);
+});
 const repos = (await reader.collections.repos.all()).sort(byOrden);
 const conDemo = repos.filter(({ entry }) => Boolean(entry.demo));
 
