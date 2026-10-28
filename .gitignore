@@ -6,3 +6,6 @@ dist/
 .pi/
 .impeccable/
 .DS_Store
+
+# caché local de la skill registry
+.atl/
