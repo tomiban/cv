@@ -8,5 +8,7 @@ ficha:
     valor: ".NET · Node.js · React · React Native · Astro"
   - etiqueta: "Infra"
     valor: "Docker · PostgreSQL · Linux"
+  - etiqueta: "Desde"
+    valor: "2024"
   - etiqueta: "Inglés"
     valor: "B1"
