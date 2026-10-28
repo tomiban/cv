@@ -185,21 +185,26 @@ main {
   align-items: start;
 }
 
-.ascii {
+.crt {
+  position: relative;
   margin: 0;
-  font-size: 0.8em;
+  font-size: 0.9em;
   line-height: 1.12;
-  color: var(--ink-2);
   letter-spacing: 0;
-}
-
-.ascii__l {
-  display: block;
-  white-space: pre;
-}
-
-.led {
   color: var(--ink);
+}
+
+.crt__f {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  white-space: pre;
+  opacity: 0;
+}
+
+.crt__f:first-child {
+  position: relative;
+  opacity: 1;
 }
 
 .ident__main {
@@ -234,30 +239,19 @@ main {
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .ascii__l {
-    animation: print 1ms steps(1, end) backwards;
-    animation-delay: calc(var(--n, 0) * 45ms);
+  .crt__f {
+    animation: snake 4.4s steps(1, end) infinite;
+    animation-delay: calc(var(--f, 0) * -0.4s);
   }
 
-  .led {
-    animation: led 2.8s steps(1, end) infinite;
-    animation-delay: calc(var(--i, 0) * 0.33s);
-  }
-
-  @keyframes print {
-    from {
-      opacity: 0;
-    }
-  }
-
-  @keyframes led {
+  @keyframes snake {
     0%,
-    58% {
+    9.08% {
       opacity: 1;
     }
-    59%,
+    9.09%,
     100% {
-      opacity: 0.25;
+      opacity: 0;
     }
   }
 }
@@ -286,19 +280,6 @@ main {
 }
 
 /* ---------- filas de ficha ---------- */
-
-.prosa {
-  margin-top: 1.4rem;
-}
-
-.prosa p {
-  margin: 0 0 0.9em;
-  max-width: 74ch;
-}
-
-.prosa p:last-child {
-  margin-bottom: 0;
-}
 
 .rows {
   margin-top: 1.2rem;
@@ -667,8 +648,8 @@ a.row:focus-visible dd {
     gap: 2.2rem;
   }
 
-  .ascii {
-    font-size: 0.86em;
+  .crt {
+    font-size: 0.98em;
   }
 
   .ident__meta {
@@ -751,8 +732,7 @@ a.row:focus-visible dd {
     border: 1px solid #000;
   }
 
-  .ascii__l,
-  .led {
+  .crt__f {
     animation: none;
   }
 

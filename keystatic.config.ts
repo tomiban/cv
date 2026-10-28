@@ -18,10 +18,6 @@ export default config({
         nombre: fields.text({ label: 'Nombre' }),
         rol: fields.text({ label: 'Rol' }),
         ubicacion: fields.text({ label: 'Ubicación' }),
-        parrafos: fields.array(fields.text({ label: 'Párrafo', multiline: true }), {
-          label: 'Párrafos',
-          itemLabel: (props) => props.value.slice(0, 48),
-        }),
         ficha: fields.array(
           fields.object({
             etiqueta: fields.text({ label: 'Etiqueta' }),

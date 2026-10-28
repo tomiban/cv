@@ -182,16 +182,17 @@ saltan a la sección.
 Etiqueta en `ink-2` y valor en `ink`, separadas por una línea de 1px. Cuando la fila es un enlace,
 hover y foco la invierten completa y las etiquetas pasan a `screen`, para no perder contraste.
 
-### Bloque ASCII
+### Monitor ASCII
 
-Rack de cuatro unidades dibujado con `+ - | [ ]` — sólo ASCII, nunca glifos de caja: el arte no
-depende de la cobertura de la fuente. Va en la columna izquierda de la ventana de identificación, a
-`0.86em` y en `ink-2`, con el nombre y la ficha a la derecha.
+Un CRT dibujado con `+ - | =` y comillas — sólo ASCII, nunca glifos de caja, para no depender de la
+cobertura de la fuente. Dentro de la pantalla corre una partida de snake: `@` cabeza, `o` cuerpo,
+`*` comida y un marcador `PUNTOS` / `HI` arriba.
 
-Efecto, una sola vez al cargar: cada línea entra con un paso de 45 ms (`animation: print 1ms
-steps(1)` escalonado por `--n`), y después los cinco LEDs `[##]` parpadean en un ciclo de 2,8 s con
-desfasajes de `--i`. Es el único movimiento del sitio; con `prefers-reduced-motion` no hay impresión
-ni parpadeo, y en `@media print` las animaciones se desactivan para que el arte salga impreso.
+Los once cuadros de la animación se generan en build time con un recorrido cerrado de celdas (no
+están escritos a mano), así el bucle cierra sin saltos y el marcador sube cuadro a cuadro. Se apilan
+con `position: absolute` y se muestran de a uno con `steps(1)` cada 0.4 s; el primero queda en flujo
+para que el bloque mida lo que debe. Con `prefers-reduced-motion` queda un cuadro fijo, y en
+`@media print` las animaciones se apagan.
 
 ### Acción
 

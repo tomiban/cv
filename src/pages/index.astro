@@ -18,6 +18,60 @@ const certificados = (await reader.collections.certificados.all()).sort(byOrden)
 const repos = (await reader.collections.repos.all()).sort(byOrden);
 const conDemo = repos.filter(({ entry }) => Boolean(entry.demo));
 
+
+// --- Monitor CRT en ASCII con una partida de snake (cuadros en build time) ---
+const TW = 28;
+const TH = 8;
+const PAD = "        ";
+const INNER = TW + 4;
+const loop: Array<[number, number]> = [];
+for (let x = 2; x <= 25; x++) loop.push([x, 2]);
+for (let y = 3; y <= 7; y++) loop.push([25, y]);
+for (let x = 24; x >= 2; x--) loop.push([x, 7]);
+for (let y = 6; y >= 3; y--) loop.push([2, y]);
+
+const hud = (frame: number) =>
+  ` PUNTOS ${String(4 + frame).padStart(4, "0")}      HI 0031`.padEnd(TW).slice(0, TW);
+
+const playfield = (frames: number) => {
+  const cells = new Map<string, string>();
+  const head = frames * 4;
+  for (let b = 0; b < 6; b++) {
+    const [x, y] = loop[(head - b + loop.length * 3) % loop.length];
+    cells.set(`${x},${y}`, b === 0 ? "@" : "o");
+  }
+  const food = [
+    [8, 7],
+    [21, 2],
+    [14, 7],
+  ][frames % 3];
+  const key = `${food[0]},${food[1]}`;
+  if (!cells.has(key)) cells.set(key, "*");
+  return Array.from({ length: TH }, (_, y) => {
+    if (y === 0) return hud(frames);
+    let row = "";
+    for (let x = 0; x < TW; x++) row += cells.get(`${x},${y}`) ?? " ";
+    return row;
+  });
+};
+
+const monitor = (frame: number) => [
+  PAD + "." + "=".repeat(INNER) + ".",
+  PAD + "|" + " ".repeat(INNER) + "|",
+  PAD + "| " + "." + "-".repeat(TW) + ". |",
+  ...playfield(frame).map((row) => PAD + "| |" + row + "| |"),
+  PAD + "| '" + "-".repeat(TW) + "' |",
+  PAD + "|" + " ".repeat(INNER) + "|",
+  PAD + "|  (o)  TB-2026" + " ".repeat(INNER - 14) + "|",
+  PAD + "'" + "=".repeat(INNER) + "'",
+  PAD + "     [==================]",
+  PAD + "      '----------------'",
+  PAD + "       |              |",
+  PAD + "  _____|______________|_____",
+];
+
+const snake = Array.from({ length: 11 }, (_, f) => monitor(f));
+
 const secciones = [
   { id: 'p1', n: '1', label: 'Perfil' },
   { id: 'p2', n: '2', label: 'Experiencia' },
@@ -72,21 +126,16 @@ const secciones = [
         <h2 class="win__t" id="t1">Identificación</h2>
 
         <div class="ident">
-          <pre class="ascii" aria-hidden="true"><span class="ascii__l" style="--n:0">+----------------------+</span>
-<span class="ascii__l" style="--n:1">| [] [] [] []   <span class="led" style="--i:1">[##]</span>   |</span>
-<span class="ascii__l" style="--n:2">+----------------------+</span>
-<span class="ascii__l" style="--n:3">| [] [] <span class="led" style="--i:2">[##]</span> []        |</span>
-<span class="ascii__l" style="--n:4">+----------------------+</span>
-<span class="ascii__l" style="--n:5">| <span class="led" style="--i:3">[##]</span> [] [] <span class="led" style="--i:4">[##]</span>      |</span>
-<span class="ascii__l" style="--n:6">+----------------------+</span>
-<span class="ascii__l" style="--n:7">| [] [] [] []   <span class="led" style="--i:5">[##]</span>   |</span>
-<span class="ascii__l" style="--n:8">+----------------------+</span>
-<span class="ascii__l" style="--n:9">    ||            ||    </span>
-<span class="ascii__l" style="--n:10"> .----------------------.</span></pre>
+          <div class="crt" aria-hidden="true">
+            {
+              snake.map((frame, f) => (
+                <pre class="crt__f" style={`--f:${f}`}>{frame.join("\n")}</pre>
+              ))
+            }
+          </div>
           <div class="ident__main">
             <h1>{perfil?.nombre}<span class="cursor" aria-hidden="true"></span></h1>
             <p class="ident__meta">
-              <span>{perfil?.rol}</span>
               <span>{perfil?.ubicacion}</span>
               <span><time id="reloj">--:--</time> local</span>
             </p>
@@ -102,10 +151,6 @@ const secciones = [
               }
             </dl>
           </div>
-        </div>
-
-        <div class="prosa">
-          {perfil?.parrafos.map((parrafo) => <p>{parrafo}</p>)}
         </div>
 
         <div class="btns">
