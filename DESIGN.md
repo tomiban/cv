@@ -99,17 +99,17 @@ Voz: monoespaciada, sin excepción. Español con jerga técnica en inglés.
 
 ## Colors
 
-Cuatro fósforos, un token por rol. Se recorren con la tecla **C** y el navegador recuerda el último. El de fábrica es el ámbar de siempre; los otros tres son los colores del icono.
+Cuatro fósforos, un token por rol. Se recorren con la tecla **C** y el navegador recuerda el último.
 
 | Fósforo | `ink` | `ink-2` | `rule` | `screen` |
 | --- | --- | --- | --- | --- |
-| Ámbar (por defecto) | `#ffb000` | `#d59a20` | `#5b3f09` | `#0b0a08` |
-| Verde | `#4dff8f` | `#3fc473` | `#1d5c33` | `#070a07` |
+| Amarillo (por defecto) | `#ffe600` | `#c9b400` | `#4a4200` | `#0b0a08` |
+| Verde | `#4fe34f` | `#35a035` | `#1c5a1c` | `#070a07` |
 | Rojo | `#ff5240` | `#e04a38` | `#5a1d16` | `#0d0806` |
 | Cian | `#35d6d6` | `#2aa9a9` | `#144a4a` | `#060a0a` |
 
-El ámbar y el verde son los fósforos originales del sitio; el rojo y el cian vienen del icono. Cada uno
-tiñe apenas su `screen` en la dirección del color. El estado se cambia con `:root[data-phosphor="…"]`; sin atributo, amarillo.
+Son los cuatro colores del icono del sitio, con el `screen` apenas tintado en la dirección de cada
+uno. El estado se cambia con `:root[data-phosphor="…"]`; sin atributo, amarillo.
 
 - `ink` — texto, marcos, botones. Entre 6.2:1 y 15.6:1 sobre `screen`.
 - `ink-2` — etiquetas, metadatos, marcas. Nunca por debajo de 4.5:1 (el rojo es el más ajustado,
