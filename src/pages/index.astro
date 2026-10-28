@@ -22,8 +22,8 @@ const secciones = [
   { id: 'p1', n: '1', label: 'Perfil' },
   { id: 'p2', n: '2', label: 'Experiencia' },
   { id: 'p3', n: '3', label: 'Stack' },
-  { id: 'p4', n: '4', label: 'Proyectos' },
-  { id: 'p5', n: '5', label: 'Repos' },
+  { id: 'p4', n: '4', label: 'Profesionales' },
+  { id: 'p5', n: '5', label: 'Personales' },
   { id: 'p6', n: '6', label: 'Estudios' },
   { id: 'p7', n: '7', label: 'Contacto' },
 ];
@@ -64,12 +64,12 @@ const secciones = [
           </a>
         ))
       }
-      <span class="menu__meta">ficha 0001 · {contacto?.actualizado}</span>
+      <span class="menu__meta">Actualizado {contacto?.actualizado}</span>
     </nav>
 
     <main>
       <section class="win win--id" id="p1" data-page="1" aria-labelledby="t1">
-        <h2 class="win__t" id="t1">Ficha 0001 — datos del autor</h2>
+        <h2 class="win__t" id="t1">Identificación</h2>
 
         <div class="ident">
           <h1>Tomás Banchio<span class="cursor" aria-hidden="true"></span></h1>
@@ -110,7 +110,7 @@ const secciones = [
 
         <div class="btns">
           <a class="btn btn--on" href="#p2">&lt; Ver experiencia &gt;</a>
-          <a class="btn" href="#p5">&lt; Ver repos &gt;</a>
+          <a class="btn" href="#p5">&lt; Ver personales &gt;</a>
           <a class="btn" href={`mailto:${contacto?.email}`}>&lt; Escribir &gt;</a>
         </div>
       </section>
@@ -155,7 +155,7 @@ const secciones = [
       </section>
 
       <section class="win" id="p4" data-page="4" aria-labelledby="t4">
-        <h2 class="win__t" id="t4">[4] Proyectos de trabajo</h2>
+        <h2 class="win__t" id="t4">[4] Proyectos profesionales</h2>
         {
           trabajos.map(({ entry }) => (
             <article class="entry">
@@ -171,7 +171,7 @@ const secciones = [
       </section>
 
       <section class="win" id="p5" data-page="5" aria-labelledby="t5">
-        <h2 class="win__t" id="t5">[5] Repos con demo</h2>
+        <h2 class="win__t" id="t5">[5] Proyectos personales</h2>
         {
           conDemo.map(({ entry }) => (
             <div class="lead-row">
@@ -192,7 +192,7 @@ const secciones = [
           ))
         }
         <p class="note">
-          {conDemo.length} con demo viva, de {repos.length} repositorios públicos en <a
+          {conDemo.length} con demo viva, de {repos.length} proyectos publicados en <a
             href={contacto?.githubUrl}>{contacto?.github}</a>.
         </p>
       </section>
@@ -241,8 +241,7 @@ const secciones = [
             <span class="row__v">{contacto?.linkedin}</span>
           </a>
         </div>
-        <p class="note">{contacto?.nota}</p>
-        <p class="note">Ficha actualizada el {contacto?.actualizado}.</p>
+        <p class="note">Última actualización: {contacto?.actualizado}.</p>
       </section>
     </main>
 

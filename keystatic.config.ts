@@ -55,7 +55,6 @@ export default config({
         githubUrl: fields.url({ label: 'GitHub (URL)' }),
         linkedin: fields.text({ label: 'LinkedIn (texto)' }),
         linkedinUrl: fields.url({ label: 'LinkedIn (URL)' }),
-        nota: fields.text({ label: 'Nota', multiline: true }),
         actualizado: fields.text({ label: 'Actualizado' }),
       },
     }),
@@ -78,7 +77,7 @@ export default config({
       },
     }),
     proyectosTrabajo: collection({
-      label: 'Proyectos de trabajo (P500)',
+      label: 'Proyectos profesionales (P500)',
       path: 'content/proyectos-trabajo/*',
       schema: {
         nombre: fields.text({ label: 'Nombre' }),
@@ -89,7 +88,7 @@ export default config({
       },
     }),
     repos: collection({
-      label: 'Repos (P600)',
+      label: 'Proyectos personales (P600)',
       path: 'content/repos/*',
       schema: {
         nombre: fields.text({ label: 'Nombre' }),
