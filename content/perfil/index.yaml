@@ -5,7 +5,7 @@ ficha:
   - etiqueta: "Rol"
     valor: "Desarrollador de software"
   - etiqueta: "Stack"
-    valor: "C# · TypeScript · SQL · React · Next.js"
+    valor: ".NET · Node.js · React · React Native · Astro"
   - etiqueta: "Infra"
     valor: "Docker · PostgreSQL · Linux"
   - etiqueta: "Inglés"
