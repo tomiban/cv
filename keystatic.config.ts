@@ -18,8 +18,6 @@ export default config({
         nombre: fields.text({ label: 'Nombre' }),
         rol: fields.text({ label: 'Rol' }),
         ubicacion: fields.text({ label: 'Ubicación' }),
-        kicker: fields.text({ label: 'Dato del índice' }),
-        lead: fields.text({ label: 'Bajada de P100', multiline: true }),
         parrafos: fields.array(fields.text({ label: 'Párrafo', multiline: true }), {
           label: 'Párrafos',
           itemLabel: (props) => props.value.slice(0, 48),
@@ -97,7 +95,6 @@ export default config({
         descripcion: fields.text({ label: 'Descripción', multiline: true }),
         url: fields.url({ label: 'URL' }),
         demo: fields.url({ label: 'Demo', validation: { isRequired: false } }),
-        subpagina: fields.integer({ label: 'Subpágina', defaultValue: 1, validation: { min: 1, max: 2 } }),
         orden,
       },
     }),

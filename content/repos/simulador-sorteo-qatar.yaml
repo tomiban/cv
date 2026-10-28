@@ -4,5 +4,4 @@ anio: 2026
 descripcion: "Simulador del sorteo de grupos del Mundial de Qatar en JavaScript vanilla, según las reglas de la FIFA."
 url: "https://github.com/tomiban/simulador-sorteo-qatar"
 demo: "https://tomiban.github.io/simulador-sorteo-qatar/"
-subpagina: 2
 orden: 8

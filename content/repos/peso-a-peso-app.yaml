@@ -4,5 +4,4 @@ anio: 2026
 descripcion: "Gestión de finanzas personales full-stack: Next.js, Prisma y MariaDB sobre Google Cloud Run."
 url: "https://github.com/tomiban/peso-a-peso-app"
 demo: "https://peso-a-peso-app-five.vercel.app/"
-subpagina: 1
 orden: 2
