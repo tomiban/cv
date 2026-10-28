@@ -15,6 +15,16 @@ npm run dev
 
 Queda en `http://localhost:4321`.
 
+## Teclado
+
+| Tecla | Qué hace |
+| --- | --- |
+| `1` … `7` | Salta a perfil, experiencia, stack, proyectos, repos, estudios o contacto |
+| `G` | Alterna el fósforo entre ámbar y verde (se recuerda en el navegador) |
+| `↑` `↓` | Desplazan la página |
+
+Sin JavaScript el documento se lee completo: el menú, las casillas y los botones son enlaces.
+
 ## Contenido
 
 El CMS está en `http://localhost:4321/keystatic` (solo en `npm run dev`). Cada colección escribe

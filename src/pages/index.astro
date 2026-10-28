@@ -17,23 +17,14 @@ const estudios = (await reader.collections.estudios.all()).sort(byOrden);
 const certificados = (await reader.collections.certificados.all()).sort(byOrden);
 const repos = (await reader.collections.repos.all()).sort(byOrden);
 
-const subpaginas = [1, 2].map((n) => repos.filter(({ entry }) => entry.subpagina === n));
-const indexRows = [
-  { page: '200', label: 'Perfil', value: perfil?.kicker ?? '' },
-  {
-    page: '300',
-    label: 'Experiencia',
-    value: experiencia.map(({ entry }) => entry.empresa.split(',')[0]).join(' · '),
-  },
-  { page: '400', label: 'Stack', value: 'C# · TS · SQL · Docker' },
-  {
-    page: '500',
-    label: 'Proyectos',
-    value: trabajos.map(({ entry }) => entry.nombre).join(' · '),
-  },
-  { page: '600', label: 'Repos', value: 'Nueve públicos' },
-  { page: '700', label: 'Estudios', value: 'ITEC · Crombie Academy' },
-  { page: '800', label: 'Contacto', value: 'Escribime' },
+const secciones = [
+  { id: 'p1', n: '1', label: 'Perfil' },
+  { id: 'p2', n: '2', label: 'Experiencia' },
+  { id: 'p3', n: '3', label: 'Stack' },
+  { id: 'p4', n: '4', label: 'Proyectos' },
+  { id: 'p5', n: '5', label: 'Repos' },
+  { id: 'p6', n: '6', label: 'Estudios' },
+  { id: 'p7', n: '7', label: 'Contacto' },
 ];
 ---
 
@@ -47,132 +38,100 @@ const indexRows = [
       name="description"
       content="Desarrollador full stack en Esperanza, Santa Fe. Tres años construyendo producto de punta a punta: React y Next.js, NestJS y ASP.NET Core, SQL, Docker, pagos e identidad."
     />
-    <meta name="theme-color" content="#06070a" />
+    <meta name="theme-color" content="#0b0a08" />
     <meta name="color-scheme" content="dark" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="preload" href="/fonts/jersey-15.woff2" as="font" type="font/woff2" crossorigin />
     <meta property="og:type" content="profile" />
     <meta property="og:locale" content="es_AR" />
     <meta property="og:title" content="Tomás Banchio — Desarrollador Full Stack" />
     <meta
       property="og:description"
-      content="Tres años construyendo producto de punta a punta: trámites municipales, pagos e identidad. Una página, ocho páginas de teletexto."
+      content="Ficha de terminal: perfil, experiencia, stack, proyectos, repos y contacto."
     />
     <meta property="og:url" content="https://tomiban.github.io/" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="../styles/global.css" />
   </head>
   <body>
-    <a class="skip" href="#p100">Saltar al índice</a>
+    <a class="skip" href="#p1">Saltar a la ficha</a>
 
-    <header class="top">
-      <p class="top__id">
-        <a href="#p100"
-          >Tomás Banchio<span class="cell" aria-hidden="true"></span
-          ><span class="top__role">Desarrollador Full Stack</span></a
-        >
-      </p>
-      <form class="top__go" id="ir" hidden>
-        <label for="pagina">Página</label>
-        <input
-          id="pagina"
-          name="pagina"
-          type="text"
-          inputmode="numeric"
-          autocomplete="off"
-          maxlength="3"
-          size="3"
-          placeholder="300"
-          aria-describedby="aviso"
-        />
-        <button type="submit">Ir</button>
-      </form>
-      <p class="top__stamp">
-        <b id="pagina-actual">P100</b>/<i id="subpagina-actual">1</i>
-        <time id="reloj">--:--</time>
-      </p>
-      <p class="top__msg" id="aviso" role="status" aria-live="polite"></p>
-    </header>
+    <nav class="menu" aria-label="Secciones">
+      {
+        secciones.map((s) => (
+          <a href={`#${s.id}`} data-nav={s.id}>
+            <b>{s.n}</b>
+            {s.label}
+          </a>
+        ))
+      }
+      <span class="menu__meta">ficha 0001 · {contacto?.actualizado}</span>
+    </nav>
 
     <main>
-      <section class="page page--index" id="p100" data-page="100" aria-labelledby="t100">
-        <h1 id="t100"><span>Tomás</span> <span>Banchio</span></h1>
-        <p class="where">
-          {perfil?.ubicacion}<span class="cell" aria-hidden="true"></span>{perfil?.kicker}
-        </p>
+      <section class="win win--id" id="p1" data-page="1" aria-labelledby="t1">
+        <h2 class="win__t" id="t1">Ficha 0001 — datos del autor</h2>
 
-        <p class="lead">{perfil?.lead}</p>
-
-        <div class="index-grid">
-          <nav aria-label="Índice de páginas">
-            <ol class="index">
-              {
-                indexRows.map((row) => (
-                  <li>
-                    <a href={`#p${row.page}`}>
-                      <b>{row.page}</b>
-                      <span>{row.label}</span>
-                      <i></i>
-                      <em>{row.value}</em>
-                    </a>
-                  </li>
-                ))
-              }
-            </ol>
-          </nav>
-
-          <div class="card-test" aria-hidden="true">
-            <span></span><span></span><span></span><span></span><span></span><span></span
-            ><span></span><span></span><span></span>
-            <p>Un sol de celdas</p>
-          </div>
+        <div class="ident">
+          <h1>Tomás Banchio<span class="cursor" aria-hidden="true"></span></h1>
+          <p class="ident__meta">
+            <span>{perfil?.rol}</span>
+            <span>{perfil?.ubicacion}</span>
+            <span><time id="reloj">--:--</time> local</span>
+          </p>
         </div>
 
-        <p class="status">
-          8 páginas<span class="cell" aria-hidden="true"></span>Actualizado {
-            contacto?.actualizado
-          }<span class="cell" aria-hidden="true"></span>Esperanza, Santa Fe
-        </p>
-      </section>
-
-      <section class="page" id="p200" data-page="200" aria-labelledby="t200">
-        <div class="bar">
-          <h2 id="t200"><b>200</b> Perfil</h2>
-          <span class="bar__stamp">P200/1</span>
-        </div>
-        <div class="prose">
-          {perfil?.parrafos.map((parrafo) => <p>{parrafo}</p>)}
-        </div>
-        <dl class="record">
+        <dl class="rows">
           {
             perfil?.ficha.map((fila) => (
-              <div>
+              <div class="row">
                 <dt>{fila.etiqueta}</dt>
                 <dd>{fila.valor}</dd>
               </div>
             ))
           }
         </dl>
-      </section>
 
-      <section class="page" id="p300" data-page="300" aria-labelledby="t300">
-        <div class="bar">
-          <h2 id="t300"><b>300</b> Experiencia</h2>
-          <span class="bar__stamp">P300/1</span>
+        <div class="prosa">
+          {perfil?.parrafos.map((parrafo) => <p>{parrafo}</p>)}
         </div>
 
+        <ul class="checks" aria-label="Ir a una sección">
+          {
+            secciones.map((s) => (
+              <li>
+                <a href={`#${s.id}`}>
+                  <b>[{s.n}]</b>
+                  <span>{s.label}</span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+
+        <div class="btns">
+          <a class="btn btn--on" href="#p2">&lt; Ver experiencia &gt;</a>
+          <a class="btn" href="#p5">&lt; Ver repos &gt;</a>
+          <a class="btn" href={`mailto:${contacto?.email}`}>&lt; Escribir &gt;</a>
+        </div>
+      </section>
+
+      <section class="win" id="p2" data-page="2" aria-labelledby="t2">
+        <h2 class="win__t" id="t2">[2] Experiencia</h2>
         {
           experiencia.map(({ entry }) => (
-            <article class="job">
-              <div class="job__head">
+            <article class="entry">
+              <div class="entry__head">
                 <h3>{entry.empresa}</h3>
-                <p class="job__role">{entry.puesto}</p>
-                <p class="job__when">
-                  {entry.enCurso && <span class="flag">Hoy</span>}
-                  {` ${entry.desde} — ${entry.hasta}`}
+                <p class="entry__role">{entry.puesto}</p>
+                <p class="entry__when">
+                  {entry.enCurso && <span class="tag">hoy</span>}
+                  {`${entry.desde} → ${entry.hasta}`}
                 </p>
               </div>
               <ul class="bullets">
                 {entry.vinetas.map((vineta) => (
-                  <li>{vineta}</li>
+                  <li>
+                    <span>{vineta}</span>
+                  </li>
                 ))}
               </ul>
             </article>
@@ -180,174 +139,109 @@ const indexRows = [
         }
       </section>
 
-      <section class="page" id="p400" data-page="400" aria-labelledby="t400">
-        <div class="bar">
-          <h2 id="t400"><b>400</b> Stack</h2>
-          <span class="bar__stamp">P400/1</span>
-        </div>
-        <dl class="record record--wide">
+      <section class="win" id="p3" data-page="3" aria-labelledby="t3">
+        <h2 class="win__t" id="t3">[3] Stack</h2>
+        <ul class="plain plain--kv">
           {
             stack?.grupos.map((grupo) => (
-              <div>
-                <dt>{grupo.titulo}</dt>
-                <dd>{grupo.valor}</dd>
-              </div>
-            ))
-          }
-        </dl>
-      </section>
-
-      <section class="page" id="p500" data-page="500" aria-labelledby="t500">
-        <div class="bar">
-          <h2 id="t500"><b>500</b> Proyectos de trabajo</h2>
-          <span class="bar__stamp">P500/1</span>
-        </div>
-        <p class="note">
-          Productos de mis empleadores. Sin código público, sin capturas: acá está lo que construí y
-          con qué.
-        </p>
-
-        {
-          trabajos.map(({ entry }) => (
-            <article class="work">
-              <div class="work__head">
-                <h3>{entry.nombre}</h3>
-                <p class="work__when">{entry.empleador}</p>
-              </div>
-              <p>{entry.descripcion}</p>
-              <p class="flag flag--row">{entry.privacidad}</p>
-            </article>
-          ))
-        }
-      </section>
-
-      <section class="page" id="p600" data-page="600" aria-labelledby="t600">
-        <div class="bar">
-          <h2 id="t600"><b>600</b> Repos</h2>
-          <span class="bar__stamp" id="stamp600">P600/1</span>
-        </div>
-
-        <div class="subs" id="subs600">
-          {
-            subpaginas.map((pagina, i) => (
-              <div class="sub" data-sub={String(i + 1)} hidden={i !== 0}>
-                <ul class="repos">
-                  {pagina.map(({ entry }) => (
-                    <li>
-                      <a href={entry.url} rel="noopener">
-                        <span class="repo__name">{entry.nombre}</span>
-                        <span class="repo__meta">
-                          {entry.lenguaje}
-                          <span class="cell" aria-hidden="true" />
-                          {entry.anio}
-                        </span>
-                        <span class="repo__desc">{entry.descripcion}</span>
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))
-          }
-        </div>
-
-        <div class="subs__ctrl">
-          <button type="button" class="key" data-sub-step="-1">Anterior</button>
-          <button type="button" class="key" data-sub-step="1">Siguiente</button>
-          <button type="button" class="key key--hold" id="hold600">Pausa</button>
-          <p class="subs__count" id="count600">Subpágina 1/2</p>
-        </div>
-        <p class="note">
-          Nueve repositorios públicos en <a href="https://github.com/tomiban" rel="noopener"
-            >github.com/tomiban</a
-          >. La demo viva de la tienda está en <a
-            href="https://tomiban.github.io/mi-tienda-react/"
-            rel="noopener">tomiban.github.io/mi-tienda-react</a
-          >.
-        </p>
-      </section>
-
-      <section class="page" id="p700" data-page="700" aria-labelledby="t700">
-        <div class="bar">
-          <h2 id="t700"><b>700</b> Estudios</h2>
-          <span class="bar__stamp">P700/1</span>
-        </div>
-        <dl class="record record--wide">
-          {
-            estudios.map(({ entry }) => (
-              <div>
-                <dt>{entry.etiqueta}</dt>
-                <dd>
-                  {entry.titulo} · {entry.institucion}
-                  <span class="when">{entry.periodo}</span>
-                </dd>
-              </div>
-            ))
-          }
-        </dl>
-
-        <h3 class="minor">Certificaciones</h3>
-        <ul class="certs">
-          {
-            certificados.map(({ entry }) => (
               <li>
-                {entry.titulo}
-                {entry.emisor ? ` · ${entry.emisor}` : ''}
-                <span class="when">{entry.anio}</span>
+                <b>{grupo.titulo}</b>
+                <span>{grupo.valor}</span>
               </li>
             ))
           }
         </ul>
       </section>
 
-      <section class="page" id="p800" data-page="800" aria-labelledby="t800">
-        <div class="bar">
-          <h2 id="t800"><b>800</b> Contacto</h2>
-          <span class="bar__stamp">P800/1</span>
+      <section class="win" id="p4" data-page="4" aria-labelledby="t4">
+        <h2 class="win__t" id="t4">[4] Proyectos de trabajo</h2>
+        {
+          trabajos.map(({ entry }) => (
+            <article class="entry">
+              <div class="entry__head">
+                <h3>{entry.nombre}</h3>
+                <p class="entry__when">{entry.empleador}</p>
+              </div>
+              <p>{entry.descripcion}</p>
+              <p class="note">* {entry.privacidad}. Sin capturas ni enlaces públicos.</p>
+            </article>
+          ))
+        }
+      </section>
+
+      <section class="win" id="p5" data-page="5" aria-labelledby="t5">
+        <h2 class="win__t" id="t5">[5] Repos públicos</h2>
+        {
+          repos.map(({ entry }) => (
+            <a class="lead-row" href={entry.url} rel="noopener">
+              <span class="lead-row__name">{entry.nombre}</span>
+              <span class="lead-row__meta">
+                {entry.lenguaje} · {entry.anio}
+              </span>
+              <span class="lead-row__desc">{entry.descripcion}</span>
+            </a>
+          ))
+        }
+        <p class="note">
+          Nueve repositorios en <a href={contacto?.githubUrl}>{contacto?.github}</a>. Demo viva de la
+          tienda: <a href="https://tomiban.github.io/mi-tienda-react/">tomiban.github.io/mi-tienda-react</a>.
+        </p>
+      </section>
+
+      <section class="win" id="p6" data-page="6" aria-labelledby="t6">
+        <h2 class="win__t" id="t6">[6] Estudios y certificados</h2>
+        <ul class="plain">
+          {
+            estudios.map(({ entry }) => (
+              <li>
+                <span>
+                  {entry.etiqueta}: {entry.titulo} · {entry.institucion}
+                </span>
+                <span>{entry.periodo}</span>
+              </li>
+            ))
+          }
+        </ul>
+
+        <h3 class="subhead">Certificaciones</h3>
+        <ul class="plain">
+          {
+            certificados.map(({ entry }) => (
+              <li>
+                <span>{entry.emisor ? `${entry.titulo} · ${entry.emisor}` : entry.titulo}</span>
+                <span>{entry.anio}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      <section class="win" id="p7" data-page="7" aria-labelledby="t7">
+        <h2 class="win__t" id="t7">[7] Contacto</h2>
+        <div class="rows">
+          <a class="row" href={`mailto:${contacto?.email}`}>
+            <span class="row__k">Mail</span>
+            <span class="row__v">{contacto?.email}</span>
+          </a>
+          <a class="row" href={contacto?.githubUrl} rel="noopener">
+            <span class="row__k">GitHub</span>
+            <span class="row__v">{contacto?.github}</span>
+          </a>
+          <a class="row" href={contacto?.linkedinUrl} rel="noopener">
+            <span class="row__k">LinkedIn</span>
+            <span class="row__v">{contacto?.linkedin}</span>
+          </a>
         </div>
-        <ol class="index index--contact">
-          <li>
-            <a href={`mailto:${contacto?.email}`}>
-              <b>Mail</b><span>{contacto?.email}</span><i></i><em>Abrir</em>
-            </a>
-          </li>
-          <li>
-            <a href={contacto?.githubUrl} rel="noopener">
-              <b>GitHub</b><span>{contacto?.github}</span><i></i><em>Abrir</em>
-            </a>
-          </li>
-          <li>
-            <a href={contacto?.linkedinUrl} rel="noopener">
-              <b>LinkedIn</b><span>{contacto?.linkedin}</span><i></i><em>Abrir</em>
-            </a>
-          </li>
-        </ol>
         <p class="note">{contacto?.nota}</p>
-        <dl class="record record--visits">
-          <div>
-            <dt>Visitas</dt>
-            <dd><span id="visitas">—</span> en este navegador</dd>
-          </div>
-          <div>
-            <dt>Actualizado</dt>
-            <dd>{contacto?.actualizado}</dd>
-          </div>
-        </dl>
+        <p class="note">Ficha actualizada el {contacto?.actualizado}.</p>
       </section>
     </main>
 
-    <footer class="end">
-      <p class="end__line">
-        Fin de la transmisión<span class="cell" aria-hidden="true"></span><span
-          >Low Tek, High Life.</span
-        >
-      </p>
-      <nav class="fast" aria-label="Accesos rápidos">
-        <a href="#p600" data-key="red"><s aria-hidden="true"></s>600 Repos</a>
-        <a href="#p300" data-key="green"><s aria-hidden="true"></s>300 Exp.</a>
-        <a href="#p500" data-key="yellow"><s aria-hidden="true"></s>500 Proyectos</a>
-        <a href="#p800" data-key="cyan"><s aria-hidden="true"></s>800 Contacto</a>
-      </nav>
+    <footer class="status">
+      <span><em>[1..7]</em> secciones</span>
+      <span><em>[g]</em> fósforo</span>
+      <span><em>[↑↓]</em> desplazar</span>
+      <span class="status__end">{contacto?.email} · Low Tek, High Life.</span>
     </footer>
 
     <script src="/app.js" defer></script>

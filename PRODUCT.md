@@ -47,7 +47,8 @@ GitHub Pages, one static page. Visitors compare him against agency quotes and ot
 - Spanish copy with English technical jargon, as in the CV.
 - Voice: direct, technical, no marketing register. The predecessor site already signs off with "Low Tek, High Life." — keep the signature.
 - No invented claims: no fake clients, metrics, testimonials, or benchmarks.
-- Aesthetic pinned by the owner: brutalist, early-2000s web and print culture. Not a modern-minimal portfolio wearing a retro typeface.
+- Aesthetic pinned by the owner (latest, 2026-10-28): **industrial retro brutalist** — machine plates, silkscreened control panels, technical manuals, safety signage, stamped capitals, raw ground, one signal colour, no rounded corners, no glass, no skeuomorphic gloss. It supersedes the earlier "brutalist early-2000s web" pin; that proposal (teletexto) is archived on branch `feat/televideo`.
+- Reference given by the owner: `https://www.421.news/es/`. Take its editorial structure — domain sections, a ranked list, one saturated band, mixed display/body voices — and refuse what does not work for one person: a feed of equal cards, no single thesis, pill buttons.
 - Explicitly rejected: anything that reads as an AI-generated template, aesthetics at the cost of readability, fabricated achievements.
 
 ## Evidence on Hand
