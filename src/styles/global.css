@@ -516,6 +516,16 @@ a.row:focus-visible dd {
   white-space: nowrap;
 }
 
+.plain li > .certs__end {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.plain li > .certs__end .btn {
+  color: var(--ink);
+}
+
 .subhead {
   margin: 1.6rem 0 0.5rem;
   font-size: 0.76em;

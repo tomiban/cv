@@ -246,7 +246,13 @@ const secciones = [
                 <span class="certs__end">
                   {entry.anio && <span>{entry.anio}</span>}
                   {entry.url && (
-                    <a class="btn btn--sm" href={entry.url} rel="noopener">
+                    <a
+                      class="btn btn--sm"
+                      href={entry.url}
+                      rel="noopener"
+                      target="_blank"
+                      aria-label={`Ver certificado: ${entry.titulo}`}
+                    >
                       ver
                     </a>
                   )}
