@@ -16,7 +16,6 @@ const trabajos = (await reader.collections.proyectosTrabajo.all()).sort(byOrden)
 const estudios = (await reader.collections.estudios.all()).sort(byOrden);
 const certificados = (await reader.collections.certificados.all()).sort(byOrden);
 const repos = (await reader.collections.repos.all()).sort(byOrden);
-const conDemo = repos.filter(({ entry }) => Boolean(entry.demo));
 
 
 // --- Monitor CRT en ASCII con una partida de snake (cuadros en build time) ---
@@ -216,7 +215,7 @@ const secciones = [
       <section class="win" id="p5" data-page="5" aria-labelledby="t5">
         <h2 class="win__t" id="t5">[5] Proyectos personales</h2>
         {
-          conDemo.map(({ entry }) => (
+          repos.map(({ entry }) => (
             <div class="lead-row">
               <span class="lead-row__name">{entry.nombre}</span>
               <span class="lead-row__meta">
@@ -225,19 +224,17 @@ const secciones = [
                   <a class="btn btn--sm" href={entry.url} rel="noopener">
                     repo
                   </a>
-                  <a class="btn btn--sm btn--on" href={entry.demo}>
-                    ver demo
-                  </a>
+                  {entry.demo && (
+                    <a class="btn btn--sm btn--on" href={entry.demo}>
+                      ver demo
+                    </a>
+                  )}
                 </span>
               </span>
               <span class="lead-row__desc">{entry.descripcion}</span>
             </div>
           ))
         }
-        <p class="note">
-          {conDemo.length} con demo viva, de {repos.length} proyectos publicados en <a
-            href={contacto?.githubUrl}>{contacto?.github}</a>.
-        </p>
       </section>
 
       <section class="win" id="p6" data-page="6" aria-labelledby="t6">

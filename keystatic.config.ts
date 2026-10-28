@@ -87,7 +87,7 @@ export default config({
       schema: {
         nombre: fields.text({ label: 'Nombre' }),
         lenguaje: fields.text({ label: 'Lenguaje' }),
-        anio: fields.integer({ label: 'Año' }),
+        anio: fields.integer({ label: 'Año de creación' }),
         descripcion: fields.text({ label: 'Descripción', multiline: true }),
         url: fields.url({ label: 'URL' }),
         demo: fields.url({ label: 'Demo', validation: { isRequired: false } }),
