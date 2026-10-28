@@ -77,7 +77,6 @@ export default config({
         anio: fields.integer({ label: 'Año de creación' }),
         descripcion: fields.text({ label: 'Descripción', multiline: true }),
         web: fields.url({ label: 'Página del producto' }),
-        url: fields.url({ label: 'URL' }),
         demo: fields.url({ label: 'Demo', validation: { isRequired: false } }),
         orden,
       },
