@@ -98,7 +98,9 @@ export default config({
       schema: {
         titulo: fields.text({ label: 'Título' }),
         emisor: fields.text({ label: 'Emisor' }),
-        anio: fields.text({ label: 'Año' }),
+        detalle: fields.text({ label: 'Detalle (horas, duración)', validation: { isRequired: false } }),
+        anio: fields.text({ label: 'Año', validation: { isRequired: false } }),
+        url: fields.url({ label: 'Verificación', validation: { isRequired: false } }),
         orden,
       },
     }),

@@ -239,8 +239,18 @@ const secciones = [
           {
             certificados.map(({ entry }) => (
               <li>
-                <span>{entry.emisor ? `${entry.titulo} · ${entry.emisor}` : entry.titulo}</span>
-                <span>{entry.anio}</span>
+                <span>
+                  {entry.titulo} · {entry.emisor}
+                  {entry.detalle ? ` · ${entry.detalle}` : ''}
+                </span>
+                <span class="certs__end">
+                  {entry.anio && <span>{entry.anio}</span>}
+                  {entry.url && (
+                    <a class="btn btn--sm" href={entry.url} rel="noopener">
+                      ver
+                    </a>
+                  )}
+                </span>
               </li>
             ))
           }
