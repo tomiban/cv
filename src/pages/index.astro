@@ -189,7 +189,8 @@ const secciones = [
               <div class="entry__head">
                 <h3>{entry.nombre}</h3>
                 <p class="entry__when">
-                  {entry.empleador}<span class="tag tag--quiet">{entry.privacidad}</span>
+                  {entry.empleador}
+                  <a class="btn btn--sm" href={entry.web} rel="noopener">ver producto</a>
                 </p>
               </div>
               <p>{entry.descripcion}</p>

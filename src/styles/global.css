@@ -396,12 +396,6 @@ a.row:focus-visible dd {
   letter-spacing: 0.14em;
 }
 
-.tag--quiet {
-  background: none;
-  color: var(--ink-2);
-  box-shadow: inset 0 0 0 1px var(--rule);
-}
-
 .bullets {
   list-style: none;
   margin: 0.7rem 0 0;
