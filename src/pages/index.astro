@@ -188,10 +188,11 @@ const secciones = [
             <article class="entry">
               <div class="entry__head">
                 <h3>{entry.nombre}</h3>
-                <p class="entry__when">{entry.empleador}</p>
+                <p class="entry__when">
+                  {entry.empleador}<span class="tag tag--quiet">{entry.privacidad}</span>
+                </p>
               </div>
               <p>{entry.descripcion}</p>
-              <p class="note">* {entry.privacidad}. Sin capturas ni enlaces públicos.</p>
             </article>
           ))
         }
