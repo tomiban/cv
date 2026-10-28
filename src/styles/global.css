@@ -16,6 +16,10 @@
   body {
     padding-bottom: 7.2rem;
   }
+
+  .ident__meta span + span::before {
+    content: none;
+  }
 }
 
 /* fósforo alternativo: la tecla G cambia el atributo del documento */
@@ -177,8 +181,29 @@ main {
 .ident {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  gap: 0.5rem;
-  align-items: end;
+  gap: 1rem;
+  align-items: start;
+}
+
+.ascii {
+  margin: 0;
+  font-size: 0.8em;
+  line-height: 1.12;
+  color: var(--ink-2);
+  letter-spacing: 0;
+}
+
+.ascii__l {
+  display: block;
+  white-space: pre;
+}
+
+.led {
+  color: var(--ink);
+}
+
+.ident__main {
+  min-width: 0;
 }
 
 .ident h1 {
@@ -208,6 +233,35 @@ main {
   }
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  .ascii__l {
+    animation: print 1ms steps(1, end) backwards;
+    animation-delay: calc(var(--n, 0) * 45ms);
+  }
+
+  .led {
+    animation: led 2.8s steps(1, end) infinite;
+    animation-delay: calc(var(--i, 0) * 0.33s);
+  }
+
+  @keyframes print {
+    from {
+      opacity: 0;
+    }
+  }
+
+  @keyframes led {
+    0%,
+    58% {
+      opacity: 1;
+    }
+    59%,
+    100% {
+      opacity: 0.25;
+    }
+  }
+}
+
 .ident__meta {
   margin: 0;
   color: var(--ink-2);
@@ -223,6 +277,12 @@ main {
   display: inline-flex;
   align-items: center;
   gap: 0.5em;
+}
+
+.ident__meta span + span::before {
+  content: "·";
+  color: var(--rule);
+  margin-right: 0.1em;
 }
 
 /* ---------- filas de ficha ---------- */
@@ -250,8 +310,7 @@ main {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: 0.1rem;
-  padding: 0.5em 0.5em;
-  margin-left: -0.5em;
+  padding: 0.42em 0;
   border-bottom: 1px solid var(--rule);
 }
 
@@ -593,24 +652,28 @@ a.row:focus-visible dd {
 
 @media (min-width: 48rem) {
   .row {
-    grid-template-columns: 16ch minmax(0, 1fr);
-    gap: 1rem;
+    grid-template-columns: 13ch minmax(0, 1fr);
+    gap: 0.9rem;
     align-items: baseline;
   }
 
-  .row dt,
-  .row__k {
-    text-align: right;
+  .row dt::after,
+  .row__k::after {
+    content: ":";
   }
 
   .ident {
-    grid-template-columns: minmax(0, 1fr) auto;
-    gap: 1.5rem;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 2.2rem;
+  }
+
+  .ascii {
+    font-size: 0.86em;
   }
 
   .ident__meta {
-    justify-content: flex-end;
-    text-align: right;
+    justify-content: flex-start;
+    text-align: left;
   }
 
   .entry__head {
@@ -686,6 +749,11 @@ a.row:focus-visible dd {
 
   .win--id {
     border: 1px solid #000;
+  }
+
+  .ascii__l,
+  .led {
+    animation: none;
   }
 
   a.row:hover,

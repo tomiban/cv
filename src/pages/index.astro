@@ -72,24 +72,37 @@ const secciones = [
         <h2 class="win__t" id="t1">Identificación</h2>
 
         <div class="ident">
-          <h1>{perfil?.nombre}<span class="cursor" aria-hidden="true"></span></h1>
-          <p class="ident__meta">
-            <span>{perfil?.rol}</span>
-            <span>{perfil?.ubicacion}</span>
-            <span><time id="reloj">--:--</time> local</span>
-          </p>
-        </div>
+          <pre class="ascii" aria-hidden="true"><span class="ascii__l" style="--n:0">+----------------------+</span>
+<span class="ascii__l" style="--n:1">| [] [] [] []   <span class="led" style="--i:1">[##]</span>   |</span>
+<span class="ascii__l" style="--n:2">+----------------------+</span>
+<span class="ascii__l" style="--n:3">| [] [] <span class="led" style="--i:2">[##]</span> []        |</span>
+<span class="ascii__l" style="--n:4">+----------------------+</span>
+<span class="ascii__l" style="--n:5">| <span class="led" style="--i:3">[##]</span> [] [] <span class="led" style="--i:4">[##]</span>      |</span>
+<span class="ascii__l" style="--n:6">+----------------------+</span>
+<span class="ascii__l" style="--n:7">| [] [] [] []   <span class="led" style="--i:5">[##]</span>   |</span>
+<span class="ascii__l" style="--n:8">+----------------------+</span>
+<span class="ascii__l" style="--n:9">    ||            ||    </span>
+<span class="ascii__l" style="--n:10"> .----------------------.</span></pre>
+          <div class="ident__main">
+            <h1>{perfil?.nombre}<span class="cursor" aria-hidden="true"></span></h1>
+            <p class="ident__meta">
+              <span>{perfil?.rol}</span>
+              <span>{perfil?.ubicacion}</span>
+              <span><time id="reloj">--:--</time> local</span>
+            </p>
 
-        <dl class="rows">
-          {
-            perfil?.ficha.map((fila) => (
-              <div class="row">
-                <dt>{fila.etiqueta}</dt>
-                <dd>{fila.valor}</dd>
-              </div>
-            ))
-          }
-        </dl>
+            <dl class="rows">
+              {
+                perfil?.ficha.map((fila) => (
+                  <div class="row">
+                    <dt>{fila.etiqueta}</dt>
+                    <dd>{fila.valor}</dd>
+                  </div>
+                ))
+              }
+            </dl>
+          </div>
+        </div>
 
         <div class="prosa">
           {perfil?.parrafos.map((parrafo) => <p>{parrafo}</p>)}

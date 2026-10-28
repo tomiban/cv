@@ -182,6 +182,17 @@ saltan a la sección.
 Etiqueta en `ink-2` y valor en `ink`, separadas por una línea de 1px. Cuando la fila es un enlace,
 hover y foco la invierten completa y las etiquetas pasan a `screen`, para no perder contraste.
 
+### Bloque ASCII
+
+Rack de cuatro unidades dibujado con `+ - | [ ]` — sólo ASCII, nunca glifos de caja: el arte no
+depende de la cobertura de la fuente. Va en la columna izquierda de la ventana de identificación, a
+`0.86em` y en `ink-2`, con el nombre y la ficha a la derecha.
+
+Efecto, una sola vez al cargar: cada línea entra con un paso de 45 ms (`animation: print 1ms
+steps(1)` escalonado por `--n`), y después los cinco LEDs `[##]` parpadean en un ciclo de 2,8 s con
+desfasajes de `--i`. Es el único movimiento del sitio; con `prefers-reduced-motion` no hay impresión
+ni parpadeo, y en `@media print` las animaciones se desactivan para que el arte salga impreso.
+
 ### Acción
 
 Una sola por ventana: `< Escribir >`, en vídeo inverso, después del contenido. La navegación no se
