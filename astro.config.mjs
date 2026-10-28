@@ -10,5 +10,7 @@ const isDev = process.env.NODE_ENV === 'development';
 
 export default defineConfig({
   site: 'https://tomiban.github.io',
+  // la barra flotante de desarrollo no debe tapar el diseño que se está revisando
+  devToolbar: { enabled: false },
   integrations: [react(), ...(isDev ? [keystatic()] : [])],
 });

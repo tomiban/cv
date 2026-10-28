@@ -187,7 +187,8 @@ Un CRT dibujado con `+ - | =` y comillas — sólo ASCII, nunca glifos de caja, 
 cobertura de la fuente. Dentro de la pantalla corre una partida de snake: `@` cabeza, `o` cuerpo,
 `*` comida y un marcador `PUNTOS` / `HI` arriba.
 
-Los once cuadros de la animación se generan en build time con un recorrido cerrado de celdas (no
+El bloque es solo de escritorio: en móvil se oculta (`display: none`), porque a 42 caracteres
+fijos no entra sin encogerse hasta ser ilegible. Los once cuadros de la animación se generan en build time con un recorrido cerrado de celdas (no
 están escritos a mano), así el bucle cierra sin saltos y el marcador sube cuadro a cuadro. Se apilan
 con `position: absolute` y se muestran de a uno con `steps(1)` cada 0.4 s; el primero queda en flujo
 para que el bloque mida lo que debe. Con `prefers-reduced-motion` queda un cuadro fijo, y en

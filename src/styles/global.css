@@ -735,10 +735,10 @@ a.row:focus-visible dd {
   }
 }
 
-/* el monitor mide 42 caracteres siempre: se escala con el ancho para no desbordar */
+/* en móvil el monitor no entra sin encogerse a un tamaño inútil */
 @media (max-width: 47.99rem) {
   .crt {
-    font-size: min(0.9em, 3vw);
+    display: none;
   }
 }
 
