@@ -150,8 +150,7 @@ barra de estado fija abajo, y entre las dos el documento.
 - Ventana de identidad: marco `3px double` — el único doble de la página — con el nombre grande.
 - Ventanas de sección: marco de 1px `rule`, título en el borde superior.
 - Filas de campo: `16ch · 1fr` con la etiqueta a la derecha; en móvil se apilan en una columna.
-- Punto de quiebre: 48rem. Cuarto: 34rem (casillas a dos columnas). Techo: 78rem con `main` a
-  1280px centrado.
+- Punto de quiebre: 48rem. Techo: 78rem con `main` a 1280px centrado.
 - En móvil el pie crece a dos líneas y el `body` reserva 7.2rem para que nada quede tapado.
 
 ## Elevation & Depth
@@ -182,6 +181,11 @@ saltan a la sección.
 
 Etiqueta en `ink-2` y valor en `ink`, separadas por una línea de 1px. Cuando la fila es un enlace,
 hover y foco la invierten completa y las etiquetas pasan a `screen`, para no perder contraste.
+
+### Acción
+
+Una sola por ventana: `< Escribir >`, en vídeo inverso, después del contenido. La navegación no se
+repite en botones: vive en la barra de menú.
 
 ### Botones
 

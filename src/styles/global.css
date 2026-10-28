@@ -289,39 +289,6 @@ a.row:focus-visible dd {
 
 /* ---------- casillas y botones ---------- */
 
-.checks {
-  list-style: none;
-  margin: 1.3rem 0 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 0.25rem 1.5rem;
-  font-size: 0.9em;
-}
-
-.checks a {
-  display: grid;
-  grid-template-columns: 2.2em 1fr;
-  padding: 0.15em 0.4em;
-  margin-left: -0.4em;
-}
-
-.checks b {
-  font-weight: 400;
-  color: var(--ink-2);
-}
-
-.checks a:hover,
-.checks a:focus-visible {
-  background: var(--ink);
-  color: var(--screen);
-}
-
-.checks a:hover b,
-.checks a:focus-visible b {
-  color: var(--screen);
-}
-
 .btns {
   display: flex;
   flex-wrap: wrap;
@@ -598,12 +565,6 @@ a.row:focus-visible dd {
 
 /* ---------- responsive ---------- */
 
-@media (min-width: 34rem) {
-  .checks {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
 @media (max-width: 47.99rem) {
   .plain--kv li {
     grid-template-columns: minmax(0, 1fr);
@@ -664,11 +625,7 @@ a.row:focus-visible dd {
     margin-top: 0.2rem;
   }
 
-  .checks {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-
-  .status {
+    .status {
     font-size: 0.76em;
   }
 }

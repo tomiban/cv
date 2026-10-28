@@ -23,7 +23,7 @@ Queda en `http://localhost:4321`.
 | `G` | Alterna el fósforo entre ámbar y verde (se recuerda en el navegador) |
 | `↑` `↓` | Desplazan la página |
 
-Sin JavaScript el documento se lee completo: el menú, las casillas y los botones son enlaces.
+Sin JavaScript el documento se lee completo: el menú y los botones son enlaces.
 
 ## Contenido
 

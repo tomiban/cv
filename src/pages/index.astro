@@ -95,19 +95,6 @@ const secciones = [
           {perfil?.parrafos.map((parrafo) => <p>{parrafo}</p>)}
         </div>
 
-        <ul class="checks" aria-label="Ir a una sección">
-          {
-            secciones.map((s) => (
-              <li>
-                <a href={`#${s.id}`}>
-                  <b>[{s.n}]</b>
-                  <span>{s.label}</span>
-                </a>
-              </li>
-            ))
-          }
-        </ul>
-
         <div class="btns">
           <a class="btn btn--on" href={`mailto:${contacto?.email}`}>&lt; Escribir &gt;</a>
         </div>
