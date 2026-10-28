@@ -8,7 +8,7 @@ web
 
 ## Stack
 
-Plain static HTML + CSS, zero dependencies, no build step, published by GitHub Pages from `main`. Inherited from the existing repository; confirmed by the owner as the shape to keep. A small amount of hand-written JS is acceptable when a behaviour genuinely needs it.
+Astro 7 with static output, plus Keystatic 6 as the content source, deployed to GitHub Pages by a GitHub Actions workflow on every push to `main`. Content lives in `content/` and is authored through the Keystatic admin while running `astro dev`; the admin is deliberately absent from production builds because GitHub Pages cannot serve its server-rendered API routes, so the shipped artifact is fully prerendered with no adapter and no secrets. No client-side framework on the public page: the only script is a small hand-written vanilla file. Fonts are self-hosted.
 
 ## Users
 
@@ -40,7 +40,7 @@ GitHub Pages, one static page. Visitors compare him against agency quotes and ot
 - Languages: Spanish native, English B1.
 - Location and contact are exactly the ones in the CV: Esperanza, Santa Fe, Argentina; the phone number and email already published on the site's predecessor; linkedin.com/in/tbanchio; github.com/tomiban.
 - Constraint: employer product internals are private; no screenshots, no invented metrics, no client names beyond the employer.
-- Constraint: everything is served from one page with no build step and no external dependencies.
+- Constraint: one page, static output, no client framework, no hosted stylesheets or third-party runtime. The CMS is an authoring tool, never a production dependency.
 
 ## Brand Commitments
 
@@ -55,6 +55,7 @@ GitHub Pages, one static page. Visitors compare him against agency quotes and ot
 - CV: `/home/tomiban/Descargas/CV-TomasBanchio.pdf` (source of every employment, education, certification, and skill fact).
 - Public repositories under github.com/tomiban (verified 2026-10-28): `agentic-pm`, `peso-a-peso-app`, `modikra-website`, `restaurant-clean-architecture`, `veterinariapp-API`, `veterinariapp-FE`, `mi-tienda-react`, `simulador-sorteo-qatar`, `hotel-management-sys`, `tomiban` (profile README).
 - Live demo: `https://tomiban.github.io/mi-tienda-react/`.
+- Product record for design work: `PRODUCT.md`; recorded visual system: `DESIGN.md`.
 - Absent: employer product URLs, screenshots, usage metrics, client testimonials, published benchmarks. None may be fabricated.
 
 ## Product Principles

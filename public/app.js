@@ -40,12 +40,7 @@
 
   let current = null;
 
-  const setCurrent = () => {
-    const line = 90;
-    let found = pages[0];
-    for (const page of pages) {
-      if (page.getBoundingClientRect().top - line <= 0) found = page;
-    }
+  const applyCurrent = (found) => {
     if (found === current) return;
     current = found;
     stamp.textContent = `P${found.dataset.page}`;
@@ -55,6 +50,15 @@
       if (target === found.id) link.setAttribute("aria-current", "true");
       else link.removeAttribute("aria-current");
     }
+  };
+
+  const setCurrent = () => {
+    const line = 90;
+    let found = pages[0];
+    for (const page of pages) {
+      if (page.getBoundingClientRect().top - line <= 0) found = page;
+    }
+    applyCurrent(found);
   };
 
   const go = (number) => {
@@ -69,6 +73,7 @@
     aviso.textContent = "";
     page.scrollIntoView({ block: "start", behavior: reduced.matches ? "auto" : "smooth" });
     history.replaceState(null, "", `#${page.id}`);
+    applyCurrent(page);
     input.value = "";
   };
 
@@ -116,7 +121,7 @@
 
   clock();
   window.setInterval(clock, 15000);
-  setCurrent();
+  applyCurrent(pages[0]);
   showSub(1);
   holdBtn.setAttribute("aria-pressed", String(held));
   holdBtn.textContent = held ? "Sigue" : "Pausa";

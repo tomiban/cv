@@ -1,0 +1,5 @@
+nombre: "App Santa Fe"
+empleador: "Crombie · 2025 →"
+descripcion: "Aplicación híbrida para la gestión de trámites municipales. Frontend en React y TypeScript, backend en NestJS y SQL. Integré las pasarelas de pago Mercado Pago y Plus Pago, monté identidad y control de acceso con OIDC y Keycloak, y desarrollé el backoffice con el que el equipo opera los trámites. Despliegue y mantenimiento en infraestructura on-premise con Docker."
+privacidad: "Privado · Producto de Crombie"
+orden: 1
