@@ -1,0 +1,298 @@
+---
+import { createReader } from '@keystatic/core/reader';
+import keystaticConfig from '../../keystatic.config';
+import '../styles/global.css';
+
+const reader = createReader(process.cwd(), keystaticConfig);
+const perfil = await reader.singletons.perfil.read();
+const contacto = await reader.singletons.contacto.read();
+
+const byOrden = (a: { entry: { orden?: number | null } }, b: { entry: { orden?: number | null } }) =>
+  (a.entry.orden ?? 0) - (b.entry.orden ?? 0);
+
+const experiencia = (await reader.collections.experiencia.all()).sort(byOrden);
+const trabajos = (await reader.collections.proyectosTrabajo.all()).sort(byOrden);
+const estudios = (await reader.collections.estudios.all()).sort(byOrden);
+const certificados = (await reader.collections.certificados.all()).sort((a, b) => {
+  const year = Number(b.entry.anio || 0) - Number(a.entry.anio || 0);
+  return year !== 0 ? year : (a.entry.orden ?? 0) - (b.entry.orden ?? 0);
+});
+const repos = (await reader.collections.repos.all()).sort(byOrden);
+const conDemo = repos.filter(({ entry }) => Boolean(entry.demo));
+
+
+// --- Monitor CRT en ASCII con una partida de snake (cuadros en build time) ---
+const TW = 28;
+const TH = 8;
+const PAD = "        ";
+const INNER = TW + 4;
+const loop: Array<[number, number]> = [];
+for (let x = 2; x <= 25; x++) loop.push([x, 2]);
+for (let y = 3; y <= 7; y++) loop.push([25, y]);
+for (let x = 24; x >= 2; x--) loop.push([x, 7]);
+for (let y = 6; y >= 3; y--) loop.push([2, y]);
+
+const hud = (frame: number) =>
+  ` PUNTOS ${String(4 + frame).padStart(4, "0")}      HI 0031`.padEnd(TW).slice(0, TW);
+
+const playfield = (frames: number) => {
+  const cells = new Map<string, string>();
+  const head = frames * 4;
+  for (let b = 0; b < 6; b++) {
+    const [x, y] = loop[(head - b + loop.length * 3) % loop.length];
+    cells.set(`${x},${y}`, b === 0 ? "@" : "o");
+  }
+  const food = [
+    [8, 7],
+    [21, 2],
+    [14, 7],
+  ][frames % 3];
+  const key = `${food[0]},${food[1]}`;
+  if (!cells.has(key)) cells.set(key, "*");
+  return Array.from({ length: TH }, (_, y) => {
+    if (y === 0) return hud(frames);
+    let row = "";
+    for (let x = 0; x < TW; x++) row += cells.get(`${x},${y}`) ?? " ";
+    return row;
+  });
+};
+
+const monitor = (frame: number) => [
+  PAD + "." + "=".repeat(INNER) + ".",
+  PAD + "|" + " ".repeat(INNER) + "|",
+  PAD + "| " + "." + "-".repeat(TW) + ". |",
+  ...playfield(frame).map((row) => PAD + "| |" + row + "| |"),
+  PAD + "| '" + "-".repeat(TW) + "' |",
+  PAD + "|" + " ".repeat(INNER) + "|",
+  PAD + "|  (o)  TB-2026" + " ".repeat(INNER - 14) + "|",
+  PAD + "'" + "=".repeat(INNER) + "'",
+  PAD + "     [==================]",
+  PAD + "      '----------------'",
+  PAD + "       |              |",
+  PAD + "  _____|______________|_____",
+];
+
+const snake = Array.from({ length: 11 }, (_, f) => monitor(f));
+
+const secciones = [
+  { id: 'p1', n: '1', label: 'Perfil' },
+  { id: 'p2', n: '2', label: 'Experiencia' },
+  { id: 'p3', n: '3', label: 'Profesionales' },
+  { id: 'p4', n: '4', label: 'Personales' },
+  { id: 'p5', n: '5', label: 'Estudios' },
+  { id: 'p6', n: '6', label: 'Contacto' },
+];
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tomás Banchio — Desarrollador Full Stack</title>
+    <meta
+      name="description"
+      content="Desarrollador full stack en Esperanza, Santa Fe. Tres años construyendo producto de punta a punta: React y Next.js, NestJS y ASP.NET Core, SQL, Docker, pagos e identidad."
+    />
+    <meta name="theme-color" content="#0b0a08" />
+    <meta name="color-scheme" content="dark" />
+    <meta property="og:type" content="profile" />
+    <meta property="og:locale" content="es_AR" />
+    <meta property="og:title" content="Tomás Banchio — Desarrollador Full Stack" />
+    <meta
+      property="og:description"
+      content="Ficha de terminal: perfil, experiencia, stack, proyectos, repos y contacto."
+    />
+    <meta property="og:url" content="https://tomiban.github.io/" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="../styles/global.css" />
+  </head>
+  <body>
+    <a class="skip" href="#p1">Saltar a la ficha</a>
+
+    <nav class="menu" aria-label="Secciones">
+      {
+        secciones.map((s) => (
+          <a href={`#${s.id}`} data-nav={s.id}>
+            <b>{s.n}</b>
+            {s.label}
+          </a>
+        ))
+      }
+      <span class="menu__meta">Actualizado {contacto?.actualizado}</span>
+    </nav>
+
+    <main>
+      <section class="win win--id" id="p1" data-page="1" aria-labelledby="t1">
+        <h2 class="win__t" id="t1">Identificación</h2>
+
+        <div class="ident">
+          <div class="crt" aria-hidden="true">
+            {
+              snake.map((frame, f) => (
+                <pre class="crt__f" style={`--f:${f}`}>{frame.join("\n")}</pre>
+              ))
+            }
+          </div>
+          <div class="ident__main">
+            <h1>{perfil?.nombre}</h1>
+            <p class="ident__meta">
+              <span>{perfil?.ubicacion}</span>
+              <span><time id="reloj">--:--</time> local</span>
+            </p>
+
+            <dl class="rows">
+              {
+                perfil?.ficha.map((fila) => (
+                  <div class="row">
+                    <dt>{fila.etiqueta}</dt>
+                    <dd>{fila.valor}</dd>
+                  </div>
+                ))
+              }
+            </dl>
+            <p class="card-go">
+              <a class="btn btn--on" href={`mailto:${contacto?.email}`}>Contactar</a>
+            </p>
+          </div>
+        </div>
+
+      </section>
+
+      <section class="win" id="p2" data-page="2" aria-labelledby="t2">
+        <h2 class="win__t" id="t2">[2] Experiencia</h2>
+        {
+          experiencia.map(({ entry }) => (
+            <article class="entry">
+              <div class="entry__head">
+                <h3>{entry.empresa}</h3>
+                <p class="entry__role">{entry.puesto}</p>
+                <p class="entry__when">
+                  {entry.enCurso && <span class="tag">hoy</span>}
+                  {`${entry.desde} → ${entry.hasta}`}
+                </p>
+              </div>
+              <ul class="bullets">
+                {entry.vinetas.map((vineta) => (
+                  <li>
+                    <span>{vineta}</span>
+                  </li>
+                ))}
+              </ul>
+            </article>
+          ))
+        }
+      </section>
+
+      <section class="win" id="p3" data-page="3" aria-labelledby="t3">
+        <h2 class="win__t" id="t3">[3] Proyectos profesionales</h2>
+        {
+          trabajos.map(({ entry }) => (
+            <article class="entry">
+              <div class="entry__head">
+                <h3>{entry.nombre}</h3>
+                <p class="entry__when">
+                  {entry.empleador}
+                  <a class="btn btn--sm" href={entry.web} rel="noopener">ver producto</a>
+                </p>
+              </div>
+              <p>{entry.descripcion}</p>
+            </article>
+          ))
+        }
+      </section>
+
+      <section class="win" id="p4" data-page="4" aria-labelledby="t4">
+        <h2 class="win__t" id="t4">[4] Proyectos personales</h2>
+        {
+          conDemo.map(({ entry }) => (
+            <div class="lead-row">
+              <span class="lead-row__name">{entry.nombre}</span>
+              <span class="lead-row__meta">
+                {entry.lenguaje} · {entry.anio}
+                <span class="lead-row__acts">
+                  <a class="btn btn--sm btn--on" href={entry.demo}>
+                    ver demo
+                  </a>
+                </span>
+              </span>
+              <span class="lead-row__desc">{entry.descripcion}</span>
+            </div>
+          ))
+        }
+      </section>
+
+      <section class="win" id="p5" data-page="5" aria-labelledby="t5">
+        <h2 class="win__t" id="t5">[5] Estudios y certificados</h2>
+        <ul class="plain">
+          {
+            estudios.map(({ entry }) => (
+              <li>
+                <span>
+                  {entry.etiqueta}: {entry.titulo} · {entry.institucion}
+                </span>
+                <span>{entry.periodo}</span>
+              </li>
+            ))
+          }
+        </ul>
+
+        <h3 class="subhead">Certificaciones</h3>
+        <ul class="plain">
+          {
+            certificados.map(({ entry }) => (
+              <li>
+                <span>
+                  {entry.titulo} · {entry.emisor}
+                  {entry.detalle ? ` · ${entry.detalle}` : ''}
+                </span>
+                <span class="certs__end">
+                  {entry.anio && <span>{entry.anio}</span>}
+                  {entry.url && (
+                    <a
+                      class="btn btn--sm"
+                      href={entry.url}
+                      rel="noopener"
+                      target="_blank"
+                      aria-label={`Ver certificado: ${entry.titulo}`}
+                    >
+                      ver certificado
+                    </a>
+                  )}
+                </span>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      <section class="win" id="p6" data-page="6" aria-labelledby="t6">
+        <h2 class="win__t" id="t6">[6] Contacto</h2>
+        <div class="rows">
+          <a class="row" href={`mailto:${contacto?.email}`}>
+            <span class="row__k">Mail</span>
+            <span class="row__v">{contacto?.email}</span>
+          </a>
+          <a class="row" href={contacto?.githubUrl} rel="noopener">
+            <span class="row__k">GitHub</span>
+            <span class="row__v">{contacto?.github}</span>
+          </a>
+          <a class="row" href={contacto?.linkedinUrl} rel="noopener">
+            <span class="row__k">LinkedIn</span>
+            <span class="row__v">{contacto?.linkedin}</span>
+          </a>
+        </div>
+        <p class="note">Última actualización: {contacto?.actualizado}.</p>
+      </section>
+    </main>
+
+    <footer class="status">
+      <span><em>[1..6]</em> secciones</span>
+      <span><em>[c]</em> fósforo</span>
+      <span><em>[↑↓]</em> desplazar</span>
+      <span class="status__end">{contacto?.email} · Low Tek, High Life.</span>
+    </footer>
+
+    <script src="/app.js" defer></script>
+  </body>
+</html>

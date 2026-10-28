@@ -1,0 +1,6 @@
+nombre: "veterinariapp-API"
+lenguaje: "C#"
+anio: 2024
+descripcion: "API .NET 8 para gestión de pacientes, dueños, vacunas y dosis aplicadas. Cliente web en Angular 17."
+demo: "https://veterinariapp-api.vercel.app/swagger/index.html"
+orden: 4

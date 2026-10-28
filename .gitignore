@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.astro/
+
+# herramientas locales de diseño y agentes
+.pi/
+.impeccable/
+.DS_Store
+
+# caché local de la skill registry
+.atl/

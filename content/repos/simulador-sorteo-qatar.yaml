@@ -1,0 +1,6 @@
+nombre: "simulador-sorteo-qatar"
+lenguaje: "JavaScript"
+anio: 2022
+descripcion: "Simulador del sorteo de grupos del Mundial de Qatar en JavaScript vanilla, según las reglas de la FIFA."
+demo: "https://tomiban.github.io/simulador-sorteo-qatar/"
+orden: 9

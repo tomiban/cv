@@ -1,0 +1,5 @@
+nombre: "restaurant-clean-architecture"
+lenguaje: "C#"
+anio: 2025
+descripcion: "API REST en .NET con Clean Architecture, CQRS (MediatR), Serilog y Docker Compose."
+orden: 2

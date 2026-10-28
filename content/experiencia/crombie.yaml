@@ -1,0 +1,12 @@
+empresa: "Crombie, Santa Fe"
+puesto: "Desarrollador Full Stack"
+desde: "Sep 2025"
+hasta: "Actualidad"
+enCurso: true
+orden: 1
+vinetas:
+  - "Desarrollo y mantenimiento de App Santa Fe, aplicación híbrida para la gestión de trámites municipales, con React, TypeScript, NestJS y SQL."
+  - "Integración de APIs REST y servicios de terceros, incluyendo las pasarelas de pago Mercado Pago y Plus Pago."
+  - "Implementación de autenticación y autorización con OIDC y Keycloak (identidad y control de acceso)."
+  - "Desarrollo de un backoffice administrativo para la gestión interna de trámites y la operación del equipo."
+  - "Configuración de entornos y colaboración en despliegues y mantenimiento en infraestructura on-premise con Docker."

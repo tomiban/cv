@@ -1,0 +1,6 @@
+nombre: "veterinariapp-FE"
+lenguaje: "TypeScript"
+anio: 2024
+descripcion: "Cliente web en Angular 17 + Material UI que consume la API veterinariapp-API."
+demo: "https://veterinariapp-fe.vercel.app"
+orden: 5
