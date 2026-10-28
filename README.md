@@ -20,7 +20,7 @@ Queda en `http://localhost:4321`.
 | Tecla | Qué hace |
 | --- | --- |
 | `1` … `6` | Salta a perfil, experiencia, profesionales, personales, estudios o contacto |
-| `C` | Recorre los cuatro fósforos: amarillo, verde, rojo y cian (se recuerda en el navegador) |
+| `C` | Recorre los cuatro fósforos: ámbar, verde, rojo y cian (se recuerda en el navegador) |
 | `↑` `↓` | Desplazan la página |
 
 Sin JavaScript el documento se lee completo: el menú y los botones son enlaces.
