@@ -13,7 +13,9 @@ npm install
 npm run dev
 ```
 
-Queda en `http://localhost:4321`.
+Queda en `http://localhost:4321`. 
+El CMS está en `http://localhost:4321/keystatic` (solo en `npm run dev`). Cada colección escribe
+YAML en `content/`:
 
 ## Teclado
 
@@ -25,24 +27,6 @@ Queda en `http://localhost:4321`.
 
 Sin JavaScript el documento se lee completo: el menú y los botones son enlaces.
 
-## Contenido
-
-El CMS está en `http://localhost:4321/keystatic` (solo en `npm run dev`). Cada colección escribe
-YAML en `content/`:
-
-| Dónde | Qué |
-| --- | --- |
-| `content/perfil`, `content/contacto` | Singletons: perfil (con la ficha y el stack) y contacto |
-| `content/experiencia` | Trabajos, con viñetas y orden |
-| `content/proyectos-trabajo` | Proyectos profesionales: productos de empleadores (privados, sin enlaces) |
-| `content/repos` | Proyectos personales: nombre, lenguaje, año de creación, descripción, repo y `demo` opcional. El orden lo da el campo `orden` |
-| `content/estudios`, `content/certificados` | P700 |
-
-En producción **no hay CMS**, y es a propósito: GitHub Pages solo sirve archivos estáticos y las
-rutas del admin de Keystatic necesitan un servidor. La integración se monta únicamente cuando
-corre `astro dev` (ver `astro.config.mjs`), así que el build queda 100 % prerenderizado. Para
-editar desde el navegador contra GitHub habría que mudar el hosting a uno con SSR y registrar la
-GitHub App de Keystatic.
 
 ## Build y publicación
 
