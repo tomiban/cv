@@ -340,13 +340,6 @@ a.row:focus-visible dd {
   color: var(--ink);
 }
 
-.note {
-  margin: 1rem 0 0;
-  color: var(--ink-2);
-  font-size: 0.82em;
-  max-width: 72ch;
-}
-
 /* ---------- bloques de experiencia / proyectos ---------- */
 
 .entry {
@@ -391,13 +384,6 @@ a.row:focus-visible dd {
   gap: 0.6em;
   align-items: center;
   flex-wrap: wrap;
-}
-
-.tag {
-  background: var(--ink);
-  color: var(--screen);
-  padding: 0 0.45em;
-  letter-spacing: 0.14em;
 }
 
 .bullets {
@@ -500,6 +486,9 @@ a.row:focus-visible dd {
   padding: 0;
   display: grid;
   gap: 0.2rem;
+}
+
+.plain li > span:first-child {
   max-width: 88ch;
 }
 
@@ -520,14 +509,24 @@ a.row:focus-visible dd {
   white-space: nowrap;
 }
 
-.plain li > .certs__end {
+.plain li > .list__end {
   display: inline-flex;
   align-items: center;
   gap: 0.8rem;
 }
 
-.plain li > .certs__end .btn {
+.plain li > .list__end .btn:not(:hover):not(:focus-visible) {
   color: var(--ink);
+}
+
+.plain__desc {
+  display: block;
+  font-size: 0.88em;
+  color: var(--ink-2);
+  letter-spacing: 0;
+  text-transform: none;
+  white-space: normal;
+  max-width: 74ch;
 }
 
 .subhead {

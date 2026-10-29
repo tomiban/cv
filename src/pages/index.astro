@@ -7,10 +7,37 @@ const reader = createReader(process.cwd(), keystaticConfig);
 const perfil = await reader.singletons.perfil.read();
 const contacto = await reader.singletons.contacto.read();
 
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const title = 'Tomás Banchio — Desarrollador Full Stack';
+const description =
+  'Desarrollador full stack en Esperanza, Santa Fe. Tres años construyendo producto de punta a punta: React y Next.js, NestJS y ASP.NET Core, SQL, Docker, pagos e identidad.';
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  '@id': `${canonical.href}#person`,
+  name: perfil?.nombre,
+  jobTitle: perfil?.rol,
+  url: canonical.href,
+  email: contacto?.email ? `mailto:${contacto.email}` : undefined,
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Esperanza',
+    addressRegion: 'Santa Fe',
+    addressCountry: 'AR',
+  },
+  knowsAbout: ['React', 'Next.js', 'NestJS', 'ASP.NET Core', 'TypeScript', 'PostgreSQL', 'Docker'],
+  sameAs: [contacto?.githubUrl, contacto?.linkedinUrl].filter(Boolean),
+};
+
 const byOrden = (a: { entry: { orden?: number | null } }, b: { entry: { orden?: number | null } }) =>
   (a.entry.orden ?? 0) - (b.entry.orden ?? 0);
 
 const experiencia = (await reader.collections.experiencia.all()).sort(byOrden);
+// el periodo se toma de experiencia: una sola fuente de verdad para las fechas
+const periodoDe = (empleador: string) => {
+  const exp = experiencia.find(({ entry }) => entry.empresa.startsWith(empleador));
+  return exp ? `${exp.entry.desde} → ${exp.entry.hasta}` : '';
+};
 const trabajos = (await reader.collections.proyectosTrabajo.all()).sort(byOrden);
 const estudios = (await reader.collections.estudios.all()).sort(byOrden);
 const certificados = (await reader.collections.certificados.all()).sort((a, b) => {
@@ -89,23 +116,15 @@ const secciones = [
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Tomás Banchio — Desarrollador Full Stack</title>
-    <meta
-      name="description"
-      content="Desarrollador full stack en Esperanza, Santa Fe. Tres años construyendo producto de punta a punta: React y Next.js, NestJS y ASP.NET Core, SQL, Docker, pagos e identidad."
-    />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content={perfil?.nombre} />
+    <link rel="canonical" href={canonical} />
     <meta name="theme-color" content="#0b0a08" />
     <meta name="color-scheme" content="dark" />
-    <meta property="og:type" content="profile" />
-    <meta property="og:locale" content="es_AR" />
-    <meta property="og:title" content="Tomás Banchio — Desarrollador Full Stack" />
-    <meta
-      property="og:description"
-      content="Ficha de terminal: perfil, experiencia, stack, proyectos, repos y contacto."
-    />
-    <meta property="og:url" content="https://tomiban.github.io/" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="../styles/global.css" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </head>
   <body>
     <a class="skip" href="#p1">Saltar a la ficha</a>
@@ -168,7 +187,6 @@ const secciones = [
                 <h3>{entry.empresa}</h3>
                 <p class="entry__role">{entry.puesto}</p>
                 <p class="entry__when">
-                  {entry.enCurso && <span class="tag">hoy</span>}
                   {`${entry.desde} → ${entry.hasta}`}
                 </p>
               </div>
@@ -187,39 +205,44 @@ const secciones = [
       <section class="win" id="p3" data-page="3" aria-labelledby="t3">
         <h2 class="win__t" id="t3">[3] Proyectos profesionales</h2>
         {
-          trabajos.map(({ entry }) => (
-            <article class="entry">
-              <div class="entry__head">
-                <h3>{entry.nombre}</h3>
-                <p class="entry__when">
-                  {entry.empleador}
-                  <a class="btn btn--sm" href={entry.web} rel="noopener">ver producto</a>
-                </p>
-              </div>
-              <p>{entry.descripcion}</p>
-            </article>
-          ))
+          trabajos.map(({ entry }) => {
+            const periodo = periodoDe(entry.empleador);
+            return (
+              <article class="entry">
+                <div class="entry__head">
+                  <h3>{entry.nombre}</h3>
+                  <p class="entry__when">
+                    {entry.empleador}{periodo && ` · ${periodo}`}
+                    <a class="btn btn--sm" href={entry.web} rel="noopener">ver producto</a>
+                  </p>
+                </div>
+                <p>{entry.descripcion}</p>
+              </article>
+            );
+          })
         }
       </section>
 
       <section class="win" id="p4" data-page="4" aria-labelledby="t4">
         <h2 class="win__t" id="t4">[4] Proyectos personales</h2>
+        <ul class="plain">
         {
           conDemo.map(({ entry }) => (
-            <div class="lead-row">
-              <span class="lead-row__name">{entry.nombre}</span>
-              <span class="lead-row__meta">
-                {entry.lenguaje} · {entry.anio}
-                <span class="lead-row__acts">
-                  <a class="btn btn--sm btn--on" href={entry.demo}>
-                    ver demo
-                  </a>
-                </span>
+            <li>
+              <span>
+                {entry.nombre} · {entry.lenguaje}
+                <span class="plain__desc">{entry.descripcion}</span>
               </span>
-              <span class="lead-row__desc">{entry.descripcion}</span>
-            </div>
+              <span class="list__end">
+                <span>{entry.anio}</span>
+                <a class="btn btn--sm" href={entry.demo}>
+                  ver demo
+                </a>
+              </span>
+            </li>
           ))
         }
+        </ul>
       </section>
 
       <section class="win" id="p5" data-page="5" aria-labelledby="t5">
@@ -246,7 +269,7 @@ const secciones = [
                   {entry.titulo} · {entry.emisor}
                   {entry.detalle ? ` · ${entry.detalle}` : ''}
                 </span>
-                <span class="certs__end">
+                <span class="list__end">
                   {entry.anio && <span>{entry.anio}</span>}
                   {entry.url && (
                     <a
@@ -282,7 +305,6 @@ const secciones = [
             <span class="row__v">{contacto?.linkedin}</span>
           </a>
         </div>
-        <p class="note">Última actualización: {contacto?.actualizado}.</p>
       </section>
     </main>
 

@@ -1,5 +1,6 @@
 import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
+import sitemap from '@astrojs/sitemap';
 import keystatic from '@keystatic/astro';
 
 // Keystatic's admin is made of server-rendered routes and this site is a static
@@ -9,8 +10,8 @@ import keystatic from '@keystatic/astro';
 const isDev = process.env.NODE_ENV === 'development';
 
 export default defineConfig({
-  site: 'https://tomiban.github.io',
+  site: 'https://tomasbanchio.com.ar',
   // la barra flotante de desarrollo no debe tapar el diseño que se está revisando
   devToolbar: { enabled: false },
-  integrations: [react(), ...(isDev ? [keystatic()] : [])],
+  integrations: [react(), sitemap(), ...(isDev ? [keystatic()] : [])],
 });
