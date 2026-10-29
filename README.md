@@ -1,7 +1,4 @@
-# tomiban.github.io
-
-Sitio personal: el CV como servicio de teletexto. Una página, ocho páginas numeradas, celdas
-fijas y direccionamiento por número (`P300`, `P600`, …).
+# Sitio Web Personal
 
 Astro + Keystatic. El contenido vive en `content/` y se edita desde el CMS; el sitio se publica
 como HTML estático en GitHub Pages.
