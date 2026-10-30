@@ -5,7 +5,7 @@ hasta: "Jun 2025"
 enCurso: false
 orden: 2
 vinetas:
-  - "Desarrollo de funcionalidades de Neuro AI, plataforma empresarial de agentes de IA configurables y compartidos, con Next.js."
+  - "Desarrollo de funcionalidades de Neuro AI con Next.js."
   - "Construcción de interfaces y flujos para la gestión de agentes, usuarios y permisos de acceso por organización."
-  - "Implementación de integraciones con sistemas empresariales y APIs REST con C# y ASP.NET Core."
+  - "Integraciones con sistemas empresariales y APIs REST con C# y ASP.NET Core."
   - "Desarrollo y mantenimiento de sistemas empresariales con GeneXus y WorkWithPlus."

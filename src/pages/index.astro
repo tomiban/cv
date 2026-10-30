@@ -45,7 +45,7 @@ const certificados = (await reader.collections.certificados.all()).sort((a, b) =
   return year !== 0 ? year : (a.entry.orden ?? 0) - (b.entry.orden ?? 0);
 });
 const repos = (await reader.collections.repos.all()).sort(byOrden);
-const conDemo = repos.filter(({ entry }) => Boolean(entry.demo));
+const publicados = repos.filter(({ entry }) => Boolean(entry.demo || entry.web));
 
 
 // --- Monitor CRT en ASCII con una partida de snake (cuadros en build time) ---
@@ -210,13 +210,15 @@ const secciones = [
             return (
               <article class="entry">
                 <div class="entry__head">
-                  <h3>{entry.nombre}</h3>
-                  <p class="entry__when">
-                    {entry.empleador}{periodo && ` · ${periodo}`}
-                    <a class="btn btn--sm" href={entry.web} rel="noopener">ver producto</a>
-                  </p>
+                  <h3>
+                    <a href={entry.web} rel="noopener" aria-label={`${entry.nombre} — ver producto`}>
+                      {entry.nombre}
+                    </a>
+                  </h3>
+                  <p class="entry__when">{entry.empleador}{periodo && ` · ${periodo}`}</p>
                 </div>
                 <p>{entry.descripcion}</p>
+                {entry.stack && <p class="entry__stack">{entry.stack}</p>}
               </article>
             );
           })
@@ -227,17 +229,30 @@ const secciones = [
         <h2 class="win__t" id="t4">[4] Proyectos personales</h2>
         <ul class="plain">
         {
-          conDemo.map(({ entry }) => (
+          publicados.map(({ entry }) => (
             <li>
               <span>
-                {entry.nombre} · {entry.lenguaje}
+                {entry.web ? (
+                  <a
+                    href={entry.web}
+                    rel="noopener"
+                    aria-label={`${entry.nombre} — ver repositorio`}
+                  >
+                    {entry.nombre}
+                  </a>
+                ) : (
+                  entry.nombre
+                )}
+                {' · '}{entry.lenguaje}
                 <span class="plain__desc">{entry.descripcion}</span>
               </span>
               <span class="list__end">
                 <span>{entry.anio}</span>
-                <a class="btn btn--sm" href={entry.demo}>
-                  ver demo
-                </a>
+                {entry.demo && (
+                  <a class="btn btn--sm" href={entry.demo}>
+                    ver demo
+                  </a>
+                )}
               </span>
             </li>
           ))

@@ -18,6 +18,13 @@ export default config({
         nombre: fields.text({ label: 'Nombre' }),
         rol: fields.text({ label: 'Rol' }),
         ubicacion: fields.text({ label: 'Ubicación' }),
+        foto: fields.image({
+          label: 'Foto de perfil',
+          info: {
+            fileTypes: ['image/*'],
+            title: 'Foto de perfil',
+          },
+        }),
         ficha: fields.array(
           fields.object({
             etiqueta: fields.text({ label: 'Etiqueta' }),
@@ -64,6 +71,7 @@ export default config({
         nombre: fields.text({ label: 'Nombre' }),
         empleador: fields.text({ label: 'Empleador' }),
         descripcion: fields.text({ label: 'Descripción', multiline: true }),
+        stack: fields.text({ label: 'Stack', validation: { isRequired: false } }),
         web: fields.url({ label: 'Página del producto' }),
         orden,
       },

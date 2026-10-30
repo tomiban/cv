@@ -2,4 +2,5 @@ nombre: "restaurant-clean-architecture"
 lenguaje: "C#"
 anio: 2025
 descripcion: "API REST en .NET con Clean Architecture, CQRS (MediatR), Serilog y Docker Compose."
+web: "https://github.com/tomiban/restaurant-clean-architecture"
 orden: 2

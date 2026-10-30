@@ -1,5 +1,6 @@
 nombre: "Neuro AI"
 empleador: "Neuronic"
-descripcion: "Plataforma empresarial de agentes de IA configurables y compartidos. Construí en Next.js las interfaces y los flujos de gestión de agentes, usuarios y permisos de acceso por organización, y las integraciones con sistemas empresariales y APIs REST en C# y ASP.NET Core. También mantuve sistemas empresariales en GeneXus y WorkWithPlus."
+descripcion: "Plataforma donde las empresas crean agentes de IA a medida y los comparten entre equipos, con control de quién accede a qué dentro de cada organización. El foco estuvo en el modelo de permisos: que cada organización gestione sus agentes, usuarios y accesos de forma aislada."
+stack: "Next.js · C# · ASP.NET Core · shadcn"
 web: "https://ai.neuronic.tech/"
 orden: 2
