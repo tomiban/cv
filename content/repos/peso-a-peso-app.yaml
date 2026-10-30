@@ -2,5 +2,6 @@ nombre: "peso-a-peso-app"
 lenguaje: "TypeScript"
 anio: 2024
 descripcion: "Gestión de finanzas personales full-stack: Next.js, Prisma y MariaDB sobre Google Cloud Run."
+web: "https://github.com/tomiban/peso-a-peso-app"
 demo: "https://peso-a-peso-app-five.vercel.app/"
 orden: 3

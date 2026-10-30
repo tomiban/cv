@@ -5,8 +5,8 @@ hasta: "Actualidad"
 enCurso: true
 orden: 1
 vinetas:
-  - "Desarrollo y mantenimiento de App Santa Fe, aplicación híbrida para la gestión de trámites municipales, con React, TypeScript, NestJS y SQL."
-  - "Integración de APIs REST y servicios de terceros, incluyendo las pasarelas de pago Mercado Pago y Plus Pago."
-  - "Implementación de autenticación y autorización con OIDC y Keycloak (identidad y control de acceso)."
-  - "Desarrollo de un backoffice administrativo para la gestión interna de trámites y la operación del equipo."
-  - "Configuración de entornos y colaboración en despliegues y mantenimiento en infraestructura on-premise con Docker."
+  - "Desarrollo y mantenimiento full stack de App Santa Fe con React, TypeScript, NestJS y SQL, usada por más de 10.000 usuarios."
+  - "Integración de las pasarelas de pago Mercado Pago y Plus Pago."
+  - "Implementación de autenticación y autorización con OIDC y Keycloak."
+  - "Desarrollo del backoffice administrativo para la gestión interna de trámites."
+  - "Configuración de entornos y colaboración en despliegues y mantenimiento on-premise con Docker."

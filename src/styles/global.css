@@ -366,6 +366,14 @@ a.row:focus-visible dd {
   text-transform: uppercase;
 }
 
+.entry__head h3 a:hover,
+.entry__head h3 a:focus-visible,
+.plain li > span:first-child a:hover,
+.plain li > span:first-child a:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 0.22em;
+}
+
 .entry__role {
   margin: 0;
   color: var(--ink-2);
@@ -527,6 +535,14 @@ a.row:focus-visible dd {
   text-transform: none;
   white-space: normal;
   max-width: 74ch;
+}
+
+.entry__stack {
+  margin: 0.5rem 0 0;
+  color: var(--ink-2);
+  font-size: 0.78em;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
 .subhead {
@@ -739,10 +755,6 @@ a.row:focus-visible dd {
 
   .entry__when {
     justify-content: flex-start;
-  }
-
-  .entry__head a.btn {
-    margin-top: 0.35rem;
   }
 }
 
