@@ -17,6 +17,7 @@ export default config({
       schema: {
         nombre: fields.text({ label: 'Nombre' }),
         rol: fields.text({ label: 'Rol' }),
+        especialidad: fields.text({ label: 'Especialidad' }),
         ubicacion: fields.text({ label: 'Ubicación' }),
         foto: fields.image({
           label: 'Foto de perfil',
@@ -43,7 +44,6 @@ export default config({
         githubUrl: fields.url({ label: 'GitHub (URL)' }),
         linkedin: fields.text({ label: 'LinkedIn (texto)' }),
         linkedinUrl: fields.url({ label: 'LinkedIn (URL)' }),
-        actualizado: fields.text({ label: 'Actualizado' }),
       },
     }),
   },
@@ -71,7 +71,6 @@ export default config({
         nombre: fields.text({ label: 'Nombre' }),
         empleador: fields.text({ label: 'Empleador' }),
         descripcion: fields.text({ label: 'Descripción', multiline: true }),
-        stack: fields.text({ label: 'Stack', validation: { isRequired: false } }),
         web: fields.url({ label: 'Página del producto' }),
         orden,
       },

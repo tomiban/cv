@@ -1,6 +1,5 @@
 nombre: "App Santa Fe"
 empleador: "Crombie"
 descripcion: "Centraliza en una sola app los trámites municipales de la ciudad. Superó los 10.000 usuarios, que inician y pagan trámites desde el celular, mientras el equipo municipal los procesa desde un backoffice propio. El desafío fue combinar pagos online con dos pasarelas, identidad centralizada y un despliegue on-premise donde la infraestructura la manejamos nosotros."
-stack: "React · TypeScript · NestJS · SQL · Keycloak · Docker · Capacitor · HeroUI"
 web: "https://santafeciudad.gov.ar/appsantafe/"
 orden: 1

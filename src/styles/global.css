@@ -137,11 +137,6 @@ a {
   color: var(--ink);
 }
 
-.menu__meta {
-  margin-left: auto;
-  color: var(--ink-2);
-}
-
 /* ---------- ventanas ---------- */
 
 main {
@@ -261,10 +256,61 @@ main {
   gap: 0.5em;
 }
 
-.ident__meta span + span::before {
-  content: "·";
-  color: var(--rule);
-  margin-right: 0.1em;
+.ident__spec {
+  margin: 0 0 0.35rem;
+  color: var(--ink-2);
+  font-size: 0.78em;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+/* ---------- stack ---------- */
+
+.stack {
+  display: grid;
+  gap: 1rem;
+}
+
+.stack__group {
+  border-top: 1px solid var(--rule);
+  padding-top: 0.9rem;
+}
+
+.stack__group:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.stack__group h3 {
+  margin: 0;
+  font-size: 0.9em;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.stack__group p {
+  margin: 0.4rem 0 0;
+  max-width: 74ch;
+  color: var(--ink-2);
+}
+
+.stack__tags {
+  font-size: 0.78em;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+@media (min-width: 48rem) {
+  .stack {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.2rem 2rem;
+  }
+
+  .stack__group:nth-child(2) {
+    border-top: 0;
+    padding-top: 0;
+  }
 }
 
 /* ---------- filas de ficha ---------- */
@@ -321,6 +367,15 @@ a.row:focus-visible dd {
   border: 1px solid var(--ink);
   padding: 0.35em 0.85em;
   text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+}
+
+.icon {
+  width: 1.1em;
+  height: 1.1em;
+  flex: none;
 }
 
 .btn:hover,
@@ -464,7 +519,9 @@ a.row:focus-visible dd {
 .card-go {
   margin: 1.2rem 0 0;
   display: flex;
+  flex-wrap: wrap;
   justify-content: flex-end;
+  gap: 0.5rem;
 }
 
 .btn--sm {
@@ -537,14 +594,6 @@ a.row:focus-visible dd {
   max-width: 74ch;
 }
 
-.entry__stack {
-  margin: 0.5rem 0 0;
-  color: var(--ink-2);
-  font-size: 0.78em;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
 .subhead {
   margin: 1.6rem 0 0.5rem;
   font-size: 0.76em;
@@ -614,7 +663,7 @@ a.row:focus-visible dd {
 
 @media (min-width: 48rem) {
   .row {
-    grid-template-columns: 13ch minmax(0, 1fr);
+    grid-template-columns: 15ch minmax(0, 1fr);
     gap: 0.9rem;
     align-items: baseline;
   }
@@ -694,10 +743,6 @@ a.row:focus-visible dd {
     flex: 0 0 auto;
   }
 
-  .menu__meta {
-    display: none;
-  }
-
   /* la barra de estado es de teclado: en táctil no aporta y come 75px */
   .status {
     display: none;
@@ -716,10 +761,6 @@ a.row:focus-visible dd {
   .ident__meta {
     font-size: 0.82em;
     letter-spacing: 0.08em;
-  }
-
-  .ident__meta span + span::before {
-    content: none;
   }
 
   .lead-row {

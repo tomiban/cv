@@ -1,7 +1,6 @@
 (() => {
   const sections = Array.from(document.querySelectorAll("[data-page]"));
   const navLinks = Array.from(document.querySelectorAll("[data-nav]"));
-  const clockEl = document.getElementById("reloj");
   const root = document.documentElement;
   const store = {
     get: (k) => {
@@ -18,12 +17,6 @@
         return;
       }
     },
-  };
-
-  const clock = () => {
-    const now = new Date();
-    clockEl.textContent = `${String(now.getHours()).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}`;
-    clockEl.dateTime = now.toISOString();
   };
 
   const PHOSPHORS = ["amber", "green", "red", "cyan"];
@@ -67,8 +60,6 @@
     }
   });
 
-  clock();
-  window.setInterval(clock, 15000);
   markCurrent();
   window.addEventListener("scroll", markCurrent, { passive: true });
 })();
