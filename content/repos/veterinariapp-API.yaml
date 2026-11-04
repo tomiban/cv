@@ -5,3 +5,4 @@ descripcion: "API .NET 8 para gestión de pacientes, dueños, vacunas y dosis ap
 web: "https://github.com/tomiban/veterinariapp-API"
 demo: "https://veterinariapp-api.vercel.app/swagger/index.html"
 orden: 4
+destacado: true
