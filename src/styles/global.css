@@ -433,11 +433,13 @@ main > * {
   display: flex;
   flex: none;
   gap: 0;
-  padding-block: 0.9rem;
-  font-family: var(--mono);
-  font-size: 0.95rem;
+  padding-block: 0.7rem 0.6rem;
+  font-family: 'Jersey 15', var(--mono);
+  font-size: 1.5rem;
+  line-height: 1;
+  letter-spacing: 0.02em;
   white-space: nowrap;
-  animation: ticker 45s linear infinite;
+  animation: ticker 70s linear infinite;
 }
 
 .ticker__track li::after {
