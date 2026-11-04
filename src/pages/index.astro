@@ -141,7 +141,7 @@ const pad = (n: number) => String(n + 1).padStart(2, '0');
                 ></path>
               </svg>
             )}
-            {contactoLabel}
+            Escribime
           </a>
           <a class="btn" href="#casos">Ver casos</a>
         </p>
@@ -159,17 +159,6 @@ const pad = (n: number) => String(n + 1).padStart(2, '0');
           )
         }
       </section>
-
-      <dl class="proof" aria-label="Trayectoria">
-        {
-          oferta?.pruebas.map((p) => (
-            <div>
-              <dt><span aria-hidden="true">&gt; </span>{p.valor}</dt>
-              <dd>{p.detalle}</dd>
-            </div>
-          ))
-        }
-      </dl>
 
       <section class="block" id="servicios" aria-labelledby="servicios-t">
         <header class="block__head">
@@ -404,7 +393,6 @@ const pad = (n: number) => String(n + 1).padStart(2, '0');
       </p>
     </footer>
 
-    <a class="float-cta" href={contactoHref} {...waAttrs}>{whatsapp ? 'WhatsApp' : 'Escribime'}</a>
     {
       whatsapp && (
         <script src="/contacto.js" defer data-sitekey={contacto?.turnstileSiteKey} data-text={mensaje}></script>
