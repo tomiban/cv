@@ -1,5 +1,16 @@
 nombre: "App Santa Fe"
 empleador: "Crombie"
+cliente: "Municipalidad de Santa Fe"
 descripcion: "Centraliza en una sola app los trámites municipales de la ciudad. Superó los 10.000 usuarios, que inician y pagan trámites desde el celular, mientras el equipo municipal los procesa desde un backoffice propio. El desafío fue combinar pagos online con dos pasarelas, identidad centralizada y un despliegue on-premise donde la infraestructura la manejamos nosotros."
+desafio: "La ciudad necesitaba que los vecinos pudieran iniciar y pagar trámites sin ir en persona, y que el municipio los gestionara desde un solo lugar."
+rol: "Desarrollador full stack en el equipo de Crombie que construye y mantiene la app."
+solucion:
+  - "Desarrollo de la app donde los vecinos inician y pagan trámites desde el celular."
+  - "Integración de los cobros online con Mercado Pago y Plus Pago."
+  - "Autenticación y autorización con OIDC y Keycloak."
+  - "Backoffice para que el equipo municipal gestione cada trámite."
+  - "Despliegue de la web y publicación de las apps en Google Play y App Store."
+resultado: "Más de 10.000 usuarios que hoy resuelven trámites sin hacer fila."
+stack: "React · TypeScript · NestJS · SQL · Docker"
 web: "https://santafeciudad.gov.ar/appsantafe/"
 orden: 1

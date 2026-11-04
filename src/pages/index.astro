@@ -1,17 +1,24 @@
 ---
 import { createReader } from '@keystatic/core/reader';
 import keystaticConfig from '../../keystatic.config';
+import '@fontsource-variable/bricolage-grotesque';
 import '../styles/global.css';
 
 const reader = createReader(process.cwd(), keystaticConfig);
+const oferta = await reader.singletons.oferta.read();
 const perfil = await reader.singletons.perfil.read();
 const contacto = await reader.singletons.contacto.read();
 
+// retrato ASCII generado con scripts/ascii.py; si no existe, el hero va a una columna
+const retratos = import.meta.glob<string>('../assets/retrato*.txt', { query: '?raw', import: 'default', eager: true });
+const retrato = retratos['../assets/retrato.txt'];
+const retratoOscuro = retratos['../assets/retrato-oscuro.txt'] ?? retrato;
+
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL('/og.png', Astro.site).href;
-const title = 'Tomás Banchio — Desarrollador Full Stack';
+const title = 'Tomás Banchio — Desarrollo de software a medida';
 const description =
-  'Desarrollador full stack en Esperanza, Santa Fe. Tres años construyendo producto de punta a punta: React y Next.js, NestJS y ASP.NET Core, SQL, Docker, pagos e identidad.';
+  'Desarrollador full stack en Santa Fe. Sistemas a medida, integraciones con Mercado Pago y login, webs y apps con IA para pymes, organismos y equipos. Escribime por WhatsApp.';
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
@@ -26,9 +33,21 @@ const jsonLd = {
     addressRegion: 'Santa Fe',
     addressCountry: 'AR',
   },
-  knowsAbout: ['React', 'Next.js', 'NestJS', 'ASP.NET Core', 'TypeScript', 'PostgreSQL', 'Docker'],
+  knowsAbout: ['React', 'Next.js', 'NestJS', 'ASP.NET Core', 'TypeScript', 'PostgreSQL', 'Docker', 'Mercado Pago', 'Keycloak'],
+  makesOffer: oferta?.servicios.map((s) => ({
+    '@type': 'Offer',
+    itemOffered: { '@type': 'Service', name: s.titulo, description: s.descripcion },
+  })),
   sameAs: [contacto?.githubUrl, contacto?.linkedinUrl].filter(Boolean),
 };
+
+// el número no se publica: con Turnstile configurado, /contacto.js lo pide al Worker de
+// /api/contacto tras el desafío; el mailto queda como href para el que no tiene JavaScript
+const mensaje = oferta?.mensajeWhatsapp ?? '';
+const whatsapp = Boolean(contacto?.turnstileSiteKey);
+const contactoHref = `mailto:${contacto?.email}?subject=${encodeURIComponent('Proyecto')}&body=${encodeURIComponent(mensaje)}`;
+const contactoLabel = whatsapp ? 'Escribime por WhatsApp' : 'Escribime';
+const waAttrs = whatsapp ? { 'data-wa': '' } : {};
 
 const byOrden = (a: { entry: { orden?: number | null } }, b: { entry: { orden?: number | null } }) =>
   (a.entry.orden ?? 0) - (b.entry.orden ?? 0);
@@ -37,9 +56,9 @@ const experiencia = (await reader.collections.experiencia.all()).sort(byOrden);
 // el periodo se toma de experiencia: una sola fuente de verdad para las fechas
 const periodoDe = (empleador: string) => {
   const exp = experiencia.find(({ entry }) => entry.empresa.startsWith(empleador));
-  return exp ? `${exp.entry.desde} → ${exp.entry.hasta}` : '';
+  return exp ? `${exp.entry.desde} – ${exp.entry.hasta}` : '';
 };
-const trabajos = (await reader.collections.proyectosTrabajo.all()).sort(byOrden);
+const casos = (await reader.collections.proyectosTrabajo.all()).sort(byOrden);
 const estudios = (await reader.collections.estudios.all()).sort(byOrden);
 const certificados = (await reader.collections.certificados.all()).sort((a, b) => {
   const year = Number(b.entry.anio || 0) - Number(a.entry.anio || 0);
@@ -48,93 +67,21 @@ const certificados = (await reader.collections.certificados.all()).sort((a, b) =
 const repos = (await reader.collections.repos.all()).sort(byOrden);
 const publicados = repos.filter(({ entry }) => Boolean(entry.demo || entry.web));
 
-
-// --- Monitor CRT en ASCII con una partida de snake (cuadros en build time) ---
-const TW = 28;
-const TH = 8;
-const PAD = "        ";
-const INNER = TW + 4;
-const loop: Array<[number, number]> = [];
-for (let x = 2; x <= 25; x++) loop.push([x, 2]);
-for (let y = 3; y <= 7; y++) loop.push([25, y]);
-for (let x = 24; x >= 2; x--) loop.push([x, 7]);
-for (let y = 6; y >= 3; y--) loop.push([2, y]);
-
-const hud = (frame: number) =>
-  ` PUNTOS ${String(4 + frame).padStart(4, "0")}      HI 0031`.padEnd(TW).slice(0, TW);
-
-const playfield = (frames: number) => {
-  const cells = new Map<string, string>();
-  const head = frames * 4;
-  for (let b = 0; b < 6; b++) {
-    const [x, y] = loop[(head - b + loop.length * 3) % loop.length];
-    cells.set(`${x},${y}`, b === 0 ? "@" : "o");
-  }
-  const food = [
-    [8, 7],
-    [21, 2],
-    [14, 7],
-  ][frames % 3];
-  const key = `${food[0]},${food[1]}`;
-  if (!cells.has(key)) cells.set(key, "*");
-  return Array.from({ length: TH }, (_, y) => {
-    if (y === 0) return hud(frames);
-    let row = "";
-    for (let x = 0; x < TW; x++) row += cells.get(`${x},${y}`) ?? " ";
-    return row;
-  });
-};
-
-const monitor = (frame: number) => [
-  PAD + "." + "=".repeat(INNER) + ".",
-  PAD + "|" + " ".repeat(INNER) + "|",
-  PAD + "| " + "." + "-".repeat(TW) + ". |",
-  ...playfield(frame).map((row) => PAD + "| |" + row + "| |"),
-  PAD + "| '" + "-".repeat(TW) + "' |",
-  PAD + "|" + " ".repeat(INNER) + "|",
-  PAD + "|  (o)  TB-2026" + " ".repeat(INNER - 14) + "|",
-  PAD + "'" + "=".repeat(INNER) + "'",
-  PAD + "     [==================]",
-  PAD + "      '----------------'",
-  PAD + "       |              |",
-  PAD + "  _____|______________|_____",
-];
-
-const snake = Array.from({ length: 11 }, (_, f) => monitor(f));
-
 const secciones = [
-  { id: 'p1', n: '1', label: 'Perfil' },
-  { id: 'p2', n: '2', label: 'Experiencia' },
-  { id: 'p3', n: '3', label: 'Stack' },
-  { id: 'p4', n: '4', label: 'Proyectos' },
-  { id: 'p5', n: '5', label: 'Estudios' },
-  { id: 'p6', n: '6', label: 'Contacto' },
+  { id: 'servicios', label: 'Servicios' },
+  { id: 'casos', label: 'Casos' },
+  { id: 'proceso', label: 'Cómo trabajo' },
+  { id: 'perfil', label: 'Perfil' },
 ];
 
 const stack = [
-  {
-    titulo: 'Arquitectura frontend',
-    descripcion:
-      'Interfaces y aplicaciones con React y Next.js: flujos de producto, formularios y consumo de APIs; web con Astro y mobile con React Native.',
-    tags: ['React', 'Next.js', 'TypeScript', 'Astro', 'React Native'],
-  },
-  {
-    titulo: 'Arquitectura backend',
-    descripcion:
-      'APIs y servicios con NestJS y ASP.NET Core: integraciones, autenticación, permisos y contratos compartidos con el frontend.',
-    tags: ['NestJS', 'Node.js', 'ASP.NET Core', 'C#'],
-  },
-  {
-    titulo: 'Datos e infraestructura',
-    descripcion: 'Modelado, despliegue y operación en producción, on-premise y cloud.',
-    tags: ['PostgreSQL', 'SQL Server', 'AWS', 'Azure', 'Terraform'],
-  },
-  {
-    titulo: 'Sistemas y redes',
-    descripcion: 'Administración Linux, contenedores y troubleshooting de red.',
-    tags: ['Linux', 'Docker', 'TCP/IP', 'DNS', 'SSH', 'Bash'],
-  },
+  { titulo: 'Frontend', tags: ['React', 'Next.js', 'TypeScript', 'Astro', 'React Native'] },
+  { titulo: 'Backend', tags: ['NestJS', 'Node.js', 'ASP.NET Core', 'C#'] },
+  { titulo: 'Datos y cloud', tags: ['PostgreSQL', 'SQL Server', 'AWS', 'Azure', 'Terraform'] },
+  { titulo: 'Sistemas', tags: ['Linux', 'Docker', 'TCP/IP', 'DNS', 'SSH', 'Bash'] },
 ];
+
+const pad = (n: number) => String(n + 1).padStart(2, '0');
 ---
 
 <!doctype html>
@@ -157,247 +104,311 @@ const stack = [
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
-    <meta name="theme-color" content="#0b0a08" />
-    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#f3efe6" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0b0a08" media="(prefers-color-scheme: dark)" />
+    <meta name="color-scheme" content="light dark" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </head>
   <body>
-    <a class="skip" href="#p1">Saltar a la ficha</a>
+    <a class="skip" href="#main">Saltar al contenido</a>
 
-    <nav class="menu" aria-label="Secciones">
-      {
-        secciones.map((s) => (
-          <a href={`#${s.id}`} data-nav={s.id}>
-            <b>{s.n}</b>
-            {s.label}
+    <header class="top">
+      <a class="brand" href="#main" aria-label="Tomás Banchio, inicio">
+        <span class="brand__mark" aria-hidden="true">TB<span class="cursor">_</span></span>
+        <span class="brand__name">Tomás Banchio</span>
+      </a>
+      <nav class="top__nav" aria-label="Secciones">
+        {secciones.map((s) => <a href={`#${s.id}`}>{s.label}</a>)}
+      </nav>
+      <a class="btn btn--sm btn--accent" href={contactoHref} {...waAttrs}>Hablemos</a>
+    </header>
+
+    <main id="main">
+      <section class:list={['hero', { 'hero--retrato': retrato }]} aria-labelledby="hero-t">
+        <div class="hero__text">
+        <p class="eyebrow"><span class="dot" aria-hidden="true"></span>{oferta?.etiqueta}</p>
+        <h1 id="hero-t">{oferta?.titular}</h1>
+        <p class="hero__lead">{oferta?.bajada}</p>
+        <p class="actions">
+          <a class="btn btn--accent" href={contactoHref} {...waAttrs}>
+            {whatsapp && (
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path
+                  fill="currentColor"
+                  d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.6.13-.14.3-.35.44-.52.15-.18.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.6-.92-2.2-.24-.58-.49-.5-.67-.5h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.08c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.7.63.71.22 1.36.19 1.87.12.57-.09 1.76-.72 2-1.41.25-.7.25-1.29.18-1.41-.08-.13-.27-.2-.57-.35zM12.04 21.5h-.01a9.4 9.4 0 0 1-4.8-1.31l-.34-.2-3.57.93.95-3.48-.22-.36a9.4 9.4 0 0 1-1.44-5.02c0-5.2 4.24-9.44 9.44-9.44 2.52 0 4.89.99 6.67 2.77a9.37 9.37 0 0 1 2.76 6.68c0 5.2-4.24 9.43-9.44 9.43zm8.03-17.47A11.3 11.3 0 0 0 12.04.7C5.78.7.68 5.8.68 12.06c0 2 .52 3.96 1.52 5.68L.58 23.7l6.1-1.6a11.3 11.3 0 0 0 5.36 1.37h.01c6.26 0 11.36-5.1 11.36-11.36 0-3.04-1.18-5.89-3.33-8.04z"
+                ></path>
+              </svg>
+            )}
+            {contactoLabel}
           </a>
-        ))
-      }
-    </nav>
-
-    <main>
-      <section class="win win--id" id="p1" data-page="1" aria-labelledby="t1">
-        <h2 class="win__t" id="t1">Identificación</h2>
-
-        <div class="ident">
-          <div class="crt" aria-hidden="true">
-            {
-              snake.map((frame, f) => (
-                <pre class="crt__f" style={`--f:${f}`}>{frame.join("\n")}</pre>
-              ))
-            }
-          </div>
-          <div class="ident__main">
-            <p class="ident__spec">{perfil?.especialidad}</p>
-            <h1>{perfil?.nombre}</h1>
-            <p class="ident__meta">
-              <span>{perfil?.ubicacion}</span>
-            </p>
-
-            <dl class="rows">
-              {
-                perfil?.ficha.map((fila) => (
-                  <div class="row">
-                    <dt>{fila.etiqueta}</dt>
-                    <dd>{fila.valor}</dd>
-                  </div>
-                ))
-              }
-            </dl>
-
-            <p class="card-go">
-              <a class="btn" href={contacto?.githubUrl} rel="noopener">
-                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                  <path
-                    fill="currentColor"
-                    d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"
-                  ></path>
-                </svg>
-                GitHub
-              </a>
-              <a class="btn btn--on" href={`mailto:${contacto?.email}`}>
-                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                  <path
-                    fill="currentColor"
-                    d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 2v.01L12 13 4 6.01V6h16zM4 18V8l8 7 8-7v10H4z"
-                  ></path>
-                </svg>
-                Contactar
-              </a>
-            </p>
-          </div>
+          <a class="btn" href="#casos">Ver casos</a>
+        </p>
         </div>
-
-      </section>
-
-      <section class="win" id="p2" data-page="2" aria-labelledby="t2">
-        <h2 class="win__t" id="t2">[2] Experiencia</h2>
         {
-          experiencia.map(({ entry }) => (
-            <article class="entry">
-              <div class="entry__head">
-                <h3>{entry.empresa}</h3>
-                <p class="entry__role">{entry.puesto}</p>
-                <p class="entry__when">
-                  {`${entry.desde} → ${entry.hasta}`}
-                </p>
-              </div>
-              <ul class="bullets">
-                {entry.vinetas.map((vineta) => (
-                  <li>
-                    <span>{vineta}</span>
-                  </li>
-                ))}
-              </ul>
-            </article>
-          ))
+          retrato && (
+            <figure class="retrato">
+              <pre class="retrato__claro" aria-hidden="true">{retrato}</pre>
+              <pre class="retrato__oscuro" aria-hidden="true">{retratoOscuro}</pre>
+              <figcaption class="mono">
+                <span aria-hidden="true">$ cat tomas.txt</span>
+                <span class="sr-only">Retrato de Tomás Banchio en ASCII</span>
+              </figcaption>
+            </figure>
+          )
         }
       </section>
 
-      <section class="win" id="p3" data-page="3" aria-labelledby="t3">
-        <h2 class="win__t" id="t3">[3] Stack</h2>
-        <div class="stack">
+      <dl class="proof" aria-label="Trayectoria">
+        {
+          oferta?.pruebas.map((p) => (
+            <div>
+              <dt><span aria-hidden="true">&gt; </span>{p.valor}</dt>
+              <dd>{p.detalle}</dd>
+            </div>
+          ))
+        }
+      </dl>
+
+      <section class="block" id="servicios" aria-labelledby="servicios-t">
+        <header class="block__head">
+          <p class="kicker">Servicios</p>
+          <h2 id="servicios-t">Qué puedo hacer por tu proyecto</h2>
+        </header>
+        <ol class="services">
           {
-            stack.map((grupo) => (
-              <article class="stack__group">
-                <h3>{grupo.titulo}</h3>
-                <p>{grupo.descripcion}</p>
-                <p class="stack__tags">{grupo.tags.join(' · ')}</p>
-              </article>
+            oferta?.servicios.map((s, i) => (
+              <li class="service reveal">
+                <span class="service__n" aria-hidden="true">{pad(i)}</span>
+                <h3>{s.titulo}</h3>
+                <p>{s.descripcion}</p>
+                <p class="service__for"><span>Ideal para</span> {s.para}</p>
+              </li>
             ))
           }
-        </div>
+        </ol>
       </section>
 
-      <section class="win" id="p4" data-page="4" aria-labelledby="t4">
-        <h2 class="win__t" id="t4">[4] Proyectos</h2>
-
-        <h3 class="subhead">Profesionales</h3>
+      <section class="block" id="casos" aria-labelledby="casos-t">
+        <header class="block__head">
+          <p class="kicker">Casos</p>
+          <h2 id="casos-t">Software que hoy está en producción</h2>
+        </header>
         {
-          trabajos.map(({ entry }) => {
+          casos.map(({ entry }) => {
             const periodo = periodoDe(entry.empleador);
             return (
-              <article class="entry">
-                <div class="entry__head">
+              <article class="case reveal">
+                <div class="case__meta">
                   <h3>
-                    <a href={entry.web} rel="noopener" aria-label={`${entry.nombre} — ver producto`}>
+                    <a href={entry.web} rel="noopener" target="_blank">
                       {entry.nombre}
+                      <span class="sr-only"> (abre en otra pestaña)</span>
                     </a>
                   </h3>
-                  <p class="entry__when">{entry.empleador}{periodo && ` · ${periodo}`}</p>
+                  <p>{entry.cliente}</p>
+                  <p class="mono">
+                    vía {entry.empleador}
+                    {periodo && ` · ${periodo}`}
+                  </p>
+                  <p class="mono case__stack">{entry.stack}</p>
                 </div>
-                <p>{entry.descripcion}</p>
+                <dl class="case__body">
+                  <div>
+                    <dt>El problema</dt>
+                    <dd>{entry.desafio}</dd>
+                  </div>
+                  <div>
+                    <dt>Mi rol</dt>
+                    <dd>{entry.rol}</dd>
+                  </div>
+                  <div>
+                    <dt>En qué trabajé</dt>
+                    <dd>
+                      <ul>
+                        {entry.solucion.map((punto) => (
+                          <li>{punto}</li>
+                        ))}
+                      </ul>
+                    </dd>
+                  </div>
+                  <div class="case__result">
+                    <dt>Resultado</dt>
+                    <dd>{entry.resultado}</dd>
+                  </div>
+                </dl>
               </article>
             );
           })
         }
 
-        <h3 class="subhead">Personales</h3>
-        <ul class="plain">
-        {
-          publicados.map(({ entry }) => (
-            <li>
-              <span>
-                {entry.web ? (
-                  <a
-                    href={entry.web}
-                    rel="noopener"
-                    aria-label={`${entry.nombre} — ver repositorio`}
-                  >
-                    {entry.nombre}
-                  </a>
-                ) : (
-                  entry.nombre
-                )}
-                {' · '}{entry.lenguaje}
-                <span class="plain__desc">{entry.descripcion}</span>
-              </span>
-              <span class="list__end">
-                <span>{entry.anio}</span>
-                {entry.demo && (
-                  <a class="btn btn--sm" href={entry.demo}>
-                    ver demo
-                  </a>
-                )}
-              </span>
-            </li>
-          ))
-        }
+        <h3 class="subhead">Proyectos propios</h3>
+        <ul class="repos">
+          {
+            publicados.map(({ entry }) => (
+              <li>
+                <a href={entry.demo || entry.web} rel="noopener" target="_blank">
+                  <span class="repos__name">{entry.nombre}</span>
+                  <span class="repos__desc">{entry.descripcion}</span>
+                  <span class="mono repos__meta">
+                    {entry.lenguaje} · {entry.anio}
+                    {entry.demo ? ' · demo' : ' · código'}
+                  </span>
+                  <span class="sr-only"> (abre en otra pestaña)</span>
+                </a>
+              </li>
+            ))
+          }
         </ul>
       </section>
 
-      <section class="win" id="p5" data-page="5" aria-labelledby="t5">
-        <h2 class="win__t" id="t5">[5] Estudios y certificados</h2>
-        <ul class="plain">
+      <section class="block block--band" id="proceso" aria-labelledby="proceso-t">
+        <header class="block__head">
+          <p class="kicker">Cómo trabajo</p>
+          <h2 id="proceso-t">Sin sorpresas, de la charla al deploy</h2>
+        </header>
+        <ol class="steps">
+          {
+            oferta?.pasos.map((p, i) => (
+              <li class="reveal">
+                <span class="steps__n" aria-hidden="true">{pad(i)}</span>
+                <h3>{p.titulo}</h3>
+                <p>{p.descripcion}</p>
+              </li>
+            ))
+          }
+        </ol>
+      </section>
+
+      <section class="block" id="perfil" aria-labelledby="perfil-t">
+        <header class="block__head">
+          <p class="kicker">Perfil</p>
+          <h2 id="perfil-t">¿Buscás sumar a alguien al equipo?</h2>
+          <p class="block__lead">
+            También trabajo en relación de dependencia. {perfil?.especialidad}, con experiencia en equipos
+            ágiles y producto en producción.
+          </p>
+        </header>
+
+        <div class="profile">
+          <dl class="facts">
+            {
+              perfil?.ficha.map((fila) => (
+                <div>
+                  <dt>{fila.etiqueta}</dt>
+                  <dd>{fila.valor}</dd>
+                </div>
+              ))
+            }
+          </dl>
+
+          <div class="timeline">
+            {
+              experiencia.map(({ entry }) => (
+                <article class="job">
+                  <p class="mono job__when">{`${entry.desde} – ${entry.hasta}`}</p>
+                  <h3>
+                    {entry.puesto} <span>· {entry.empresa}</span>
+                  </h3>
+                  <ul>
+                    {entry.vinetas.map((vineta) => (
+                      <li>{vineta}</li>
+                    ))}
+                  </ul>
+                </article>
+              ))
+            }
+          </div>
+        </div>
+
+        <div class="stack">
+          {
+            stack.map((grupo) => (
+              <div>
+                <h3 class="mono">{grupo.titulo}</h3>
+                <ul class="tags">
+                  {grupo.tags.map((tag) => (
+                    <li>{tag}</li>
+                  ))}
+                </ul>
+              </div>
+            ))
+          }
+        </div>
+
+        <ul class="studies">
           {
             estudios.map(({ entry }) => (
               <li>
+                <span class="mono">{entry.periodo}</span>
                 <span>
-                  {entry.etiqueta}: {entry.titulo} · {entry.institucion}
+                  <strong>{entry.titulo}</strong> · {entry.institucion}
                 </span>
-                <span>{entry.periodo}</span>
               </li>
             ))
           }
         </ul>
 
-        <h3 class="subhead">Certificaciones</h3>
-        <ul class="plain">
-          {
-            certificados.map(({ entry }) => (
-              <li>
-                <span>
-                  {entry.titulo} · {entry.emisor}
-                  {entry.detalle ? ` · ${entry.detalle}` : ''}
-                </span>
-                <span class="list__end">
-                  {entry.anio && <span>{entry.anio}</span>}
-                  {entry.url && (
-                    <a
-                      class="btn btn--sm"
-                      href={entry.url}
-                      rel="noopener"
-                      target="_blank"
-                      aria-label={`Ver certificado: ${entry.titulo}`}
-                    >
-                      ver certificado
-                    </a>
-                  )}
-                </span>
-              </li>
-            ))
-          }
-        </ul>
+        <details class="certs">
+          <summary>Certificaciones ({certificados.length})</summary>
+          <ul>
+            {
+              certificados.map(({ entry }) => (
+                <li>
+                  <span class="mono">{entry.anio}</span>
+                  <span>
+                    {entry.url ? (
+                      <a href={entry.url} rel="noopener" target="_blank">
+                        {entry.titulo}
+                        <span class="sr-only"> (ver certificado, abre en otra pestaña)</span>
+                      </a>
+                    ) : (
+                      entry.titulo
+                    )}
+                    {' · '}
+                    {entry.emisor}
+                    {entry.detalle ? ` · ${entry.detalle}` : ''}
+                  </span>
+                </li>
+              ))
+            }
+          </ul>
+        </details>
+
+        <p class="actions">
+          <a class="btn" href={contacto?.linkedinUrl} rel="noopener">LinkedIn</a>
+          <a class="btn" href={contacto?.githubUrl} rel="noopener">GitHub</a>
+        </p>
       </section>
 
-      <section class="win" id="p6" data-page="6" aria-labelledby="t6">
-        <h2 class="win__t" id="t6">[6] Contacto</h2>
-        <div class="rows">
-          <a class="row" href={`mailto:${contacto?.email}`}>
-            <span class="row__k">Mail</span>
-            <span class="row__v">{contacto?.email}</span>
-          </a>
-          <a class="row" href={contacto?.githubUrl} rel="noopener">
-            <span class="row__k">GitHub</span>
-            <span class="row__v">{contacto?.github}</span>
-          </a>
-          <a class="row" href={contacto?.linkedinUrl} rel="noopener">
-            <span class="row__k">LinkedIn</span>
-            <span class="row__v">{contacto?.linkedin}</span>
-          </a>
-        </div>
+      <section class="cta" id="contacto" aria-labelledby="cta-t">
+        <h2 id="cta-t">¿Tenés un proceso que se podría resolver con software?</h2>
+        <p>Contame en dos líneas qué necesitás. Te respondo a la brevedad.</p>
+        <p class="actions">
+          <a class="btn btn--ink" href={contactoHref} {...waAttrs}>{contactoLabel}</a>
+          <a class="btn btn--line" href={`mailto:${contacto?.email}`}>{contacto?.email}</a>
+        </p>
       </section>
     </main>
 
-    <footer class="status">
-      <span><em>[1..6]</em> secciones</span>
-      <span><em>[c]</em> fósforo</span>
-      <span><em>[↑↓]</em> desplazar</span>
-      <span class="status__end">{contacto?.email} · Low Tek, High Life.</span>
+    <footer class="foot">
+      <p class="mono">
+        <span aria-hidden="true">tomas@banchio:~$</span> {perfil?.ubicacion}
+      </p>
+      <p class="foot__sig">Low Tek, High Life.<span class="cursor" aria-hidden="true">_</span></p>
+      <p class="foot__links">
+        <a href={contacto?.linkedinUrl} rel="noopener">LinkedIn</a>
+        <a href={contacto?.githubUrl} rel="noopener">GitHub</a>
+        <a href={`mailto:${contacto?.email}`}>Mail</a>
+      </p>
     </footer>
 
-    <script src="/app.js" defer></script>
+    <a class="float-cta" href={contactoHref} {...waAttrs}>{whatsapp ? 'WhatsApp' : 'Escribime'}</a>
+    {
+      whatsapp && (
+        <script src="/contacto.js" defer data-sitekey={contacto?.turnstileSiteKey} data-text={mensaje}></script>
+      )
+    }
   </body>
 </html>

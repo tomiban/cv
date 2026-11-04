@@ -18,7 +18,7 @@ Secondary: recruiters and technical leads running the same scan for a full-stack
 
 ## Product Purpose
 
-A one-page professional record: who he is, where he has worked, what he can build with, what he has shipped, and how to reach him. Success is a visitor who can name his stack, his two employers, one thing he built, and the way to contact him — without scrolling twice.
+A one-page personal-brand site that turns visits into conversations. Clients come first: a promise, five services, two production cases told as problem / what he did / result, a four-step process, and WhatsApp as the primary call to action (buttons are `mailto` links until `contacto.turnstileSiteKey` is set). Recruiters get a compact profile section further down: facts, experience, stack, studies, and certificates folded in a `<details>`. Success is a client who messages him, or a recruiter who can name his stack, his two employers and one thing he built without scrolling twice.
 
 ## Positioning
 
@@ -40,15 +40,14 @@ GitHub Pages, one static page. Visitors compare him against agency quotes and ot
 - Languages: Spanish native, English B1.
 - Location and contact are exactly the ones in the CV: Esperanza, Santa Fe, Argentina; the phone number and email already published on the site's predecessor; linkedin.com/in/tbanchio; github.com/tomiban.
 - Constraint: employer product internals are private; no screenshots, no invented metrics, no client names beyond the employer.
-- Constraint: one page, static output, no client framework, no hosted stylesheets or third-party runtime. The CMS is an authoring tool, never a production dependency.
+- Constraint: one page, static output, no client framework, no hosted stylesheets. The only third-party runtime is Cloudflare Turnstile, loaded on idle to guard the WhatsApp number, which is served by the Worker in `worker/` and never published in the repo or the HTML. The CMS is an authoring tool, never a production dependency.
 
 ## Brand Commitments
 
 - Spanish copy with English technical jargon, as in the CV.
-- Voice: direct, technical, no marketing register. The predecessor site already signs off with "Low Tek, High Life." — keep the signature.
+- Voice: direct and plain, written for a non-technical client first; technical terms only where they prove something (Mercado Pago, Keycloak, Docker). No hype. The predecessor site already signs off with "Low Tek, High Life." — keep the signature.
 - No invented claims: no fake clients, metrics, testimonials, or benchmarks.
-- Aesthetic pinned by the owner (latest, 2026-10-28): **industrial retro brutalist** — machine plates, silkscreened control panels, technical manuals, safety signage, stamped capitals, raw ground, one signal colour, no rounded corners, no glass, no skeuomorphic gloss. It supersedes the earlier "brutalist early-2000s web" pin; that proposal (teletexto) is archived on branch `feat/televideo`.
-- Reference given by the owner: `https://www.421.news/es/`. Take its editorial structure — domain sections, a ranked list, one saturated band, mixed display/body voices — and refuse what does not work for one person: a feed of equal cards, no single thesis, pill buttons.
+- Aesthetic pinned by the owner (latest, 2026-11-04): **client-facing editorial with a subtle terminal nod** — warm paper ground, near-black ink, the old amber phosphor as the single signal colour, a grotesque display face, square corners. The terminal survives only in details: the `TB_` mark, blinking cursors, mono labels with `>` prefixes, the prompt and "Low Tek, High Life." in the footer. It supersedes the "industrial retro brutalist" terminal pin of 2026-10-28, which lives in git history before branch `feat/rebrand-clientes`.
 - Explicitly rejected: anything that reads as an AI-generated template, aesthetics at the cost of readability, fabricated achievements.
 
 ## Evidence on Hand
