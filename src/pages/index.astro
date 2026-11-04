@@ -16,29 +16,58 @@ const retratoOscuro = retratos['../assets/retrato-oscuro.txt'] ?? retrato;
 
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL('/og.png', Astro.site).href;
-const title = 'Tomás Banchio — Desarrollo de software a medida';
+const title = 'Tomás Banchio — Software a medida y automatizaciones en Santa Fe';
 const description =
-  'Desarrollador full stack en Santa Fe. Sistemas a medida, integraciones con Mercado Pago y login, webs y apps con IA para pymes, organismos y equipos. Escribime por WhatsApp.';
+  'Desarrollador de software en Esperanza, Santa Fe. Sistemas a medida, automatizaciones con IA, integraciones con Mercado Pago y login, webs y apps para pymes, organismos y equipos. Escribime por WhatsApp.';
+// misma localidad que el Perfil de Empresa de Google: nombre, zona y web tienen que coincidir
+const address = {
+  '@type': 'PostalAddress',
+  addressLocality: 'Esperanza',
+  addressRegion: 'Santa Fe',
+  addressCountry: 'AR',
+};
+const sameAs = [contacto?.githubUrl, contacto?.linkedinUrl].filter(Boolean);
 const jsonLd = {
   '@context': 'https://schema.org',
-  '@type': 'Person',
-  '@id': `${canonical.href}#person`,
-  name: perfil?.nombre,
-  jobTitle: perfil?.rol,
-  url: canonical.href,
-  email: contacto?.email ? `mailto:${contacto.email}` : undefined,
-  address: {
-    '@type': 'PostalAddress',
-    addressLocality: 'Esperanza',
-    addressRegion: 'Santa Fe',
-    addressCountry: 'AR',
-  },
-  knowsAbout: ['React', 'Next.js', 'NestJS', 'ASP.NET Core', 'TypeScript', 'PostgreSQL', 'Docker', 'Mercado Pago', 'Keycloak'],
-  makesOffer: oferta?.servicios.map((s) => ({
-    '@type': 'Offer',
-    itemOffered: { '@type': 'Service', name: s.titulo, description: s.descripcion },
-  })),
-  sameAs: [contacto?.githubUrl, contacto?.linkedinUrl].filter(Boolean),
+  '@graph': [
+    {
+      '@type': 'Person',
+      '@id': `${canonical.href}#person`,
+      name: perfil?.nombre,
+      jobTitle: perfil?.rol,
+      url: canonical.href,
+      email: contacto?.email ? `mailto:${contacto.email}` : undefined,
+      address,
+      knowsAbout: ['React', 'Next.js', 'NestJS', 'ASP.NET Core', 'TypeScript', 'PostgreSQL', 'Docker', 'Mercado Pago', 'Keycloak', 'Automatización de procesos', 'Inteligencia artificial'],
+      sameAs,
+    },
+    {
+      // negocio de área de servicio: sin local abierto al público, por eso no lleva calle ni horarios
+      '@type': 'ProfessionalService',
+      '@id': `${canonical.href}#negocio`,
+      name: perfil?.nombre,
+      description,
+      url: canonical.href,
+      image: ogImage,
+      email: contacto?.email ? `mailto:${contacto.email}` : undefined,
+      founder: { '@id': `${canonical.href}#person` },
+      address,
+      areaServed: [
+        { '@type': 'City', name: 'Esperanza' },
+        { '@type': 'City', name: 'Santa Fe' },
+        { '@type': 'City', name: 'Santo Tomé' },
+        { '@type': 'City', name: 'Rafaela' },
+        { '@type': 'City', name: 'Paraná' },
+        { '@type': 'AdministrativeArea', name: 'Provincia de Santa Fe' },
+        { '@type': 'Country', name: 'Argentina' },
+      ],
+      makesOffer: oferta?.servicios.map((s) => ({
+        '@type': 'Offer',
+        itemOffered: { '@type': 'Service', name: s.titulo, description: s.descripcion },
+      })),
+      sameAs,
+    },
+  ],
 };
 
 // el número no se publica: con Turnstile configurado, /contacto.js lo pide al Worker de
