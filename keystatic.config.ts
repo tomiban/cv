@@ -123,6 +123,7 @@ export default config({
         descripcion: fields.text({ label: 'Descripción', multiline: true }),
         web: fields.url({ label: 'Página del producto' }),
         demo: fields.url({ label: 'Demo', validation: { isRequired: false } }),
+        destacado: fields.checkbox({ label: 'Mostrar en el perfil', defaultValue: false }),
         orden,
       },
     }),
