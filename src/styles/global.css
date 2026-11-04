@@ -411,14 +411,34 @@ main > * {
 
 /* ---------- Cinta de tecnologías ---------- */
 
+/* monitor de fósforo ámbar, como el sitio anterior: scanlines, brillo y bordes que se apagan */
 .ticker {
+  position: relative;
   max-width: none;
   display: flex;
   overflow: hidden;
   padding-inline: 0;
-  background: #0f0e0b;
+  background: radial-gradient(ellipse at center, #1c1a12 0%, #0f0e0b 70%);
   color: #ffb000;
   border-block: 1.5px solid var(--ink);
+  text-shadow:
+    0 0 2px rgb(255 176 0 / 0.9),
+    0 0 10px rgb(255 176 0 / 0.45);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+.ticker::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgb(0 0 0 / 0) 0,
+    rgb(0 0 0 / 0) 2px,
+    rgb(0 0 0 / 0.45) 2px,
+    rgb(0 0 0 / 0.45) 3px
+  );
 }
 
 .ticker__track {
@@ -437,7 +457,8 @@ main > * {
 .ticker__track li::after {
   content: '·';
   padding-inline: 1.25rem;
-  color: #6b5a33;
+  color: #7a6230;
+  text-shadow: none;
 }
 
 .ticker:hover .ticker__track {
