@@ -1,0 +1,12 @@
+# Worker de contacto: valida Turnstile y devuelve el número de WhatsApp.
+# Secrets (se cargan con `npx wrangler secret put <NOMBRE>`, nunca acá):
+#   TURNSTILE_SECRET  clave secreta del widget de Turnstile
+#   WHATSAPP_NUMBER   solo dígitos con código de país
+name = "tomasbanchio-contacto"
+main = "src/index.js"
+compatibility_date = "2026-09-01"
+workers_dev = false
+
+routes = [
+  { pattern = "tomasbanchio.com.ar/api/contacto", zone_name = "tomasbanchio.com.ar" },
+]
