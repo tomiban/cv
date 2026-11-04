@@ -250,12 +250,19 @@ a:hover {
   margin-right: auto;
 }
 
+/* la marca es siempre una pantalla oscura, en los dos modos, con la fuente de la firma */
 .brand__mark {
-  font-family: var(--mono);
-  font-weight: 700;
-  padding: 0.25em 0.45em;
-  background: var(--ink);
-  color: var(--paper);
+  font-family: 'Jersey 15', var(--mono);
+  font-size: 1.45rem;
+  line-height: 1;
+  padding: 0.12em 0.32em 0.08em;
+  background: #0f0e0b;
+  color: #f3ecdc;
+  outline: 1px solid var(--rule);
+}
+
+.brand__mark .cursor {
+  color: #ffb000;
 }
 
 .brand__name {
@@ -409,6 +416,58 @@ main > * {
 }
 
 /* ---------- Prueba ---------- */
+
+/* ---------- Cinta de tecnologías ---------- */
+
+.ticker {
+  max-width: none;
+  display: flex;
+  overflow: hidden;
+  padding-inline: 0;
+  background: #0f0e0b;
+  color: #ffb000;
+  border-block: 1.5px solid var(--ink);
+}
+
+.ticker__track {
+  display: flex;
+  flex: none;
+  gap: 0;
+  padding-block: 0.9rem;
+  font-family: var(--mono);
+  font-size: 0.95rem;
+  white-space: nowrap;
+  animation: ticker 45s linear infinite;
+}
+
+.ticker__track li::after {
+  content: '·';
+  padding-inline: 1.25rem;
+  color: #6b5a33;
+}
+
+.ticker:hover .ticker__track {
+  animation-play-state: paused;
+}
+
+@keyframes ticker {
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ticker__track {
+    animation: none;
+    flex-wrap: wrap;
+    white-space: normal;
+    padding-inline: var(--gutter);
+  }
+
+  .ticker__track[aria-hidden='true'] {
+    display: none;
+  }
+}
 
 /* ---------- Bloques ---------- */
 
