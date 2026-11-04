@@ -1,0 +1,97 @@
+---
+import { createReader } from '@keystatic/core/reader';
+import keystaticConfig from '../../keystatic.config';
+import '@fontsource-variable/bricolage-grotesque';
+import '../styles/global.css';
+import Escribime from '../components/Escribime.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  jsonLd: object;
+  nav: { href: string; label: string }[];
+}
+
+const { title, description, jsonLd, nav } = Astro.props;
+
+const reader = createReader(process.cwd(), keystaticConfig);
+const oferta = await reader.singletons.oferta.read();
+const perfil = await reader.singletons.perfil.read();
+const contacto = await reader.singletons.contacto.read();
+
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL('/og.png', Astro.site).href;
+const esInicio = Astro.url.pathname === '/';
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content={perfil?.nombre} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <meta name="theme-color" content="#f3efe6" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0b0a08" media="(prefers-color-scheme: dark)" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+  <body>
+    <a class="skip" href="#main">Saltar al contenido</a>
+
+    <header class="top">
+      <a class="brand" href={esInicio ? '#main' : '/'} aria-label="Tomás Banchio, inicio">
+        <svg class="brand__mark" viewBox="0 0 32 32" shape-rendering="crispEdges" aria-hidden="true" focusable="false">
+          <path d="M2 0h28v1h1v1h1v28h-1v1h-1v1H2v-1H1v-1H0V2h1V1h1z" fill="#0f0e0b"></path>
+          <rect x="3" y="3" width="2" height="2" fill="#ff5240"></rect>
+          <rect x="6" y="3" width="2" height="2" fill="#ffb000"></rect>
+          <rect x="9" y="3" width="2" height="2" fill="#4dff8f"></rect>
+          <path d="M4.03 13.62H11.45V16.1H8.98V26H6.5V16.1H4.03ZM18.05 17.75H18.88V16.92H18.05V16.1H15.58V18.57H18.05ZM15.58 23.52H18.05V22.7H18.88V21.88H18.05V21.05H15.58ZM20.53 20.23H21.35V24.35H20.53V25.18H19.7V26H13.1V13.62H19.7V14.45H20.53V15.28H21.35V19.4H20.53Z" fill="#f3ecdc"></path>
+          <rect class="cursor" x="22.8" y="23" width="6.2" height="3" fill="#ffb000"></rect>
+        </svg>
+        <span class="brand__name">Tomás Banchio</span>
+      </a>
+      <nav class="top__nav" aria-label="Secciones">
+        {nav.map((s) => <a href={s.href}>{s.label}</a>)}
+      </nav>
+      <Escribime class="btn--sm btn--accent" />
+    </header>
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <footer class="foot">
+      <p class="mono">
+        <span aria-hidden="true">tomas@banchio:~$</span> {perfil?.ubicacion}
+      </p>
+      <p class="foot__sig">Low Tek, High Life.<span class="cursor" aria-hidden="true">_</span></p>
+      <p class="foot__links">
+        <a href={contacto?.linkedinUrl} rel="noopener">LinkedIn</a>
+        <a href={contacto?.githubUrl} rel="noopener">GitHub</a>
+        <a href={`mailto:${contacto?.email}`}>Mail</a>
+      </p>
+    </footer>
+
+    {
+      contacto?.turnstileSiteKey && (
+        <script src="/contacto.js" defer data-sitekey={contacto.turnstileSiteKey} data-text={oferta?.mensajeWhatsapp ?? ''}></script>
+      )
+    }
+  </body>
+</html>

@@ -1,0 +1,36 @@
+titulo: "Desarrollo de software a medida en Santa Fe"
+tituloSeo: "Desarrollo de software a medida en Santa Fe | Tomás Banchio"
+descripcionSeo: "Sistemas de gestión a medida para pymes, municipios y equipos de Santa Fe: trámites, turnos, stock y clientes en un solo lugar. Presupuesto por escrito."
+etiqueta: "Software a medida · Esperanza, Santa Fe"
+bajada: "Desarrollo sistemas web pensados para cómo trabaja tu equipo, no al revés. Reemplazan planillas, cadenas de mails y programas que ya no alcanzan por un sistema ordenado, donde cada persona ve y hace solo lo que le corresponde."
+problemas:
+  - "La información de tu negocio está repartida en planillas de Excel que nadie sabe cuál es la última versión."
+  - "Cada pedido, trámite o turno pasa por mails y mensajes de WhatsApp, y algo siempre se pierde."
+  - "Usás un programa enlatado que te obliga a trabajar como él quiere, o ya no da para lo que creciste."
+  - "Cargás los mismos datos dos o tres veces en sistemas distintos."
+incluye:
+  - titulo: "Relevamiento"
+    descripcion: "Antes de escribir código entendemos juntos el proceso: quién hace qué, qué se repite y dónde se traba. Salís con un plan claro de qué construir primero."
+  - titulo: "Sistema web a medida"
+    descripcion: "Backoffices, gestión de trámites, turnos, stock, clientes o cuentas corrientes. Se usa desde el navegador, en la compu o en el celular, sin instalar nada."
+  - titulo: "Usuarios y permisos"
+    descripcion: "Cada persona entra con su usuario y ve solo lo que le toca. Si ya usan otras herramientas, pueden entrar a todas con un solo usuario."
+  - titulo: "Puesta en marcha y soporte"
+    descripcion: "Lo dejo funcionando en tu servidor o en la nube, con acceso para tu equipo, y te acompaño mientras empiezan a usarlo."
+casos:
+  - "app-santa-fe"
+  - "neuro-ai"
+repos:
+  - "pos-demo"
+  - "veterinariapp-FE"
+stack: "React · Next.js · NestJS · ASP.NET Core · PostgreSQL · SQL Server · Docker"
+preguntas:
+  - pregunta: "¿Cuánto cuesta un sistema a medida?"
+    respuesta: "Depende de qué tiene que resolver y de cuántas partes tiene. Después de una charla corta te paso alcance, plazos y presupuesto por escrito, en lenguaje claro y sin letra chica."
+  - pregunta: "¿Por qué no usar un sistema enlatado?"
+    respuesta: "Si hay uno que se adapta a tu forma de trabajar, conviene usarlo y te lo digo. El software a medida tiene sentido cuando tu proceso es propio, cuando necesitás conectar varias herramientas o cuando el enlatado te obliga a dar vueltas."
+  - pregunta: "¿El sistema queda a mi nombre?"
+    respuesta: "Sí. Se instala en tu servidor o en una cuenta en la nube a tu nombre, y te entrego el código y los accesos."
+  - pregunta: "¿Trabajás solo con empresas de Santa Fe?"
+    respuesta: "Estoy en Esperanza y me puedo reunir en persona en Santa Fe, Rafaela, Paraná y alrededores. Con el resto del país trabajo a distancia."
+orden: 1

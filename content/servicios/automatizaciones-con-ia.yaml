@@ -1,0 +1,33 @@
+titulo: "Automatización de procesos con IA para pymes"
+tituloSeo: "Automatizaciones con IA para pymes en Santa Fe | Tomás Banchio"
+descripcionSeo: "Automatizo tareas repetitivas de tu pyme con IA: carga de facturas, respuestas por WhatsApp y seguimiento de consultas, siempre con una persona que revisa."
+etiqueta: "Automatizaciones e IA · Esperanza, Santa Fe"
+bajada: "Empiezo por un proceso que hoy tu equipo hace a mano, lo automatizo y le sumo IA donde aporta. Siempre con validaciones y con una persona que revisa lo dudoso: la IA saca el trabajo repetido, no toma decisiones sola."
+problemas:
+  - "Alguien de tu equipo pasa días por mes tipeando facturas o comprobantes."
+  - "Respondés por WhatsApp las mismas preguntas una y otra vez."
+  - "Las consultas que llegan por la web o Instagram se contestan al día siguiente, o se pierden."
+  - "Copiás datos de un mail o un PDF a una planilla o a otro sistema."
+incluye:
+  - titulo: "Elegir qué automatizar"
+    descripcion: "Revisamos juntos las tareas repetidas y elegimos la que más tiempo te saca y menos riesgo tiene. Empezamos por una sola."
+  - titulo: "Automatización con IA"
+    descripcion: "Leer facturas y PDFs, clasificar consultas, responder lo de siempre o pasar datos entre sistemas. La IA se usa donde suma, no de adorno."
+  - titulo: "Control humano"
+    descripcion: "Todo lo dudoso queda marcado para que lo revise una persona. Vos decidís qué se automatiza del todo y qué no."
+  - titulo: "Tus datos protegidos"
+    descripcion: "Control de quién accede a qué y la información de tu empresa trabajada dentro de tus propias herramientas."
+casos:
+  - "neuro-ai"
+repos: []
+stack: "TypeScript · Node.js · APIs de IA · WhatsApp · Next.js"
+preguntas:
+  - pregunta: "¿Qué tareas se pueden automatizar?"
+    respuesta: "Las que se repiten y siguen reglas: cargar facturas, responder preguntas frecuentes, ordenar consultas, pasar datos de un mail o un PDF a un sistema, armar reportes. Si una tarea depende siempre del criterio de una persona, se puede ayudar, pero no reemplazar."
+  - pregunta: "¿La IA se puede equivocar?"
+    respuesta: "Sí, por eso cada automatización tiene validaciones y una persona que revisa lo que no es claro. Preferimos que marque una duda antes que inventar una respuesta."
+  - pregunta: "¿Tengo que cambiar los sistemas que ya uso?"
+    respuesta: "En general no. La automatización se conecta con lo que ya tenés: tu WhatsApp, tu mail, tus planillas o tu sistema de gestión."
+  - pregunta: "¿Cuánto cuesta?"
+    respuesta: "Depende del proceso. Empezamos por uno solo, con alcance y presupuesto por escrito, y medimos cuánto tiempo te ahorra antes de seguir con el próximo."
+orden: 3

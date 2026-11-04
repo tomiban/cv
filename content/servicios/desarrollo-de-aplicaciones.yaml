@@ -1,0 +1,36 @@
+titulo: "Desarrollo de aplicaciones web y móviles"
+tituloSeo: "Desarrollo de apps web y móviles en Santa Fe | Tomás Banchio"
+descripcionSeo: "Desarrollo de aplicaciones web y móviles para Android e iOS: desde la idea hasta la publicación en Google Play y App Store. Esperanza, Santa Fe."
+etiqueta: "Apps · Esperanza, Santa Fe"
+bajada: "Desarrollo aplicaciones que tus clientes o tu equipo usan desde el celular o la compu: con usuarios, pagos online y un panel para administrar todo. Te acompaño desde la idea hasta que está publicada y funcionando."
+problemas:
+  - "Tenés una idea de app pero no sabés por dónde empezar ni cuánto puede llevar."
+  - "Tus clientes te piden hacer por el celular algo que hoy tienen que hacer en persona o por teléfono."
+  - "Necesitás que tu equipo cargue datos desde la calle o el campo, no solo desde la oficina."
+  - "Ya tenés un sistema y querés sumarle una app que use los mismos datos."
+incluye:
+  - titulo: "Definición de la app"
+    descripcion: "Bajamos la idea a pantallas y funciones concretas, y elegimos qué va en la primera versión para salir rápido y ajustar con uso real."
+  - titulo: "App web o móvil"
+    descripcion: "Una web app que se usa desde cualquier navegador, o una app para Android e iOS con un solo código. Te recomiendo la opción que tenga sentido para tu caso."
+  - titulo: "Panel de administración"
+    descripcion: "Un backoffice para que tu equipo gestione usuarios, pedidos o trámites que llegan desde la app."
+  - titulo: "Publicación"
+    descripcion: "Despliegue de la web y publicación de la app en Google Play y App Store, con las cuentas a tu nombre."
+casos:
+  - "app-santa-fe"
+  - "neuro-ai"
+repos:
+  - "peso-a-peso-app"
+  - "pos-demo"
+stack: "React · React Native · Next.js · TypeScript · NestJS · PostgreSQL"
+preguntas:
+  - pregunta: "¿App nativa, híbrida o web?"
+    respuesta: "Si tus usuarios la van a usar todos los días o necesita funciones del celular, conviene una app para Android e iOS. Si es algo que se usa de vez en cuando, una web app es más barata y no hay que pasar por las tiendas. Lo vemos juntos en la primera charla."
+  - pregunta: "¿Cuánto cuesta desarrollar una app?"
+    respuesta: "Depende de cuántas pantallas y funciones tenga y de si necesita pagos, usuarios o un panel. Te paso alcance, plazos y presupuesto por escrito antes de empezar."
+  - pregunta: "¿Quién publica la app en las tiendas?"
+    respuesta: "Me encargo yo, con las cuentas de desarrollador a tu nombre, así la app es tuya."
+  - pregunta: "¿Se puede empezar con algo chico?"
+    respuesta: "Sí, y es lo que recomiendo: una primera versión con lo esencial, que se prueba con usuarios reales, y después se suma lo que hace falta."
+orden: 2

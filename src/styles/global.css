@@ -585,6 +585,19 @@ main > * {
   font-size: 1.5rem;
 }
 
+.service h3 a {
+  text-decoration: none;
+}
+
+.service h3 a::after {
+  content: ' →';
+  color: var(--accent-text);
+}
+
+.service h3 a:hover {
+  text-decoration: underline;
+}
+
 .service p {
   color: var(--ink-2);
 }
@@ -980,6 +993,130 @@ main > * {
 .foot__links {
   display: flex;
   gap: 1.25rem;
+}
+
+/* ---------- Páginas de servicio ---------- */
+
+.migas ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding-top: 1.5rem;
+  list-style: none;
+  font-size: 0.82rem;
+  color: var(--ink-2);
+}
+
+.migas li:not(:last-child)::after {
+  content: ' /';
+  margin-left: 0.5rem;
+}
+
+.migas a {
+  color: inherit;
+}
+
+/* los títulos de servicio son más largos que el del hero de la home */
+.hero--servicio h1 {
+  font-size: clamp(2.3rem, 1.2rem + 4.5vw, 4.8rem);
+  max-width: 18ch;
+}
+
+.senales {
+  display: grid;
+  gap: 1rem;
+  list-style: none;
+  max-width: 48rem;
+}
+
+.senales li {
+  padding: 1.1rem 1.25rem;
+  border-left: 3px solid var(--accent);
+  background: var(--card);
+}
+
+/* cuatro ítems: 1, 2 o 4 columnas, sin el reparto 2 + 3 de la home */
+@media (min-width: 64rem) {
+  .services--par {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .services--par .service,
+  .services--par .service:nth-child(-n + 2) {
+    grid-column: auto;
+  }
+}
+
+.servicio__stack {
+  margin-top: 1.5rem;
+}
+
+.demos {
+  display: grid;
+  gap: 1rem;
+  list-style: none;
+}
+
+@media (min-width: 40rem) {
+  .demos {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.demos li {
+  display: grid;
+  gap: 0.4rem;
+  padding: 1.25rem;
+  border: 1px solid var(--rule);
+}
+
+.demos a {
+  font-family: var(--display);
+  font-weight: 650;
+  font-size: 1.15rem;
+}
+
+.demos p {
+  color: var(--ink-2);
+}
+
+.faq {
+  max-width: 48rem;
+  border-top: 1.5px solid var(--ink);
+}
+
+.faq details {
+  border-bottom: 1px solid var(--rule);
+}
+
+.faq summary {
+  cursor: pointer;
+  padding: 1.1rem 0;
+  font-weight: 600;
+}
+
+.faq details p {
+  padding-bottom: 1.25rem;
+  color: var(--ink-2);
+}
+
+.otros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  list-style: none;
+}
+
+.otros a {
+  display: inline-block;
+  padding: 0.6rem 1rem;
+  border: 1.5px solid var(--ink);
+  text-decoration: none;
+}
+
+.otros a:hover {
+  background: var(--accent);
+  color: var(--accent-ink);
 }
 
 /* ---------- Turnstile: solo se ve si Cloudflare pide interacción ---------- */

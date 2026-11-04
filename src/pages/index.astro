@@ -1,8 +1,8 @@
 ---
 import { createReader } from '@keystatic/core/reader';
 import keystaticConfig from '../../keystatic.config';
-import '@fontsource-variable/bricolage-grotesque';
-import '../styles/global.css';
+import Base from '../layouts/Base.astro';
+import Escribime from '../components/Escribime.astro';
 
 const reader = createReader(process.cwd(), keystaticConfig);
 const oferta = await reader.singletons.oferta.read();
@@ -70,14 +70,6 @@ const jsonLd = {
   ],
 };
 
-// el número no se publica: con Turnstile configurado, /contacto.js lo pide al Worker de
-// /api/contacto tras el desafío; el mailto queda como href para el que no tiene JavaScript
-const mensaje = oferta?.mensajeWhatsapp ?? '';
-const whatsapp = Boolean(contacto?.turnstileSiteKey);
-const contactoHref = `mailto:${contacto?.email}?subject=${encodeURIComponent('Proyecto')}&body=${encodeURIComponent(mensaje)}`;
-const contactoLabel = 'Escribime';
-const waAttrs = whatsapp ? { 'data-wa': '' } : {};
-
 const byOrden = (a: { entry: { orden?: number | null } }, b: { entry: { orden?: number | null } }) =>
   (a.entry.orden ?? 0) - (b.entry.orden ?? 0);
 
@@ -88,6 +80,7 @@ const periodoDe = (empleador: string) => {
   return exp ? `${exp.entry.desde} – ${exp.entry.hasta}` : '';
 };
 const casos = (await reader.collections.proyectosTrabajo.all()).sort(byOrden);
+const paginas = (await reader.collections.servicios.all()).sort(byOrden);
 const estudios = (await reader.collections.estudios.all()).sort(byOrden);
 const certificados = (await reader.collections.certificados.all()).sort((a, b) => {
   const year = Number(b.entry.anio || 0) - Number(a.entry.anio || 0);
@@ -103,6 +96,7 @@ const secciones = [
   { id: 'proceso', label: 'Cómo trabajo' },
   { id: 'perfil', label: 'Perfil' },
 ];
+const nav = secciones.map((s) => ({ href: `#${s.id}`, label: s.label }));
 
 const stack = [
   { titulo: 'Frontend', tags: ['React', 'Next.js', 'TypeScript', 'Astro', 'React Native'] },
@@ -122,72 +116,14 @@ const cinta = [
 const pad = (n: number) => String(n + 1).padStart(2, '0');
 ---
 
-<!doctype html>
-<html lang="es">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title}</title>
-    <meta name="description" content={description} />
-    <meta name="author" content={perfil?.nombre} />
-    <link rel="canonical" href={canonical} />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content={canonical} />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:image" content={ogImage} />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={ogImage} />
-    <meta name="theme-color" content="#f3efe6" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#0b0a08" media="(prefers-color-scheme: dark)" />
-    <meta name="color-scheme" content="light dark" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="sitemap" href="/sitemap-index.xml" />
-    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
-  </head>
-  <body>
-    <a class="skip" href="#main">Saltar al contenido</a>
-
-    <header class="top">
-      <a class="brand" href="#main" aria-label="Tomás Banchio, inicio">
-        <svg class="brand__mark" viewBox="0 0 32 32" shape-rendering="crispEdges" aria-hidden="true" focusable="false">
-          <path d="M2 0h28v1h1v1h1v28h-1v1h-1v1H2v-1H1v-1H0V2h1V1h1z" fill="#0f0e0b"></path>
-          <rect x="3" y="3" width="2" height="2" fill="#ff5240"></rect>
-          <rect x="6" y="3" width="2" height="2" fill="#ffb000"></rect>
-          <rect x="9" y="3" width="2" height="2" fill="#4dff8f"></rect>
-          <path d="M4.03 13.62H11.45V16.1H8.98V26H6.5V16.1H4.03ZM18.05 17.75H18.88V16.92H18.05V16.1H15.58V18.57H18.05ZM15.58 23.52H18.05V22.7H18.88V21.88H18.05V21.05H15.58ZM20.53 20.23H21.35V24.35H20.53V25.18H19.7V26H13.1V13.62H19.7V14.45H20.53V15.28H21.35V19.4H20.53Z" fill="#f3ecdc"></path>
-          <rect class="cursor" x="22.8" y="23" width="6.2" height="3" fill="#ffb000"></rect>
-        </svg>
-        <span class="brand__name">Tomás Banchio</span>
-      </a>
-      <nav class="top__nav" aria-label="Secciones">
-        {secciones.map((s) => <a href={`#${s.id}`}>{s.label}</a>)}
-      </nav>
-      <a class="btn btn--sm btn--accent" href={contactoHref} {...waAttrs}>Escribime</a>
-    </header>
-
-    <main id="main">
+<Base title={title} description={description} jsonLd={jsonLd} nav={nav}>
       <section class:list={['hero', { 'hero--retrato': retrato }]} aria-labelledby="hero-t">
         <div class="hero__text">
         <p class="eyebrow"><span class="dot" aria-hidden="true"></span>{oferta?.etiqueta}</p>
         <h1 id="hero-t">{oferta?.titular}</h1>
         <p class="hero__lead">{oferta?.bajada}</p>
         <p class="actions">
-          <a class="btn btn--accent" href={contactoHref} {...waAttrs}>
-            {whatsapp && (
-              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                <path
-                  fill="currentColor"
-                  d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.6.13-.14.3-.35.44-.52.15-.18.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.6-.92-2.2-.24-.58-.49-.5-.67-.5h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.08c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.7.63.71.22 1.36.19 1.87.12.57-.09 1.76-.72 2-1.41.25-.7.25-1.29.18-1.41-.08-.13-.27-.2-.57-.35zM12.04 21.5h-.01a9.4 9.4 0 0 1-4.8-1.31l-.34-.2-3.57.93.95-3.48-.22-.36a9.4 9.4 0 0 1-1.44-5.02c0-5.2 4.24-9.44 9.44-9.44 2.52 0 4.89.99 6.67 2.77a9.37 9.37 0 0 1 2.76 6.68c0 5.2-4.24 9.43-9.44 9.43zm8.03-17.47A11.3 11.3 0 0 0 12.04.7C5.78.7.68 5.8.68 12.06c0 2 .52 3.96 1.52 5.68L.58 23.7l6.1-1.6a11.3 11.3 0 0 0 5.36 1.37h.01c6.26 0 11.36-5.1 11.36-11.36 0-3.04-1.18-5.89-3.33-8.04z"
-                ></path>
-              </svg>
-            )}
-            Escribime
-          </a>
+          <Escribime class="btn--accent" icono />
           <a class="btn" href="#casos">Ver casos</a>
         </p>
         </div>
@@ -224,13 +160,23 @@ const pad = (n: number) => String(n + 1).padStart(2, '0');
             oferta?.servicios.map((s, i) => (
               <li class="service reveal">
                 <span class="service__n" aria-hidden="true">{pad(i)}</span>
-                <h3>{s.titulo}</h3>
+                <h3>{s.pagina ? <a href={`/${s.pagina}`}>{s.titulo}</a> : s.titulo}</h3>
                 <p>{s.descripcion}</p>
                 <p class="service__for"><span>Ideal para</span> {s.para}</p>
               </li>
             ))
           }
         </ol>
+        <h3 class="subhead">Más detalle por servicio</h3>
+        <ul class="otros">
+          {
+            paginas.map((p) => (
+              <li>
+                <a href={`/${p.slug}`}>{p.entry.titulo}</a>
+              </li>
+            ))
+          }
+        </ul>
       </section>
 
       <section class="block" id="casos" aria-labelledby="casos-t">
@@ -429,38 +375,8 @@ const pad = (n: number) => String(n + 1).padStart(2, '0');
         <h2 id="cta-t">¿Tenés un proceso que se podría resolver con software?</h2>
         <p>Contame en dos líneas qué necesitás y lo vemos juntos.</p>
         <p class="actions">
-          <a class="btn btn--ink" href={contactoHref} {...waAttrs}>
-            {whatsapp && (
-              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                <path
-                  fill="currentColor"
-                  d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.6.13-.14.3-.35.44-.52.15-.18.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.6-.92-2.2-.24-.58-.49-.5-.67-.5h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.08c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.7.63.71.22 1.36.19 1.87.12.57-.09 1.76-.72 2-1.41.25-.7.25-1.29.18-1.41-.08-.13-.27-.2-.57-.35zM12.04 21.5h-.01a9.4 9.4 0 0 1-4.8-1.31l-.34-.2-3.57.93.95-3.48-.22-.36a9.4 9.4 0 0 1-1.44-5.02c0-5.2 4.24-9.44 9.44-9.44 2.52 0 4.89.99 6.67 2.77a9.37 9.37 0 0 1 2.76 6.68c0 5.2-4.24 9.43-9.44 9.43zm8.03-17.47A11.3 11.3 0 0 0 12.04.7C5.78.7.68 5.8.68 12.06c0 2 .52 3.96 1.52 5.68L.58 23.7l6.1-1.6a11.3 11.3 0 0 0 5.36 1.37h.01c6.26 0 11.36-5.1 11.36-11.36 0-3.04-1.18-5.89-3.33-8.04z"
-                ></path>
-              </svg>
-            )}
-            {contactoLabel}
-          </a>
+          <Escribime class="btn--ink" icono />
           <a class="btn btn--line" href={`mailto:${contacto?.email}`}>{contacto?.email}</a>
         </p>
       </section>
-    </main>
-
-    <footer class="foot">
-      <p class="mono">
-        <span aria-hidden="true">tomas@banchio:~$</span> {perfil?.ubicacion}
-      </p>
-      <p class="foot__sig">Low Tek, High Life.<span class="cursor" aria-hidden="true">_</span></p>
-      <p class="foot__links">
-        <a href={contacto?.linkedinUrl} rel="noopener">LinkedIn</a>
-        <a href={contacto?.githubUrl} rel="noopener">GitHub</a>
-        <a href={`mailto:${contacto?.email}`}>Mail</a>
-      </p>
-    </footer>
-
-    {
-      whatsapp && (
-        <script src="/contacto.js" defer data-sitekey={contacto?.turnstileSiteKey} data-text={mensaje}></script>
-      )
-    }
-  </body>
-</html>
+</Base>
