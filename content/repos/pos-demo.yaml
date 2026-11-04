@@ -1,0 +1,8 @@
+nombre: "pos-demo"
+lenguaje: "TypeScript"
+anio: 2026
+descripcion: "Punto de venta para comercios: venta rápida, caja con arqueo, stock, cuenta corriente y panel de ventas. Demo en el navegador con datos ficticios."
+web: "https://github.com/tomiban/pos-demo"
+demo: "https://tomiban.github.io/pos-demo/"
+orden: 2
+destacado: true
