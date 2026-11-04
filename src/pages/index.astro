@@ -124,7 +124,15 @@ const pad = (n: number) => String(n + 1).padStart(2, '0');
 
     <header class="top">
       <a class="brand" href="#main" aria-label="Tomás Banchio, inicio">
-        <span class="brand__mark" aria-hidden="true">TB<span class="cursor">_</span></span>
+        <svg class="brand__mark" viewBox="0 0 32 32" shape-rendering="crispEdges" aria-hidden="true" focusable="false">
+          <rect width="32" height="32" fill="#0f0e0b"></rect>
+          <rect width="32" height="7" fill="#2b2619"></rect>
+          <rect x="3" y="2.5" width="2" height="2" fill="#ff5240"></rect>
+          <rect x="6.5" y="2.5" width="2" height="2" fill="#ffb000"></rect>
+          <rect x="10" y="2.5" width="2" height="2" fill="#4dff8f"></rect>
+          <path fill="#f3ecdc" d="M5 11h3v3h3v3h3v3h-3v3H8v3H5v-3h3v-3h3v-3H8v-3H5z"></path>
+          <rect class="cursor" x="16" y="23" width="11" height="3" fill="#ffb000"></rect>
+        </svg>
         <span class="brand__name">Tomás Banchio</span>
       </a>
       <nav class="top__nav" aria-label="Secciones">

@@ -250,19 +250,12 @@ a:hover {
   margin-right: auto;
 }
 
-/* la marca es siempre una pantalla oscura, en los dos modos, con la fuente de la firma */
+/* la marca es el mismo ícono de terminal que el favicon (public/favicon.svg) */
 .brand__mark {
-  font-family: 'Jersey 15', var(--mono);
-  font-size: 1.45rem;
-  line-height: 1;
-  padding: 0.12em 0.32em 0.08em;
-  background: #0f0e0b;
-  color: #f3ecdc;
+  display: block;
+  width: 2.25rem;
+  height: 2.25rem;
   outline: 1px solid var(--rule);
-}
-
-.brand__mark .cursor {
-  color: #ffb000;
 }
 
 .brand__name {
