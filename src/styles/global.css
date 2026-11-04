@@ -255,7 +255,6 @@ a:hover {
   display: block;
   width: 2.25rem;
   height: 2.25rem;
-  outline: 1px solid var(--rule);
 }
 
 .brand__name {
