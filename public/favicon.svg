@@ -1,7 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" shape-rendering="crispEdges">
-  <rect width="16" height="16" fill="#06070a"/>
-  <rect x="1" y="1" width="6" height="6" fill="#ffe600"/>
-  <rect x="9" y="1" width="6" height="6" fill="#35d6d6"/>
-  <rect x="1" y="9" width="6" height="6" fill="#4fe34f"/>
-  <rect x="9" y="9" width="6" height="6" fill="#ff5240"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- ventana de terminal con "TB_" en Jersey 15; generado desde public/fonts/jersey-15.woff2 -->
+  <rect width="32" height="32" fill="#0f0e0b"/>
+  <rect width="32" height="7" fill="#2b2619"/>
+  <rect x="3" y="2.5" width="2" height="2" fill="#ff5240"/>
+  <rect x="6.5" y="2.5" width="2" height="2" fill="#ffb000"/>
+  <rect x="10" y="2.5" width="2" height="2" fill="#4dff8f"/>
+  <path fill="#f3ecdc" d="M3.43 13.12H10.85V15.6H8.38V25.5H5.9V15.6H3.43ZM17.45 17.25H18.28V16.42H17.45V15.6H14.98V18.07H17.45ZM14.98 23.02H17.45V22.2H18.28V21.38H17.45V20.55H14.98ZM19.93 19.73H20.75V23.85H19.93V24.68H19.1V25.5H12.5V13.12H19.1V13.95H19.93V14.78H20.75V18.9H19.93Z"/>
+  <path fill="#ffb000" d="M22.4 25.5H30.65V27.98H22.4Z"/>
 </svg>

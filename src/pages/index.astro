@@ -81,6 +81,12 @@ const stack = [
   { titulo: 'Sistemas', tags: ['Linux', 'Docker', 'TCP/IP', 'DNS', 'SSH', 'Bash'] },
 ];
 
+// la cinta repite la lista dos veces para que el desplazamiento no tenga corte
+const cinta = [
+  'React', 'Next.js', 'React Native', 'TypeScript', 'NestJS', 'Node.js', 'ASP.NET Core', 'C#',
+  'PostgreSQL', 'SQL Server', 'Docker', 'AWS', 'Azure', 'Terraform', 'Keycloak', 'Mercado Pago',
+];
+
 const pad = (n: number) => String(n + 1).padStart(2, '0');
 ---
 
@@ -159,6 +165,15 @@ const pad = (n: number) => String(n + 1).padStart(2, '0');
           )
         }
       </section>
+
+      <div class="ticker">
+        <ul class="ticker__track" aria-label="Tecnologías con las que trabajo">
+          {cinta.map((t) => <li>{t}</li>)}
+        </ul>
+        <ul class="ticker__track" aria-hidden="true">
+          {cinta.map((t) => <li>{t}</li>)}
+        </ul>
+      </div>
 
       <section class="block" id="servicios" aria-labelledby="servicios-t">
         <header class="block__head">
