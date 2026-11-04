@@ -19,13 +19,6 @@ export default config({
         titular: fields.text({ label: 'Titular' }),
         bajada: fields.text({ label: 'Bajada', multiline: true }),
         mensajeWhatsapp: fields.text({ label: 'Mensaje precargado de WhatsApp' }),
-        pruebas: fields.array(
-          fields.object({
-            valor: fields.text({ label: 'Valor' }),
-            detalle: fields.text({ label: 'Detalle' }),
-          }),
-          { label: 'Pruebas', itemLabel: (props) => props.fields.valor.value },
-        ),
         servicios: fields.array(
           fields.object({
             titulo: fields.text({ label: 'Título' }),

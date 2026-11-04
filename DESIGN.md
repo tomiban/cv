@@ -27,7 +27,7 @@ rounded: "0"
 ## Overview
 
 Una sola página que vende un servicio y, más abajo, respalda un perfil. Orden: hero con promesa y
-CTA → franja de pruebas → servicios → casos → cómo trabajo (franja ámbar) → perfil para
+CTA → servicios → casos → cómo trabajo (franja ámbar) → perfil para
 reclutadores → CTA final en negro → pie con firma.
 
 ## Colors
@@ -50,7 +50,6 @@ reclutadores → CTA final en negro → pie con firma.
 - **Servicio**: celda de grilla numerada `01–05`; 1 / 2 / 2+3 columnas.
 - **Caso**: meta a la izquierda (nombre con ↗, cliente, empleador, stack) y a la derecha
   problema → qué hice → resultado en un bloque ámbar.
-- **CTA flotante**: solo debajo de 52rem, abajo a la derecha.
 
 ## Motion
 

@@ -410,42 +410,6 @@ main > * {
 
 /* ---------- Prueba ---------- */
 
-/* trayectoria como salida de terminal, en línea con el retrato */
-.proof {
-  display: grid;
-  gap: 0.35rem;
-  margin-block: 0;
-  padding-block: 1.5rem;
-  border-block: 1.5px solid var(--ink);
-  font-family: var(--mono);
-  font-size: 0.95rem;
-}
-
-.proof div {
-  display: grid;
-  grid-template-columns: 8ch minmax(0, 1fr);
-  gap: 1.5ch;
-}
-
-.proof dt {
-  color: var(--accent-text);
-}
-
-.proof dd {
-  margin: 0;
-}
-
-@media (max-width: 30rem) {
-  .proof div {
-    grid-template-columns: 1fr;
-    gap: 0;
-  }
-
-  .proof div + div {
-    margin-top: 0.5rem;
-  }
-}
-
 /* ---------- Bloques ---------- */
 
 .block {
@@ -928,7 +892,7 @@ main > * {
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  padding: 2rem var(--gutter) 6rem;
+  padding: 2rem var(--gutter);
   max-width: var(--max);
   margin-inline: auto;
 }
@@ -942,34 +906,6 @@ main > * {
 .foot__links {
   display: flex;
   gap: 1.25rem;
-}
-
-@media (min-width: 52rem) {
-  .foot {
-    padding-bottom: 2rem;
-  }
-}
-
-/* ---------- CTA flotante en móvil ---------- */
-
-.float-cta {
-  position: fixed;
-  right: 1rem;
-  bottom: 1rem;
-  z-index: 10;
-  padding: 0.9rem 1.3rem;
-  background: var(--accent);
-  color: var(--accent-ink);
-  font-weight: 700;
-  text-decoration: none;
-  border: 1.5px solid var(--accent-ink);
-  box-shadow: 4px 4px 0 var(--accent-ink);
-}
-
-@media (min-width: 52rem) {
-  .float-cta {
-    display: none;
-  }
 }
 
 /* ---------- Turnstile: solo se ve si Cloudflare pide interacción ---------- */
@@ -1017,7 +953,6 @@ main > * {
   }
 
   .top,
-  .float-cta,
   .cta .actions,
   .hero .actions {
     display: none;
