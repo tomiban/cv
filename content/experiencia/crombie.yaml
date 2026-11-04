@@ -1,8 +1,8 @@
 empresa: "Crombie, Santa Fe"
 puesto: "Desarrollador Full Stack"
 desde: "Sep 2025"
-hasta: "Actualidad"
-enCurso: true
+hasta: "Oct 2026"
+enCurso: false
 orden: 1
 vinetas:
   - "Desarrollo full stack de App Santa Fe, con más de 10.000 usuarios: React, TypeScript, NestJS y SQL."
