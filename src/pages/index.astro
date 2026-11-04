@@ -10,8 +10,9 @@ const perfil = await reader.singletons.perfil.read();
 const contacto = await reader.singletons.contacto.read();
 
 // retrato ASCII generado con scripts/ascii.py; si no existe, el hero va a una columna
-const retratos = import.meta.glob('../assets/retrato.txt', { query: '?raw', import: 'default', eager: true });
-const retrato = Object.values(retratos)[0] as string | undefined;
+const retratos = import.meta.glob<string>('../assets/retrato*.txt', { query: '?raw', import: 'default', eager: true });
+const retrato = retratos['../assets/retrato.txt'];
+const retratoOscuro = retratos['../assets/retrato-oscuro.txt'] ?? retrato;
 
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL('/og.png', Astro.site).href;
@@ -148,7 +149,8 @@ const pad = (n: number) => String(n + 1).padStart(2, '0');
         {
           retrato && (
             <figure class="retrato">
-              <pre aria-hidden="true">{retrato}</pre>
+              <pre class="retrato__claro" aria-hidden="true">{retrato}</pre>
+              <pre class="retrato__oscuro" aria-hidden="true">{retratoOscuro}</pre>
               <figcaption class="mono">
                 <span aria-hidden="true">$ cat tomas.txt</span>
                 <span class="sr-only">Retrato de Tomás Banchio en ASCII</span>
@@ -158,7 +160,7 @@ const pad = (n: number) => String(n + 1).padStart(2, '0');
         }
       </section>
 
-      <ul class="proof" aria-label="En números">
+      <ul class="proof" aria-label="Datos rápidos">
         {
           oferta?.pruebas.map((p) => (
             <li>
