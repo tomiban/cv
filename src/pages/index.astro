@@ -9,6 +9,10 @@ const oferta = await reader.singletons.oferta.read();
 const perfil = await reader.singletons.perfil.read();
 const contacto = await reader.singletons.contacto.read();
 
+// retrato ASCII generado con scripts/ascii.py; si no existe, el hero va a una columna
+const retratos = import.meta.glob('../assets/retrato.txt', { query: '?raw', import: 'default', eager: true });
+const retrato = Object.values(retratos)[0] as string | undefined;
+
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL('/og.png', Astro.site).href;
 const title = 'Tomás Banchio — Desarrollo de software a medida';
@@ -121,7 +125,8 @@ const pad = (n: number) => String(n + 1).padStart(2, '0');
     </header>
 
     <main id="main">
-      <section class="hero" aria-labelledby="hero-t">
+      <section class:list={['hero', { 'hero--retrato': retrato }]} aria-labelledby="hero-t">
+        <div class="hero__text">
         <p class="eyebrow"><span class="dot" aria-hidden="true"></span>{oferta?.etiqueta}</p>
         <h1 id="hero-t">{oferta?.titular}</h1>
         <p class="hero__lead">{oferta?.bajada}</p>
@@ -139,6 +144,18 @@ const pad = (n: number) => String(n + 1).padStart(2, '0');
           </a>
           <a class="btn" href="#casos">Ver casos</a>
         </p>
+        </div>
+        {
+          retrato && (
+            <figure class="retrato">
+              <pre aria-hidden="true">{retrato}</pre>
+              <figcaption class="mono">
+                <span aria-hidden="true">$ cat tomas.txt</span>
+                <span class="sr-only">Retrato de Tomás Banchio en ASCII</span>
+              </figcaption>
+            </figure>
+          )
+        }
       </section>
 
       <ul class="proof" aria-label="En números">
@@ -201,7 +218,11 @@ const pad = (n: number) => String(n + 1).padStart(2, '0');
                     <dd>{entry.desafio}</dd>
                   </div>
                   <div>
-                    <dt>Qué hice</dt>
+                    <dt>Mi rol</dt>
+                    <dd>{entry.rol}</dd>
+                  </div>
+                  <div>
+                    <dt>En qué trabajé</dt>
                     <dd>
                       <ul>
                         {entry.solucion.map((punto) => (

@@ -326,6 +326,55 @@ main > * {
   color: var(--ink-2);
 }
 
+.hero__text {
+  display: grid;
+  gap: 1.75rem;
+}
+
+.hero--retrato {
+  align-items: center;
+}
+
+@media (min-width: 60rem) {
+  .hero--retrato {
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+    gap: clamp(2rem, 5vw, 4rem);
+  }
+}
+
+.retrato {
+  margin: 0;
+  justify-self: center;
+  max-width: 100%;
+}
+
+.retrato pre {
+  margin: 0;
+  font-family: var(--mono);
+  /* 56 columnas tienen que entrar en el ancho disponible */
+  font-size: clamp(0.42rem, 1.45vw, 0.72rem);
+  line-height: 1;
+  letter-spacing: 0;
+  color: var(--ink);
+  overflow: hidden;
+}
+
+.retrato figcaption {
+  margin-top: 0.75rem;
+}
+
+.retrato figcaption::after {
+  content: '_';
+  color: var(--accent);
+  animation: blink 1.1s steps(1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .retrato figcaption::after {
+    animation: none;
+  }
+}
+
 /* ---------- Prueba ---------- */
 
 .proof {

@@ -109,8 +109,9 @@ export default config({
         cliente: fields.text({ label: 'Cliente' }),
         descripcion: fields.text({ label: 'Descripción', multiline: true }),
         desafio: fields.text({ label: 'Desafío', multiline: true }),
+        rol: fields.text({ label: 'Mi rol en el equipo', multiline: true }),
         solucion: fields.array(fields.text({ label: 'Punto' }), {
-          label: 'Qué hice',
+          label: 'En qué trabajé',
           itemLabel: (props) => props.value.slice(0, 48),
         }),
         resultado: fields.text({ label: 'Resultado', multiline: true }),
