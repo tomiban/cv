@@ -46,7 +46,7 @@ const jsonLd = {
 const mensaje = oferta?.mensajeWhatsapp ?? '';
 const whatsapp = Boolean(contacto?.turnstileSiteKey);
 const contactoHref = `mailto:${contacto?.email}?subject=${encodeURIComponent('Proyecto')}&body=${encodeURIComponent(mensaje)}`;
-const contactoLabel = whatsapp ? 'Escribime por WhatsApp' : 'Escribime';
+const contactoLabel = 'Escribime';
 const waAttrs = whatsapp ? { 'data-wa': '' } : {};
 
 const byOrden = (a: { entry: { orden?: number | null } }, b: { entry: { orden?: number | null } }) =>
@@ -65,7 +65,8 @@ const certificados = (await reader.collections.certificados.all()).sort((a, b) =
   return year !== 0 ? year : (a.entry.orden ?? 0) - (b.entry.orden ?? 0);
 });
 const repos = (await reader.collections.repos.all()).sort(byOrden);
-const publicados = repos.filter(({ entry }) => Boolean(entry.demo || entry.web));
+// en el perfil van solo los proyectos marcados como destacados y con algo para abrir
+const publicados = repos.filter(({ entry }) => entry.destacado && Boolean(entry.demo || entry.web));
 
 const secciones = [
   { id: 'servicios', label: 'Servicios' },
@@ -79,6 +80,14 @@ const stack = [
   { titulo: 'Backend', tags: ['NestJS', 'Node.js', 'ASP.NET Core', 'C#'] },
   { titulo: 'Datos y cloud', tags: ['PostgreSQL', 'SQL Server', 'AWS', 'Azure', 'Terraform'] },
   { titulo: 'Sistemas', tags: ['Linux', 'Docker', 'TCP/IP', 'DNS', 'SSH', 'Bash'] },
+];
+
+// la cinta repite la lista dos veces para que el desplazamiento no tenga corte
+const cinta = [
+  'React', 'Next.js', 'React Native', 'TypeScript', 'JavaScript', 'Astro', 'Tailwind',
+  'NestJS', 'Node.js', 'ASP.NET Core', 'C#', 'Laravel', 'PHP', 'REST APIs', 'Microservicios',
+  'PostgreSQL', 'SQL Server', 'Docker', 'AWS', 'Azure', 'Terraform', 'Linux', 'CI/CD',
+  'OIDC', 'OAuth', 'Claude Code',
 ];
 
 const pad = (n: number) => String(n + 1).padStart(2, '0');
@@ -116,13 +125,20 @@ const pad = (n: number) => String(n + 1).padStart(2, '0');
 
     <header class="top">
       <a class="brand" href="#main" aria-label="Tomás Banchio, inicio">
-        <span class="brand__mark" aria-hidden="true">TB<span class="cursor">_</span></span>
+        <svg class="brand__mark" viewBox="0 0 32 32" shape-rendering="crispEdges" aria-hidden="true" focusable="false">
+          <path d="M2 0h28v1h1v1h1v28h-1v1h-1v1H2v-1H1v-1H0V2h1V1h1z" fill="#0f0e0b"></path>
+          <rect x="3" y="3" width="2" height="2" fill="#ff5240"></rect>
+          <rect x="6" y="3" width="2" height="2" fill="#ffb000"></rect>
+          <rect x="9" y="3" width="2" height="2" fill="#4dff8f"></rect>
+          <path d="M4.03 13.62H11.45V16.1H8.98V26H6.5V16.1H4.03ZM18.05 17.75H18.88V16.92H18.05V16.1H15.58V18.57H18.05ZM15.58 23.52H18.05V22.7H18.88V21.88H18.05V21.05H15.58ZM20.53 20.23H21.35V24.35H20.53V25.18H19.7V26H13.1V13.62H19.7V14.45H20.53V15.28H21.35V19.4H20.53Z" fill="#f3ecdc"></path>
+          <rect class="cursor" x="22.8" y="23" width="6.2" height="3" fill="#ffb000"></rect>
+        </svg>
         <span class="brand__name">Tomás Banchio</span>
       </a>
       <nav class="top__nav" aria-label="Secciones">
         {secciones.map((s) => <a href={`#${s.id}`}>{s.label}</a>)}
       </nav>
-      <a class="btn btn--sm btn--accent" href={contactoHref} {...waAttrs}>Hablemos</a>
+      <a class="btn btn--sm btn--accent" href={contactoHref} {...waAttrs}>Escribime</a>
     </header>
 
     <main id="main">
@@ -141,7 +157,7 @@ const pad = (n: number) => String(n + 1).padStart(2, '0');
                 ></path>
               </svg>
             )}
-            {contactoLabel}
+            Escribime
           </a>
           <a class="btn" href="#casos">Ver casos</a>
         </p>
@@ -160,16 +176,14 @@ const pad = (n: number) => String(n + 1).padStart(2, '0');
         }
       </section>
 
-      <dl class="proof" aria-label="Trayectoria">
-        {
-          oferta?.pruebas.map((p) => (
-            <div>
-              <dt><span aria-hidden="true">&gt; </span>{p.valor}</dt>
-              <dd>{p.detalle}</dd>
-            </div>
-          ))
-        }
-      </dl>
+      <div class="ticker">
+        <ul class="ticker__track" aria-label="Tecnologías con las que trabajo">
+          {cinta.map((t) => <li>{t}</li>)}
+        </ul>
+        <ul class="ticker__track" aria-hidden="true">
+          {cinta.map((t) => <li>{t}</li>)}
+        </ul>
+      </div>
 
       <section class="block" id="servicios" aria-labelledby="servicios-t">
         <header class="block__head">
@@ -242,31 +256,12 @@ const pad = (n: number) => String(n + 1).padStart(2, '0');
             );
           })
         }
-
-        <h3 class="subhead">Proyectos propios</h3>
-        <ul class="repos">
-          {
-            publicados.map(({ entry }) => (
-              <li>
-                <a href={entry.demo || entry.web} rel="noopener" target="_blank">
-                  <span class="repos__name">{entry.nombre}</span>
-                  <span class="repos__desc">{entry.descripcion}</span>
-                  <span class="mono repos__meta">
-                    {entry.lenguaje} · {entry.anio}
-                    {entry.demo ? ' · demo' : ' · código'}
-                  </span>
-                  <span class="sr-only"> (abre en otra pestaña)</span>
-                </a>
-              </li>
-            ))
-          }
-        </ul>
       </section>
 
       <section class="block block--band" id="proceso" aria-labelledby="proceso-t">
         <header class="block__head">
           <p class="kicker">Cómo trabajo</p>
-          <h2 id="proceso-t">Sin sorpresas, de la charla al deploy</h2>
+          <h2 id="proceso-t">Sin sorpresas, de la charla a la puesta en marcha</h2>
         </header>
         <ol class="steps">
           {
@@ -350,6 +345,25 @@ const pad = (n: number) => String(n + 1).padStart(2, '0');
           }
         </ul>
 
+        <h3 class="subhead">Proyectos propios</h3>
+        <ul class="repos">
+          {
+            publicados.map(({ entry }) => (
+              <li>
+                <a href={entry.demo || entry.web} rel="noopener" target="_blank">
+                  <span class="repos__name">{entry.nombre}</span>
+                  <span class="repos__desc">{entry.descripcion}</span>
+                  <span class="mono repos__meta">
+                    {entry.lenguaje} · {entry.anio}
+                    {entry.demo ? ' · demo' : ' · código'}
+                  </span>
+                  <span class="sr-only"> (abre en otra pestaña)</span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+
         <details class="certs">
           <summary>Certificaciones ({certificados.length})</summary>
           <ul>
@@ -384,9 +398,19 @@ const pad = (n: number) => String(n + 1).padStart(2, '0');
 
       <section class="cta" id="contacto" aria-labelledby="cta-t">
         <h2 id="cta-t">¿Tenés un proceso que se podría resolver con software?</h2>
-        <p>Contame en dos líneas qué necesitás. Te respondo a la brevedad.</p>
+        <p>Contame en dos líneas qué necesitás y lo vemos juntos.</p>
         <p class="actions">
-          <a class="btn btn--ink" href={contactoHref} {...waAttrs}>{contactoLabel}</a>
+          <a class="btn btn--ink" href={contactoHref} {...waAttrs}>
+            {whatsapp && (
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path
+                  fill="currentColor"
+                  d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.6.13-.14.3-.35.44-.52.15-.18.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.6-.92-2.2-.24-.58-.49-.5-.67-.5h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.08c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.7.63.71.22 1.36.19 1.87.12.57-.09 1.76-.72 2-1.41.25-.7.25-1.29.18-1.41-.08-.13-.27-.2-.57-.35zM12.04 21.5h-.01a9.4 9.4 0 0 1-4.8-1.31l-.34-.2-3.57.93.95-3.48-.22-.36a9.4 9.4 0 0 1-1.44-5.02c0-5.2 4.24-9.44 9.44-9.44 2.52 0 4.89.99 6.67 2.77a9.37 9.37 0 0 1 2.76 6.68c0 5.2-4.24 9.43-9.44 9.43zm8.03-17.47A11.3 11.3 0 0 0 12.04.7C5.78.7.68 5.8.68 12.06c0 2 .52 3.96 1.52 5.68L.58 23.7l6.1-1.6a11.3 11.3 0 0 0 5.36 1.37h.01c6.26 0 11.36-5.1 11.36-11.36 0-3.04-1.18-5.89-3.33-8.04z"
+                ></path>
+              </svg>
+            )}
+            {contactoLabel}
+          </a>
           <a class="btn btn--line" href={`mailto:${contacto?.email}`}>{contacto?.email}</a>
         </p>
       </section>
@@ -404,7 +428,6 @@ const pad = (n: number) => String(n + 1).padStart(2, '0');
       </p>
     </footer>
 
-    <a class="float-cta" href={contactoHref} {...waAttrs}>{whatsapp ? 'WhatsApp' : 'Escribime'}</a>
     {
       whatsapp && (
         <script src="/contacto.js" defer data-sitekey={contacto?.turnstileSiteKey} data-text={mensaje}></script>
