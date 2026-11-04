@@ -160,16 +160,16 @@ const pad = (n: number) => String(n + 1).padStart(2, '0');
         }
       </section>
 
-      <ul class="proof" aria-label="Datos rápidos">
+      <dl class="proof" aria-label="Trayectoria">
         {
           oferta?.pruebas.map((p) => (
-            <li>
-              <strong>{p.valor}</strong>
-              <span>{p.detalle}</span>
-            </li>
+            <div>
+              <dt><span aria-hidden="true">&gt; </span>{p.valor}</dt>
+              <dd>{p.detalle}</dd>
+            </div>
           ))
         }
-      </ul>
+      </dl>
 
       <section class="block" id="servicios" aria-labelledby="servicios-t">
         <header class="block__head">
