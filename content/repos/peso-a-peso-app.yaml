@@ -1,8 +1,11 @@
 nombre: "peso-a-peso-app"
+titulo: "Finanzas personales"
 lenguaje: "TypeScript"
 anio: 2024
-descripcion: "Gestión de finanzas personales full-stack: Next.js, Prisma y MariaDB sobre Google Cloud Run."
+descripcion: "Registro de ingresos y gastos por categoría, con el balance mensual y anual en gráficos. Cada persona entra con su cuenta y ve solo sus datos."
+stack: "Next.js · TypeScript · Prisma · PostgreSQL · Auth.js"
+imagen: "/proyectos/peso-a-peso-app/imagen.webp"
 web: "https://github.com/tomiban/peso-a-peso-app"
 demo: "https://peso-a-peso-app-five.vercel.app/"
-orden: 3
 destacado: true
+orden: 3

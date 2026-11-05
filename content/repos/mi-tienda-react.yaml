@@ -1,7 +1,10 @@
 nombre: "mi-tienda-react"
+titulo: "Tienda online"
 lenguaje: "JavaScript"
 anio: 2022
-descripcion: "Ecommerce con React y Firebase, proyecto final del curso de React JS de CoderHouse."
+descripcion: "Ecommerce con catálogo por categorías, favoritos y carrito de compras que registra el pedido. Proyecto final del curso de React de Coderhouse."
+stack: "React · Firebase · Bootstrap"
+imagen: "/proyectos/mi-tienda-react/imagen.webp"
 web: "https://github.com/tomiban/mi-tienda-react"
 demo: "https://tomiban.github.io/mi-tienda-react/"
 orden: 8

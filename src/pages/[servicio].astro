@@ -3,6 +3,7 @@ import { createReader } from '@keystatic/core/reader';
 import keystaticConfig from '../../keystatic.config';
 import Base from '../layouts/Base.astro';
 import Escribime from '../components/Escribime.astro';
+import Proyecto from '../components/Proyecto.astro';
 
 const reader = createReader(process.cwd(), keystaticConfig);
 
@@ -171,14 +172,10 @@ const pad = (n: number) => String(n + 1).padStart(2, '0');
             {repos.length > 0 && (
               <>
                 <h3 class="subhead">Proyectos propios para probar</h3>
-                <ul class="demos">
+                <ul class="proyectos">
                   {repos.map((r) => (
                     <li>
-                      <a href={r!.demo || r!.web} rel="noopener" target="_blank">
-                        {r!.nombre}
-                        <span class="sr-only"> (abre en otra pestaña)</span>
-                      </a>
-                      <p>{r!.descripcion}</p>
+                      <Proyecto proyecto={r!} />
                     </li>
                   ))}
                 </ul>

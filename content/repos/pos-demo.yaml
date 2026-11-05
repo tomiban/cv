@@ -1,8 +1,11 @@
 nombre: "pos-demo"
+titulo: "Punto de venta para comercios"
 lenguaje: "TypeScript"
 anio: 2026
-descripcion: "Punto de venta para comercios: venta rápida, caja con arqueo, stock, cuenta corriente y panel de ventas. Demo en el navegador con datos ficticios."
+descripcion: "Sistema de caja para almacenes y comercios: venta rápida con lector de códigos, caja con arqueo, stock con alertas de reposición, clientes con cuenta corriente y un panel con las ventas del mes. La demo corre en el navegador con datos ficticios."
+stack: "React · TypeScript · Tailwind · IndexedDB"
+imagen: "/proyectos/pos-demo/imagen.webp"
 web: "https://github.com/tomiban/pos-demo"
 demo: "https://pos.tomasbanchio.com.ar/"
-orden: 2
 destacado: true
+orden: 2

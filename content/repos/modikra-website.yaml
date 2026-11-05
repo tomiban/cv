@@ -1,5 +1,7 @@
 nombre: "modikra-website"
+titulo: "Catálogo de mueblería"
 lenguaje: "JavaScript"
 anio: 2023
-descripcion: "Catálogo de mueblería con React, Tailwind y Firebase."
+descripcion: "Catálogo web de una mueblería, con los productos cargados en Firebase."
+stack: "React · Tailwind · Firebase"
 orden: 7
