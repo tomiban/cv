@@ -80,7 +80,6 @@ const periodoDe = (empleador: string) => {
   return exp ? `${exp.entry.desde} – ${exp.entry.hasta}` : '';
 };
 const casos = (await reader.collections.proyectosTrabajo.all()).sort(byOrden);
-const paginas = (await reader.collections.servicios.all()).sort(byOrden);
 const estudios = (await reader.collections.estudios.all()).sort(byOrden);
 const certificados = (await reader.collections.certificados.all()).sort((a, b) => {
   const year = Number(b.entry.anio || 0) - Number(a.entry.anio || 0);
@@ -167,16 +166,6 @@ const pad = (n: number) => String(n + 1).padStart(2, '0');
             ))
           }
         </ol>
-        <h3 class="subhead">Más detalle por servicio</h3>
-        <ul class="otros">
-          {
-            paginas.map((p) => (
-              <li>
-                <a href={`/${p.slug}`}>{p.entry.titulo}</a>
-              </li>
-            ))
-          }
-        </ul>
       </section>
 
       <section class="block" id="casos" aria-labelledby="casos-t">
