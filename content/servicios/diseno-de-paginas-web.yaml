@@ -1,0 +1,34 @@
+titulo: "Diseño y desarrollo de páginas web"
+tituloSeo: "Diseño de páginas web en Santa Fe | Tomás Banchio"
+descripcionSeo: "Páginas web y landings rápidas, fáciles de editar y pensadas para recibir consultas por WhatsApp. Con dominio propio y una buena base para aparecer en Google."
+etiqueta: "Webs y landings · Esperanza, Santa Fe"
+bajada: "Hago sitios rápidos y fáciles de editar, pensados para que quien entra te escriba. Con dominio propio, una buena base para aparecer en Google y botón de WhatsApp o formulario."
+problemas:
+  - "Tu negocio no tiene web, o tiene una vieja que no se ve bien en el celular."
+  - "Dependés solo de Instagram para que te encuentren."
+  - "Tu web carga lenta y no aparece cuando alguien busca lo que hacés."
+  - "Cada cambio de texto o de precio te obliga a llamar a alguien."
+incluye:
+  - titulo: "Diseño a medida"
+    descripcion: "Una web con tu identidad, no una plantilla genérica. Pensada primero para el celular, que es desde donde entra la mayoría."
+  - titulo: "Base para aparecer en Google"
+    descripcion: "Títulos y descripciones bien armados, datos para Google Maps, sitemap y carga rápida desde el primer día."
+  - titulo: "Fácil de editar"
+    descripcion: "Un panel para cambiar textos, fotos y servicios vos mismo, sin tocar código."
+  - titulo: "Contacto directo"
+    descripcion: "Botón de WhatsApp o formulario, con protección contra spam, para que cada visita pueda convertirse en una consulta."
+casos: []
+repos:
+  - "pos-demo"
+  - "mi-tienda-react"
+stack: "Astro · React · Next.js · Tailwind · Cloudflare"
+preguntas:
+  - pregunta: "¿Incluye el dominio y el hosting?"
+    respuesta: "Te ayudo a registrar el dominio a tu nombre (por ejemplo, un .com.ar) y a publicar el sitio. Para la mayoría de las webs el hosting puede ser gratuito o de muy bajo costo."
+  - pregunta: "¿Voy a poder modificar la web yo?"
+    respuesta: "Sí. Queda un panel para editar textos, fotos y servicios sin saber programar."
+  - pregunta: "¿Con la web ya aparezco en Google?"
+    respuesta: "La web queda preparada para que Google la encuentre y la entienda. Aparecer arriba lleva tiempo y depende también de tu perfil en Google Maps, las reseñas y el contenido que sumes."
+  - pregunta: "¿Cuánto tarda?"
+    respuesta: "Una landing de una página es lo más rápido; un sitio con varias secciones lleva más. Te paso el plazo por escrito junto con el presupuesto."
+orden: 4

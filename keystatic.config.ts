@@ -7,7 +7,7 @@ export default config({
   ui: {
     brand: { name: 'tomasbanchio.com.ar' },
     navigation: {
-      Contenido: ['oferta', 'perfil', 'experiencia', 'proyectosTrabajo', 'repos', 'estudios', 'certificados', 'contacto'],
+      Contenido: ['oferta', 'servicios', 'perfil', 'experiencia', 'proyectosTrabajo', 'repos', 'estudios', 'certificados', 'contacto'],
     },
   },
   singletons: {
@@ -24,6 +24,12 @@ export default config({
             titulo: fields.text({ label: 'Título' }),
             descripcion: fields.text({ label: 'Descripción', multiline: true }),
             para: fields.text({ label: 'Para quién' }),
+            pagina: fields.relationship({
+              label: 'Página del servicio',
+              description: 'Si tiene, el título de la tarjeta lleva a esa página.',
+              collection: 'servicios',
+              validation: { isRequired: false },
+            }),
           }),
           { label: 'Servicios', itemLabel: (props) => props.fields.titulo.value },
         ),
@@ -77,6 +83,44 @@ export default config({
     }),
   },
   collections: {
+    // una página por servicio: cada una apunta a una búsqueda concreta en Google
+    servicios: collection({
+      label: 'Páginas de servicio',
+      path: 'content/servicios/*',
+      slugField: 'titulo',
+      schema: {
+        titulo: fields.slug({
+          name: { label: 'Título de la página (H1)' },
+          slug: { label: 'URL', description: 'Lo que va después de tomasbanchio.com.ar/' },
+        }),
+        tituloSeo: fields.text({ label: 'Título en Google', description: 'Hasta unos 60 caracteres, con la búsqueda y la zona.' }),
+        descripcionSeo: fields.text({ label: 'Descripción en Google', description: 'Hasta unos 155 caracteres.', multiline: true }),
+        etiqueta: fields.text({ label: 'Etiqueta sobre el título' }),
+        bajada: fields.text({ label: 'Bajada', multiline: true }),
+        problemas: fields.array(fields.text({ label: 'Situación', multiline: true }), {
+          label: '¿Te pasa esto?',
+          itemLabel: (props) => props.value.slice(0, 48),
+        }),
+        incluye: fields.array(
+          fields.object({
+            titulo: fields.text({ label: 'Título' }),
+            descripcion: fields.text({ label: 'Descripción', multiline: true }),
+          }),
+          { label: 'Qué incluye', itemLabel: (props) => props.fields.titulo.value },
+        ),
+        casos: fields.multiRelationship({ label: 'Casos profesionales', collection: 'proyectosTrabajo' }),
+        repos: fields.multiRelationship({ label: 'Proyectos propios con demo', collection: 'repos' }),
+        stack: fields.text({ label: 'Tecnologías' }),
+        preguntas: fields.array(
+          fields.object({
+            pregunta: fields.text({ label: 'Pregunta' }),
+            respuesta: fields.text({ label: 'Respuesta', multiline: true }),
+          }),
+          { label: 'Preguntas frecuentes', itemLabel: (props) => props.fields.pregunta.value },
+        ),
+        orden,
+      },
+    }),
     experiencia: collection({
       label: 'Experiencia (P300)',
       path: 'content/experiencia/*',

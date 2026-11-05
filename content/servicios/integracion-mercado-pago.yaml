@@ -1,0 +1,32 @@
+titulo: "Integración con Mercado Pago, login único y sistemas"
+tituloSeo: "Integración con Mercado Pago y login único | Tomás Banchio"
+descripcionSeo: "Integro Mercado Pago y otras pasarelas de pago, login único con Keycloak y APIs entre sistemas, para que tus herramientas se pasen los datos solas."
+etiqueta: "Integraciones · Esperanza, Santa Fe"
+bajada: "Hago que tus clientes puedan pagar online, que tu equipo entre con un solo usuario a todas sus herramientas y que tus sistemas se pasen los datos solos, sin cargar lo mismo dos veces."
+problemas:
+  - "Cobrás por transferencia y tenés que confirmar cada pago a mano."
+  - "Tu equipo tiene un usuario y una contraseña distintos para cada sistema."
+  - "Tus sistemas no se hablan entre sí y alguien copia datos de uno a otro."
+  - "Querés sumar pagos online a un sistema que ya tenés funcionando."
+incluye:
+  - titulo: "Pagos online"
+    descripcion: "Integración con Mercado Pago y otras pasarelas: cobros, confirmación automática de cada pago y conciliación con tu sistema."
+  - titulo: "Login único"
+    descripcion: "Un solo usuario para entrar a todas tus herramientas, con OIDC y Keycloak, y permisos según el rol de cada persona."
+  - titulo: "APIs entre sistemas"
+    descripcion: "Conexiones para que tu sistema de gestión, tu web y tus otras herramientas compartan datos sin intervención manual."
+  - titulo: "Sobre lo que ya tenés"
+    descripcion: "No hace falta empezar de cero: trabajo sobre tu sistema actual y sumo la integración con el menor cambio posible."
+casos:
+  - "app-santa-fe"
+  - "neuro-ai"
+repos: []
+stack: "Mercado Pago · Keycloak · OIDC · OAuth · REST APIs · NestJS · ASP.NET Core"
+preguntas:
+  - pregunta: "¿Podés integrar Mercado Pago a mi sistema actual?"
+    respuesta: "En la mayoría de los casos sí. Reviso cómo está hecho tu sistema y te digo qué hace falta antes de pasarte un presupuesto."
+  - pregunta: "¿Qué es el login único?"
+    respuesta: "Que tu equipo o tus clientes entren con un solo usuario a todas tus herramientas, en lugar de tener una contraseña para cada una. Además, desde un solo lugar das de alta o de baja a una persona."
+  - pregunta: "¿Es seguro?"
+    respuesta: "Uso estándares abiertos de identidad (OIDC, OAuth), y los datos de las tarjetas nunca pasan por tu sistema: los maneja la pasarela de pago."
+orden: 5

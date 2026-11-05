@@ -1,0 +1,251 @@
+---
+import { createReader } from '@keystatic/core/reader';
+import keystaticConfig from '../../keystatic.config';
+import Base from '../layouts/Base.astro';
+import Escribime from '../components/Escribime.astro';
+
+const reader = createReader(process.cwd(), keystaticConfig);
+
+export async function getStaticPaths() {
+  const reader = createReader(process.cwd(), keystaticConfig);
+  const servicios = await reader.collections.servicios.list();
+  return servicios.map((servicio) => ({ params: { servicio } }));
+}
+
+const { servicio } = Astro.params;
+const entry = await reader.collections.servicios.read(servicio, { resolveLinkedFiles: true });
+if (!entry) throw new Error(`No existe el servicio ${servicio}`);
+
+const oferta = await reader.singletons.oferta.read();
+const perfil = await reader.singletons.perfil.read();
+
+const byOrden = (a: { entry: { orden?: number | null } }, b: { entry: { orden?: number | null } }) =>
+  (a.entry.orden ?? 0) - (b.entry.orden ?? 0);
+
+const casos = (await Promise.all(entry.casos.map((slug) => reader.collections.proyectosTrabajo.read(slug!))))
+  .filter((c) => c !== null);
+// solo proyectos que se pueden abrir: sin demo ni repo no prueban nada
+const repos = (await Promise.all(entry.repos.map((slug) => reader.collections.repos.read(slug!))))
+  .filter((r) => r !== null && Boolean(r.demo || r.web));
+const otros = (await reader.collections.servicios.all()).filter((s) => s.slug !== servicio).sort(byOrden);
+
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const inicio = new URL('/', Astro.site).href;
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Service',
+      '@id': `${canonical.href}#servicio`,
+      name: entry.titulo,
+      description: entry.descripcionSeo,
+      url: canonical.href,
+      serviceType: entry.titulo,
+      // el negocio está descrito en la home; acá solo se lo referencia
+      provider: { '@id': `${inicio}#negocio` },
+      areaServed: [
+        { '@type': 'AdministrativeArea', name: 'Provincia de Santa Fe' },
+        { '@type': 'Country', name: 'Argentina' },
+      ],
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: perfil?.nombre, item: inicio },
+        { '@type': 'ListItem', position: 2, name: entry.titulo, item: canonical.href },
+      ],
+    },
+    entry.preguntas.length > 0 && {
+      '@type': 'FAQPage',
+      mainEntity: entry.preguntas.map((p) => ({
+        '@type': 'Question',
+        name: p.pregunta,
+        acceptedAnswer: { '@type': 'Answer', text: p.respuesta },
+      })),
+    },
+  ].filter(Boolean),
+};
+
+const nav = [
+  { href: '/#servicios', label: 'Servicios' },
+  { href: '/#casos', label: 'Casos' },
+  { href: '/#proceso', label: 'Cómo trabajo' },
+  { href: '/#perfil', label: 'Perfil' },
+];
+
+const pad = (n: number) => String(n + 1).padStart(2, '0');
+---
+
+<Base title={entry.tituloSeo} description={entry.descripcionSeo} jsonLd={jsonLd} nav={nav}>
+      <nav class="migas" aria-label="Estás en">
+        <ol class="mono">
+          <li><a href="/">Inicio</a></li>
+          <li><a href="/#servicios">Servicios</a></li>
+          <li aria-current="page">{entry.titulo}</li>
+        </ol>
+      </nav>
+
+      <section class="hero hero--servicio" aria-labelledby="hero-t">
+        <div class="hero__text">
+          <p class="eyebrow"><span class="dot" aria-hidden="true"></span>{entry.etiqueta}</p>
+          <h1 id="hero-t">{entry.titulo}</h1>
+          <p class="hero__lead">{entry.bajada}</p>
+          <p class="actions">
+            <Escribime class="btn--accent" icono />
+            <a class="btn" href="#incluye">Qué incluye</a>
+          </p>
+        </div>
+      </section>
+
+      {
+        entry.problemas.length > 0 && (
+          <section class="block" aria-labelledby="problemas-t">
+            <header class="block__head">
+              <p class="kicker">¿Te pasa esto?</p>
+              <h2 id="problemas-t">Señales de que te sirve</h2>
+            </header>
+            <ul class="senales">
+              {entry.problemas.map((p) => (
+                <li class="reveal">{p}</li>
+              ))}
+            </ul>
+          </section>
+        )
+      }
+
+      <section class="block" id="incluye" aria-labelledby="incluye-t">
+        <header class="block__head">
+          <p class="kicker">Qué incluye</p>
+          <h2 id="incluye-t">Qué hago, paso por paso</h2>
+        </header>
+        <ol class="services services--par">
+          {
+            entry.incluye.map((s, i) => (
+              <li class="service reveal">
+                <span class="service__n" aria-hidden="true">{pad(i)}</span>
+                <h3>{s.titulo}</h3>
+                <p>{s.descripcion}</p>
+              </li>
+            ))
+          }
+        </ol>
+        {entry.stack && <p class="mono case__stack servicio__stack">{entry.stack}</p>}
+      </section>
+
+      {
+        (casos.length > 0 || repos.length > 0) && (
+          <section class="block" aria-labelledby="casos-t">
+            <header class="block__head">
+              <p class="kicker">Experiencia</p>
+              <h2 id="casos-t">Lo que ya construí</h2>
+            </header>
+            {casos.map((c) => (
+              <article class="case reveal">
+                <div class="case__meta">
+                  <h3>
+                    <a href={c.web} rel="noopener" target="_blank">
+                      {c.nombre}
+                      <span class="sr-only"> (abre en otra pestaña)</span>
+                    </a>
+                  </h3>
+                  <p>{c.cliente}</p>
+                  <p class="mono">vía {c.empleador}</p>
+                  <p class="mono case__stack">{c.stack}</p>
+                </div>
+                <dl class="case__body">
+                  <div>
+                    <dt>El problema</dt>
+                    <dd>{c.desafio}</dd>
+                  </div>
+                  <div>
+                    <dt>Mi parte</dt>
+                    <dd>{c.rol}</dd>
+                  </div>
+                  <div class="case__result">
+                    <dt>Resultado</dt>
+                    <dd>{c.resultado}</dd>
+                  </div>
+                </dl>
+              </article>
+            ))}
+            {repos.length > 0 && (
+              <>
+                <h3 class="subhead">Proyectos propios para probar</h3>
+                <ul class="demos">
+                  {repos.map((r) => (
+                    <li>
+                      <a href={r!.demo || r!.web} rel="noopener" target="_blank">
+                        {r!.nombre}
+                        <span class="sr-only"> (abre en otra pestaña)</span>
+                      </a>
+                      <p>{r!.descripcion}</p>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
+          </section>
+        )
+      }
+
+      <section class="block block--band" aria-labelledby="proceso-t">
+        <header class="block__head">
+          <p class="kicker">Cómo trabajo</p>
+          <h2 id="proceso-t">Sin sorpresas, de la charla a la puesta en marcha</h2>
+        </header>
+        <ol class="steps">
+          {
+            oferta?.pasos.map((p, i) => (
+              <li class="reveal">
+                <span class="steps__n" aria-hidden="true">{pad(i)}</span>
+                <h3>{p.titulo}</h3>
+                <p>{p.descripcion}</p>
+              </li>
+            ))
+          }
+        </ol>
+      </section>
+
+      {
+        entry.preguntas.length > 0 && (
+          <section class="block" aria-labelledby="faq-t">
+            <header class="block__head">
+              <p class="kicker">Preguntas frecuentes</p>
+              <h2 id="faq-t">Lo que suelen preguntarme</h2>
+            </header>
+            <div class="faq">
+              {entry.preguntas.map((p) => (
+                <details>
+                  <summary>{p.pregunta}</summary>
+                  <p>{p.respuesta}</p>
+                </details>
+              ))}
+            </div>
+          </section>
+        )
+      }
+
+      <section class="block" aria-labelledby="otros-t">
+        <header class="block__head">
+          <p class="kicker">Otros servicios</p>
+          <h2 id="otros-t">También puedo ayudarte con</h2>
+        </header>
+        <ul class="otros">
+          {
+            otros.map((s) => (
+              <li>
+                <a href={`/${s.slug}`}>{s.entry.titulo}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      <section class="cta" id="contacto" aria-labelledby="cta-t">
+        <h2 id="cta-t">¿Lo charlamos?</h2>
+        <p>Contame en dos líneas qué necesitás y te digo cómo lo resolvería.</p>
+        <p class="actions">
+          <Escribime class="btn--ink" icono />
+        </p>
+      </section>
+</Base>

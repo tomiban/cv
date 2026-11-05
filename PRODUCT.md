@@ -18,7 +18,7 @@ Secondary: recruiters and technical leads running the same scan for a full-stack
 
 ## Product Purpose
 
-A one-page personal-brand site that turns visits into conversations. Clients come first: a promise, five services, two production cases told as problem / what he did / result, a four-step process, and WhatsApp as the primary call to action (buttons are `mailto` links until `contacto.turnstileSiteKey` is set). Recruiters get a compact profile section further down: facts, experience, stack, studies, and certificates folded in a `<details>`. Success is a client who messages him, or a recruiter who can name his stack, his two employers and one thing he built without scrolling twice.
+A personal-brand site that turns visits into conversations: one home page, plus one page per service (`content/servicios/`, served at `/<slug>`) so each can rank for its own search ("desarrollo de software a medida", "desarrollo de apps", "automatizaciones con IA"). Clients come first: a promise, five services, two production cases told as problem / what he did / result, a four-step process, and WhatsApp as the primary call to action (buttons are `mailto` links until `contacto.turnstileSiteKey` is set). Recruiters get a compact profile section further down: facts, experience, stack, studies, and certificates folded in a `<details>`. Success is a client who messages him, or a recruiter who can name his stack, his two employers and one thing he built without scrolling twice.
 
 ## Positioning
 
@@ -40,7 +40,7 @@ GitHub Pages, one static page. Visitors compare him against agency quotes and ot
 - Languages: Spanish native, English B1.
 - Location and contact are exactly the ones in the CV: Esperanza, Santa Fe, Argentina; the phone number and email already published on the site's predecessor; linkedin.com/in/tbanchio; github.com/tomiban.
 - Constraint: employer product internals are private; no screenshots, no invented metrics, no client names beyond the employer.
-- Constraint: one page, static output, no client framework, no hosted stylesheets. The only third-party runtime is Cloudflare Turnstile, loaded on idle to guard the WhatsApp number, which is served by the Worker in `worker/` and never published in the repo or the HTML. The CMS is an authoring tool, never a production dependency.
+- Constraint: a home page plus service pages that share `src/layouts/Base.astro`; static output, no client framework, no hosted stylesheets. The only third-party runtime is Cloudflare Turnstile, loaded on idle to guard the WhatsApp number, which is served by the Worker in `worker/` and never published in the repo or the HTML. The CMS is an authoring tool, never a production dependency.
 
 ## Brand Commitments
 
