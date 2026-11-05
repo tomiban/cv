@@ -3,6 +3,7 @@ import { createReader } from '@keystatic/core/reader';
 import keystaticConfig from '../../keystatic.config';
 import Base from '../layouts/Base.astro';
 import Escribime from '../components/Escribime.astro';
+import Proyecto from '../components/Proyecto.astro';
 
 const reader = createReader(process.cwd(), keystaticConfig);
 const oferta = await reader.singletons.oferta.read();
@@ -310,19 +311,11 @@ const pad = (n: number) => String(n + 1).padStart(2, '0');
         </ul>
 
         <h3 class="subhead">Proyectos propios</h3>
-        <ul class="repos">
+        <ul class="proyectos">
           {
             publicados.map(({ entry }) => (
               <li>
-                <a href={entry.demo || entry.web} rel="noopener" target="_blank">
-                  <span class="repos__name">{entry.nombre}</span>
-                  <span class="repos__desc">{entry.descripcion}</span>
-                  <span class="mono repos__meta">
-                    {entry.lenguaje} · {entry.anio}
-                    {entry.demo ? ' · demo' : ' · código'}
-                  </span>
-                  <span class="sr-only"> (abre en otra pestaña)</span>
-                </a>
+                <Proyecto proyecto={entry} />
               </li>
             ))
           }

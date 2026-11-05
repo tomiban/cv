@@ -1,8 +1,10 @@
 nombre: "veterinariapp-API"
+titulo: "API de la gestión veterinaria"
 lenguaje: "C#"
 anio: 2024
-descripcion: "API .NET 8 para gestión de pacientes, dueños, vacunas y dosis aplicadas. Cliente web en Angular 17."
+descripcion: "El backend de la gestión veterinaria: mascotas, dueños, vacunas y dosis, con documentación interactiva en Swagger y desplegado como contenedor."
+stack: ".NET 8 · Entity Framework · PostgreSQL · Docker"
 web: "https://github.com/tomiban/veterinariapp-API"
 demo: "https://veterinariapp-api.vercel.app/swagger/index.html"
-orden: 4
 destacado: false
+orden: 4

@@ -1,8 +1,11 @@
 nombre: "veterinariapp-FE"
+titulo: "Gestión para veterinarias"
 lenguaje: "TypeScript"
 anio: 2024
-descripcion: "Gestión de pacientes, dueños y vacunas para una veterinaria: Angular 17 + Material sobre una API .NET 8."
+descripcion: "Fichas de mascotas y dueños con el esquema de vacunación de cada paciente: qué dosis se aplicaron, cuál está vencida y cuándo toca la próxima. Funciona en la compu y en el celular."
+stack: "Angular · Material · .NET 8 · PostgreSQL"
+imagen: "/proyectos/veterinariapp-FE/imagen.webp"
 web: "https://github.com/tomiban/veterinariapp-FE"
 demo: "https://veterinaria.tomasbanchio.com.ar"
-orden: 5
 destacado: true
+orden: 5

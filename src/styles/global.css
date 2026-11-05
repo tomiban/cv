@@ -704,39 +704,81 @@ main > * {
   }
 }
 
-.repos {
+.proyectos {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr));
+  gap: 1.25rem;
+  list-style: none;
 }
 
-.repos a {
-  display: grid;
-  gap: 0.4rem;
+.proyecto {
+  display: flex;
+  flex-direction: column;
   height: 100%;
-  padding: 1.25rem;
   border: 1px solid var(--rule);
   background: var(--card);
-  text-decoration: none;
   transition: border-color 0.15s ease;
 }
 
-.repos a:hover {
+.proyecto:hover {
   border-color: var(--ink);
 }
 
-.repos__name {
-  font-family: var(--mono);
-  font-weight: 700;
+/* captura con marco de ventana: la franja de arriba la separa del papel en los dos temas */
+.proyecto__img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: top;
+  border-top: 0.6rem solid var(--ink);
+  border-bottom: 1px solid var(--rule);
 }
 
-.repos__desc {
+.proyecto__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  flex: 1;
+  padding: 1.25rem;
+}
+
+.proyecto__body > * {
+  margin: 0;
+}
+
+.proyecto h4 {
+  font-family: var(--display);
+  font-weight: 650;
+  font-size: 1.2rem;
+}
+
+.proyecto p {
   font-size: 0.95rem;
   color: var(--ink-2);
 }
 
-.repos__meta {
+.proyecto__stack {
+  font-size: 0.8rem;
+}
+
+.proyecto__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
   margin-top: auto;
+  padding-top: 0.5rem;
+}
+
+.proyecto__links a {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.proyecto__links a::after {
+  content: ' ↗';
+  color: var(--accent-text);
 }
 
 /* ---------- Proceso (franja de color) ---------- */
@@ -1049,35 +1091,6 @@ main > * {
 
 .servicio__stack {
   margin-top: 1.5rem;
-}
-
-.demos {
-  display: grid;
-  gap: 1rem;
-  list-style: none;
-}
-
-@media (min-width: 40rem) {
-  .demos {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-.demos li {
-  display: grid;
-  gap: 0.4rem;
-  padding: 1.25rem;
-  border: 1px solid var(--rule);
-}
-
-.demos a {
-  font-family: var(--display);
-  font-weight: 650;
-  font-size: 1.15rem;
-}
-
-.demos p {
-  color: var(--ink-2);
 }
 
 .faq {

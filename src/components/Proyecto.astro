@@ -1,0 +1,55 @@
+---
+interface Props {
+  proyecto: {
+    nombre: string;
+    titulo?: string | null;
+    descripcion: string;
+    stack?: string | null;
+    imagen?: string | null;
+    web?: string | null;
+    demo?: string | null;
+  };
+}
+
+const { proyecto: p } = Astro.props;
+const titulo = p.titulo || p.nombre;
+// el repo solo se ofrece aparte cuando la demo es otra cosa
+const codigo = p.web && p.web !== p.demo ? p.web : null;
+---
+
+<article class="proyecto">
+  {
+    p.imagen && (
+      <img
+        class="proyecto__img"
+        src={p.imagen}
+        alt={`Captura de ${titulo}`}
+        width="1200"
+        height="750"
+        loading="lazy"
+        decoding="async"
+      />
+    )
+  }
+  <div class="proyecto__body">
+    <h4>{titulo}</h4>
+    <p>{p.descripcion}</p>
+    {p.stack && <p class="mono proyecto__stack">{p.stack}</p>}
+    <p class="proyecto__links">
+      {
+        p.demo && (
+          <a href={p.demo} rel="noopener" target="_blank">
+            Probar la demo<span class="sr-only"> de {titulo} (abre en otra pestaña)</span>
+          </a>
+        )
+      }
+      {
+        codigo && (
+          <a href={codigo} rel="noopener" target="_blank">
+            Ver código<span class="sr-only"> de {titulo} (abre en otra pestaña)</span>
+          </a>
+        )
+      }
+    </p>
+  </div>
+</article>

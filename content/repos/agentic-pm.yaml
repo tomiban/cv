@@ -1,5 +1,6 @@
 nombre: "agentic-pm"
+titulo: "Análisis funcional con agentes de IA"
 lenguaje: "Docs"
 anio: 2026
-descripcion: "Framework de análisis funcional asistido por agentes: del relevamiento con el cliente al backlog implementable."
+descripcion: "Framework para pasar del relevamiento con el cliente a un backlog listo para desarrollar, con agentes de IA que asisten en el análisis funcional."
 orden: 1
